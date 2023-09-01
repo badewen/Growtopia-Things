@@ -8,3 +8,6 @@ collection of my parsers<br>
   
 - ```common.py```<br>
   A python module that is commonly required for parsers
+# Credits and References
+- https://github.com/badewen/GrowDocs (forked from https://github.com/iProgramMC/GrowDocs)
+- https://github.com/badewen/GTPS3 (forked from https://github.com/GENTA7740/GTPS3 . Original author https://github.com/srmotion)
