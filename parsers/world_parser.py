@@ -109,6 +109,7 @@ def parse_block(i):
 
         # achievement block
         elif tile["extra_tile_data_type"] == 10:
+            # user id?
             data["unk_32"] = get_int(4)
             data["achievement_id"] = get_int(1)
 
@@ -362,7 +363,7 @@ if __name__ == "__main__":
     f_out = open("parsed_world.json", "wt")
     f =  open(file_name, "rb")
 
-    if parse_world() == False:
+    if parse_world() is None:
         print("error occured")
         exit(1)
     
