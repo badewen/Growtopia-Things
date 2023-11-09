@@ -2,6 +2,7 @@ from typing import List
 import json
 import struct
 import sys
+import math
 
 import common
 
@@ -37,6 +38,9 @@ def parse_block(i):
     tile = {}
     tile["debug_block_indx"] = i
     tile["debug_curr_pos"] = f.tell()
+
+    tile["x"] = i % int(world_info["width"])
+    tile["y"] = math.floor(i / int(world_info["width"]))
 
     tile["extra_tile_data_type"] = 0
 
@@ -145,6 +149,10 @@ def parse_block(i):
             # no data. 
             # completely server sided??
             pass
+
+        # Xenonite
+        elif tile["extra_tile_data_type"] == 18:
+            data["unk_arr"] = get_byte_arr(5).hex()
         
         # phone booth
         elif tile["extra_tile_data_type"] == 19:
@@ -273,6 +281,16 @@ def parse_block(i):
             # no data
             pass
         
+        # # Storage block
+        # elif tile["extra_tile_data_type"] == 54:
+        #     # no data
+        #     pass
+
+        # cooking oven
+        elif tile["extra_tile_data_type"] == 55:
+            # no data?
+            pass
+
         # audio rack and gear
         elif tile["extra_tile_data_type"] == 56:
             data["note"] = get_str()
@@ -287,11 +305,28 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 65:
             data["unk_arr"] = get_byte_arr(17).hex()
 
+        # Kraken's galatic block
+        elif tile["extra_tile_data_type"] == 80:
+            data["pattern_number"] = get_int(1)
+            data["unk_arr"] = get_byte_arr(4).hex()
+            data["color_rgb"] = get_byte_arr(3).hex().upper()
+
+        # Friends entrance
+        # maybe wrong because i dont have enough data.
+        elif tile["extra_tile_data_type"] == 81:
+            data["owner_userid"] = get_int(4)
+            
+            # maybe a flag??
+            data["unk_arr"] = get_byte_arr(2)
+
+            data["allowed_friends_userid"] = get_list_int(2, 4); 
+
         else: 
             ex_tile_data = tile["extra_tile_data_type"]
             print(f"UNKNOWN EXTRA TILE DATA TYPE {ex_tile_data}")
             print(f"DUMP CURRENT DATA")
-            print(data)
+            print(tile)
+
             return None
         
         tile["extra_tile_data"] = data
@@ -314,7 +349,7 @@ def parse_world():
     
         tile = parse_block(i)
 
-        if tile == None:
+        if tile is None:
             return False
 
         world_info["tiles"].append(tile)
@@ -363,12 +398,13 @@ if __name__ == "__main__":
     f_out = open("parsed_world.json", "wt")
     f =  open(file_name, "rb")
 
-    if parse_world() is None:
+    if parse_world() == False:
         print("error occured")
+        f_out.write(world_info.__str__())
         exit(1)
     
     parse_drops()
-    # print(world_info)
+    print(world_info)
     f_out.write(world_info.__str__())
 
     f_out.close()
