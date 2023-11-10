@@ -152,6 +152,7 @@ def parse_block(i):
 
         # Xenonite
         elif tile["extra_tile_data_type"] == 18:
+            # i dont have any access to the xenonite because im brokie.
             data["unk_arr"] = get_byte_arr(5).hex()
         
         # phone booth
@@ -281,10 +282,32 @@ def parse_block(i):
             # no data
             pass
         
-        # # Storage block
-        # elif tile["extra_tile_data_type"] == 54:
-        #     # no data
-        #     pass
+        # Storage block
+        elif tile["extra_tile_data_type"] == 54:
+
+            # this is quite an interesting block
+            # the length of the array is at the start
+            # the array has some pattern that has length of 13 bytes
+            # the array has this pattern repeating all over it
+            # 020009xxxxxxxx0109xxxxxxxx 
+            #       --------    --------
+            #        item id     item amount
+
+            data["arr_len"] = get_int(2)
+            data["items"] = []
+
+            for i in range(int(data["arr_len"]/13)):
+                skip(3)
+                item_id = get_int(4)
+                skip(2)
+                item_amt = get_int(4)
+
+                data["items"].append({
+                    "item_id"  : item_id,
+                    "item_amt" : item_amt
+                })
+
+            pass
 
         # cooking oven
         elif tile["extra_tile_data_type"] == 55:
@@ -356,8 +379,8 @@ def parse_world():
 
     return True
 
-# unk data, changes on every drop. maybe a hash?
 def parse_drops():
+    # unk data, changes on every drop update. maybe a hash?
     get_int(4)
     get_int(4)
     get_int(4)
@@ -374,7 +397,7 @@ def parse_drops():
         data["debug_curr_pos"] = f.tell()
 
         data["item_id"] = get_int(2)
-        # for pos, divide by 32 and floor it to get normal coordinate.
+        # for pos, divide by 32 and floor it to get tile coordinate.
         data["pos_x_raw"] = get_float()
         data["pos_y_raw"] = get_float()
 
