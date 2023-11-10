@@ -221,6 +221,11 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 32:
             data["bolt_list_id"] = get_list_int(4, 4)
 
+        # challenge flag
+        elif tile["extra_tile_data_type"] == 33:
+            # no data
+            pass
+
         # lobster trap
         elif tile["extra_tile_data_type"] == 34:
             # lobster trap has no data??
@@ -257,6 +262,11 @@ def parse_block(i):
             data["allowed_userid"] = ls
             data["allowed_userid_count"] = ls.__len__()
 
+        # Challenge timer
+        elif tile["extra_tile_data_type"] == 45:
+            # no data
+            pass
+
         # portrait
         elif tile["extra_tile_data_type"] == 48:
             data["label"] = get_str()
@@ -281,7 +291,13 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 51:
             # no data
             pass
-        
+
+        # Howler
+        elif tile["extra_tile_data_type"] == 52:
+            # no data
+            pass
+
+
         # Storage block
         elif tile["extra_tile_data_type"] == 54:
 
@@ -324,6 +340,11 @@ def parse_block(i):
             # no data
             pass
         
+        # Training port
+        elif tile["extra_tile_data_type"] == 61:
+            print("PLACEHOLDER EXTRA TILE 61")
+            skip(35)
+
         # guild things?
         elif tile["extra_tile_data_type"] == 65:
             data["unk_arr"] = get_byte_arr(17).hex()
