@@ -342,8 +342,14 @@ def parse_block(i):
         
         # Training port
         elif tile["extra_tile_data_type"] == 61:
-            print("PLACEHOLDER EXTRA TILE 61")
-            skip(35)
+            data["fish_lb"] = get_int(4)
+            data["status"] = get_int(2)
+            data["item_id"] = get_int(4)
+            data["total_exp"] = get_int(4) 
+            data["unk_arr"] = get_byte_arr(8).hex().upper()
+            data["fish_level"] = get_int(4)
+            data["unk_32"] = get_int(4)
+            data["unk_arr_30"] = get_byte_arr(5).hex().upper()
 
         # guild things?
         elif tile["extra_tile_data_type"] == 65:
