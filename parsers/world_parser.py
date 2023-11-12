@@ -90,10 +90,13 @@ def parse_block(i):
             for id in temp:
                 acc_id.append(int.from_bytes(id, byteorder="little"))
 
-            data["access_list_user_id"] = acc_id
+            data["access_list_user_id"] = acc_id            
+
+            # sl, bl, hl, builder lock
+            non_world_locks = [202, 204, 206, 4994]
 
             # worldlock
-            if tile["fg"] == 242:
+            if not tile["fg"] in non_world_locks:
                 data["minimun_level"] = get_int(1)
                 data["unk2_arr"] = get_byte_arr(7).hex()
 
@@ -221,9 +224,9 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 32:
             data["bolt_list_id"] = get_list_int(4, 4)
 
-        # challenge flag
+        # country flag
         elif tile["extra_tile_data_type"] == 33:
-            # no data
+            data["country"] = get_str()
             pass
 
         # lobster trap
@@ -340,6 +343,11 @@ def parse_block(i):
             # no data
             pass
         
+        # tomb robber
+        elif tile["extra_tile_data_type"] == 59:
+            # no data
+            pass
+
         # Training port
         elif tile["extra_tile_data_type"] == 61:
             data["fish_lb"] = get_int(4)
