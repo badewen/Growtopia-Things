@@ -97,7 +97,7 @@ def parse_block(i):
 
             # worldlock
             if not tile["fg"] in non_world_locks:
-                data["minimun_level"] = get_int(1)
+                data["minimum_level"] = get_int(1)
                 data["unk2_arr"] = get_byte_arr(7).hex()
 
 
@@ -168,7 +168,11 @@ def parse_block(i):
             data["hand"] = get_int(2)
             data["back"] = get_int(2)
             data["hair"] = get_int(2)
-            data["neck"] = get_int(2)
+            data["neck"] = get_int(2)   
+
+        # Crystal
+        elif tile["extra_tile_data_type"] == 20:
+            data["crystal_list"] = get_list(2, 1)
 
         # spotlight
         # fun fact: spotlight is set by the PACKET_SET_CHARACTER_STATE
@@ -186,6 +190,8 @@ def parse_block(i):
 
             # if the most significant bit is set, the price mode is ITEM per WORLD LOCK and in form of two's complement
             # if the most significant bit is not set, the price mode is in WORLD LOCK per ITEM. no transformation needs to be done.
+
+             # in short, if the price is negative then it is ITEM per WORLD LOCK
             data["price"] = get_int(4)
 
         # fish tank port
@@ -214,7 +220,6 @@ def parse_block(i):
 
         # giving tree
         elif tile["extra_tile_data_type"] == 28:
-        
             data["harvested"] = get_int(1)
             data["unk1_16"] = get_int(2)
             data["unk2_16"] = get_int(2)
@@ -338,6 +343,11 @@ def parse_block(i):
             data["note"] = get_str()
             data["volume"] = get_int(4)
 
+        # Geiger Charger
+        elif tile["extra_tile_data_type"] == 57:
+            # watafak idk
+            data["Unk_hex_arr"] = get_byte_arr(4).hex()  
+
         # the adventure begins
         elif tile["extra_tile_data_type"] == 58:
             # no data
@@ -359,9 +369,27 @@ def parse_block(i):
             data["unk_32"] = get_int(4)
             data["unk_arr_30"] = get_byte_arr(5).hex().upper()
 
+        # Item Sucker
+        # like gaia, magplant, etc
+        elif tile["extra_tile_data_type"] == 62:
+            data["item_id"] = get_int(4)
+            # guessed field
+            data["item_amount"] = get_int(4)
+            data["flags"] = get_byte_arr(2).hex()
+            data["item_limit"] = get_int(4)
+
         # guild things?
         elif tile["extra_tile_data_type"] == 65:
             data["unk_arr"] = get_byte_arr(17).hex()
+
+        # Growscan
+        elif tile["extra_tile_data_type"] == 66:
+            # maybe a flag that indicates it is being used?
+            data["Unk1_8"] = get_int(1);
+
+        # Safe Vault
+        elif tile["extra_tile_data_type"] == 74:
+            pass
 
         # Kraken's galatic block
         elif tile["extra_tile_data_type"] == 80:
@@ -436,7 +464,8 @@ def parse_drops():
         data["pos_x_raw"] = get_float()
         data["pos_y_raw"] = get_float()
 
-        data["dropped_count"] = get_int(2)
+        data["dropped_count"] = get_int(1)
+        data["item_flag"] = get_int(1).hex()
         data["item_drop_uid"] = get_int(4)
 
         world_info["dropped_items"].append(data)
