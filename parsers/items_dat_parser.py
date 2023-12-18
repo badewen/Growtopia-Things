@@ -98,10 +98,10 @@ for i in range(int(items_data["items_count"])):
     data["rayman"] = get_int(2)
     data["extra_options_1"] = get_str()
     data["texture_file_2"] = get_str()
-    data["extra_options_2"] = get_str()
+    data["extra_options_2"] = get_str() # 83
     
     # reserved part
-    skip(80)
+    # data["unkarr_80"] = get_hex_arr(80)
 
     data["punch_options"] = get_str()
     data["unk1_32"] = get_int(4)
@@ -113,6 +113,8 @@ for i in range(int(items_data["items_count"])):
 
     skip(25)
     data["unk1_str"] = get_str()
+
+    data["renderer_data"] = get_str()
 
     # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
     if data["spread_type"] == 2 or data["spread_type"] == 5:
