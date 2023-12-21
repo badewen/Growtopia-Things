@@ -214,6 +214,10 @@ def parse_block(i):
                 fish_info["lbs"] = get_int(4)
                 data["fishes"].append(fish_info)
 
+        # Solar Collector
+        elif tile["extra_tile_data_type"] == 26:
+            data["Unk1_40"] = get_byte_arr(5).hex()
+
         # forge
         elif tile["extra_tile_data_type"] == 27:
             data["temperature"] = get_int(4)
@@ -231,7 +235,8 @@ def parse_block(i):
 
         # country flag
         elif tile["extra_tile_data_type"] == 33:
-            data["country"] = get_str()
+            if tile["fg"] == 3394: 
+                data["country"] = get_str()
             pass
 
         # lobster trap
@@ -244,6 +249,10 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 35:
             data["item_id"] = get_int(4)
             data["label"] = get_str()
+
+        # Steam Engine
+        elif tile["extra_tile_data_type"] == 38:
+            data["temperature"] = get_int(4)
 
         # weather machine
         elif tile["extra_tile_data_type"] == 40:
@@ -274,6 +283,12 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 45:
             # no data
             pass
+
+        # # Fish Wall Mount
+        # elif tile["extra_tile_data_type"] == 47:
+        #     data["label"] = get_str()
+        #     data["item_id"] = get_int(4)
+        #     data["lbs"] = get_int(1)
 
         # portrait
         elif tile["extra_tile_data_type"] == 48:
@@ -387,6 +402,10 @@ def parse_block(i):
             # maybe a flag that indicates it is being used?
             data["Unk1_8"] = get_int(1);
 
+        # Temporary Platform
+        elif tile["extra_tile_data_type"] == 73:
+            data["Unk1_32"] = get_int(4)
+
         # Safe Vault
         elif tile["extra_tile_data_type"] == 74:
             pass
@@ -421,24 +440,28 @@ def parse_block(i):
 
 
 def parse_world():
-    skip(6)
-
-    world_info["name"] = get_str()
-    world_info["width"] = get_int(4)
-    world_info["height"] = get_int(4)
-    world_info["total_block"] = get_int(4)
-    world_info["tiles"] = []
-
-    skip(5)
-
-    for i in range(int(world_info["total_block"])):
+    try:
+        skip(6)
     
-        tile = parse_block(i)
-
-        if tile is None:
-            return False
-
-        world_info["tiles"].append(tile)
+        world_info["name"] = get_str()
+        world_info["width"] = get_int(4)
+        world_info["height"] = get_int(4)
+        world_info["total_block"] = get_int(4)
+        world_info["tiles"] = []
+    
+        skip(5)
+    
+        for i in range(int(world_info["total_block"])):
+        
+            tile = parse_block(i)
+    
+            if tile is None:
+                return False
+    
+            world_info["tiles"].append(tile)
+    
+    except:
+        return False
 
     return True
 
@@ -465,7 +488,7 @@ def parse_drops():
         data["pos_y_raw"] = get_float()
 
         data["dropped_count"] = get_int(1)
-        data["item_flag"] = get_int(1).hex()
+        data["item_flag"] = hex(get_int(1))
         data["item_drop_uid"] = get_int(4)
 
         world_info["dropped_items"].append(data)
