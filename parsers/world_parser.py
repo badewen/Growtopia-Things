@@ -284,11 +284,11 @@ def parse_block(i):
             # no data
             pass
 
-        # # Fish Wall Mount
-        # elif tile["extra_tile_data_type"] == 47:
-        #     data["label"] = get_str()
-        #     data["item_id"] = get_int(4)
-        #     data["lbs"] = get_int(1)
+        # Fish Wall Mount
+        elif tile["extra_tile_data_type"] == 47:
+            data["label"] = get_str()
+            data["item_id"] = get_int(4)
+            data["lbs"] = get_int(1)
 
         # portrait
         elif tile["extra_tile_data_type"] == 48:
