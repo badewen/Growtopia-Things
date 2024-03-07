@@ -49,6 +49,9 @@ def get_str(f) -> str:
 
     str_len = get_int(2, f)
 
+    if str_len == 0:
+        return ""
+
     res_str = get_byte_arr(str_len, f).decode("utf-8")
     
     return "".join(res_str)
