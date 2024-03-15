@@ -1,5 +1,5 @@
 from typing import List
-import json
+import orjson
 import struct
 import sys
 import math
@@ -410,6 +410,11 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 74:
             pass
 
+        # Infinity Weather machine
+        elif tile["extra_tile_data_type"] == 77:
+            data["interval_mins"] = get_int(4)
+            data["weather_machine_list"] = get_list_int(4, 4)
+
         # Kraken's galatic block
         elif tile["extra_tile_data_type"] == 80:
             data["pattern_number"] = get_int(1)
@@ -515,7 +520,7 @@ if __name__ == "__main__":
     
     parse_drops()
     print(world_info)
-    f_out.write(world_info.__str__())
+    f_out.write(orjson.dumps(world_info, default=common.json_default_func,  option=orjson.OPT_INDENT_2).decode("utf-8"))
 
     f_out.close()
     f.close()
