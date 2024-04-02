@@ -103,7 +103,7 @@ def parse_block(i):
 
         # seed
         elif tile["extra_tile_data_type"] == 4:
-            data["time_passed"] = get_int(4)
+            data["time_left"] = get_int(4)
             data["fruit_count"] = get_int(1)
         
         # dice-like item
@@ -112,7 +112,7 @@ def parse_block(i):
 
         # provider
         elif tile["extra_tile_data_type"] == 9:
-            data["time_passed_sec"] = get_int(4) 
+            data["time_left"] = get_int(4) 
 
         # achievement block
         elif tile["extra_tile_data_type"] == 10:
@@ -141,7 +141,11 @@ def parse_block(i):
             data["hand"] = get_int(2)
             data["back"] = get_int(2)
             data["hair"] = get_int(2)
-            data["neck"] = get_int(2)  
+            data["neck"] = get_int(2)
+
+        # Magic egg
+        elif tile["extra_tile_data_type"] == 15:
+            data["egg_amount"] = get_int(4)  
 
         # game grave
         elif tile["extra_tile_data_type"] == 16:
@@ -229,6 +233,21 @@ def parse_block(i):
             data["unk2_16"] = get_int(2)
             data["decoration_percentage"] = get_int(1) 
 
+        # Silk worm
+        elif tile["extra_tile_data_type"] == 31:
+            # A quite hard and challenging tile extra, but i managed to guess most of the field :)
+            data["type"] = get_int(1) # 0 = normal, 1 = dead, 8 = devil horn. Maybe flagis more fitting?? idk
+            data["name"] = get_str()
+            data["age_sec"] = get_int(4)
+            data["unk1_32"] = get_int(4) # seems like time/day passed since death?
+            data["unk2_32"] = get_int(4) 
+            data["can_be_fed"] = get_int(1)
+            data["food_saturation"] = get_int(4) # saturations decreases every seconds
+            data["water_saturation"] = get_int(4)
+            data["color_argb"] = get_byte_arr(4).hex()
+            data["sick_duration"] = get_int(4)
+
+
         # sewing machine
         elif tile["extra_tile_data_type"] == 32:
             data["bolt_list_id"] = get_list_int(4, 4)
@@ -250,6 +269,13 @@ def parse_block(i):
             data["item_id"] = get_int(4)
             data["label"] = get_str()
 
+        # Pet battle cage
+        elif tile["extra_tile_data_type"] == 36:
+            data["label"] = get_str()
+            data["base_pet"] = get_int(4)
+            data["combined_pet_1"] = get_int(4)
+            data["combined_pet_2"] = get_int(4)
+
         # Steam Engine
         elif tile["extra_tile_data_type"] == 38:
             data["temperature"] = get_int(4)
@@ -258,6 +284,10 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 40:
             # weather machine specific data
             data["settings"] = get_byte_arr(4).hex()
+
+        # Spirit storage unit
+        elif tile["extra_tile_data_type"] == 41:
+            data["ghost_jar_count"] = get_int(4)
 
         # data bedrock
         elif tile["extra_tile_data_type"] == 42:
@@ -310,6 +340,10 @@ def parse_block(i):
             # contains if the weather machine has invert sky colour on and/or spin items
             data["flag"] = get_int(1)
 
+        # Fossil prep station
+        elif tile["extra_tile_data_type"] == 50:
+            data["unk1_32"] = get_int(4) # idk what this field is. i think it is time? idk im broke and fossil is expensive
+
         # dna extractor
         elif tile["extra_tile_data_type"] == 51:
             # no data
@@ -320,22 +354,26 @@ def parse_block(i):
             # no data
             pass
 
+        # Chemsynth tank
+        elif tile["extra_tile_data_type"] == 53:
+            data["current_chem_id"] = get_int(4)
+            data["supposed_chem_id"] = get_int(4)   
 
         # Storage block
         elif tile["extra_tile_data_type"] == 54:
 
             # this is quite an interesting block
-            # the length of the array is at the start
+            # the length of the data is at the start
             # the array has some pattern that has length of 13 bytes
             # the array has this pattern repeating all over it
             # 020009xxxxxxxx0109xxxxxxxx 
             #       --------    --------
             #        item id     item amount
 
-            data["arr_len"] = get_int(2)
+            data["data_len"] = get_int(2)
             data["items"] = []
 
-            for i in range(int(data["arr_len"]/13)):
+            for i in range(int(data["data_len"]/13)):
                 skip(3)
                 item_id = get_int(4)
                 skip(2)
@@ -350,7 +388,20 @@ def parse_block(i):
 
         # cooking oven
         elif tile["extra_tile_data_type"] == 55:
-            # no data?
+            data["temp_level"] = get_int(4)
+            data["ingredient_list_size"] = int(get_int(4) / 2)
+            data["ingredients"] = []
+
+            for i in range(int(data["ingredient_list_size"])):
+                data["ingredients"].append({
+                    "item_id" : get_int(4),
+                    "time_added_elapsed" : get_int(4)
+                })
+
+            data["unk1_32"] = hex(get_int(4))
+            data["unk2_32"] = hex(get_int(4))
+            data["unk3_32"] = hex(get_int(4)) 
+
             pass
 
         # audio rack and gear
@@ -402,6 +453,19 @@ def parse_block(i):
             # maybe a flag that indicates it is being used?
             data["Unk1_8"] = get_int(1);
 
+        # Spirit board
+        elif tile["extra_tile_data_type"] == 68:
+            # aint bothered to figure out what these meant
+            data["unk1_32"] = get_int(4)
+            data["unk2_32"] = get_int(4)
+            data["unk3_32"] = get_int(4)
+
+        # Stormy cloud
+        elif tile["extra_tile_data_type"] == 72:
+            data["sting_duration"] = get_int(4)
+            data["is_solid"] = get_int(4)
+            data["non_solid_duration"] = get_int(4)
+
         # Temporary Platform
         elif tile["extra_tile_data_type"] == 73:
             data["Unk1_32"] = get_int(4)
@@ -409,6 +473,16 @@ def parse_block(i):
         # Safe Vault
         elif tile["extra_tile_data_type"] == 74:
             pass
+
+        # Angelic Counting Cloud
+        elif tile["extra_tile_data_type"] == 75:
+            # 1 = raffling
+            # 2 = done raffling
+            data["is_raffling"] = get_int(4)
+            data["unk1_16"] = get_int(2)
+
+            # growtopia somehow uses ascii code here and offsets it by 1
+            data["ascii_code"] = get_int(1)
 
         # Infinity Weather machine
         elif tile["extra_tile_data_type"] == 77:
@@ -515,7 +589,7 @@ if __name__ == "__main__":
 
     if parse_world() == False:
         print("error occured")
-        f_out.write(world_info.__str__())
+        f_out.write(orjson.dumps(world_info, default=common.json_default_func,  option=orjson.OPT_INDENT_2).decode("utf-8"))
         exit(1)
     
     parse_drops()
