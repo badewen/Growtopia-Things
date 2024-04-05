@@ -424,6 +424,12 @@ def parse_block(i):
             # no data
             pass
 
+        # Balloon O Matic
+        elif tile["extra_tile_data_type"] == 60:
+            # idk if they are right or not because no more balloon war
+            data["total_rarity"] = get_int(4)
+            data["team_type"] = get_int(1)
+
         # Training port
         elif tile["extra_tile_data_type"] == 61:
             data["fish_lb"] = get_int(4)
@@ -444,6 +450,22 @@ def parse_block(i):
             data["flags"] = get_byte_arr(2).hex()
             data["item_limit"] = get_int(4)
 
+        # cybot
+        elif tile["extra_tile_data_type"] == 63:
+            data["command_count"] = get_int(4)
+            data["commands"] = []
+
+            for i in range(int(data["command_count"])):
+                data["commands"].append({
+                    "command_id": get_int(4),
+                    "is_command_used": get_int(4),
+                    "unk_arr": get_byte_arr(7)
+                })
+
+            # Some sort of syncing timer? my observations tells me that it increases every ms
+            data["timer"] = get_int(4)
+            data["is_activated"] = get_int(4);
+
         # guild things?
         elif tile["extra_tile_data_type"] == 65:
             data["unk_arr"] = get_byte_arr(17).hex()
@@ -451,7 +473,13 @@ def parse_block(i):
         # Growscan
         elif tile["extra_tile_data_type"] == 66:
             # maybe a flag that indicates it is being used?
-            data["Unk1_8"] = get_int(1);
+            data["Unk1_8"] = get_int(1)
+
+        # Containment field power node
+        elif tile["extra_tile_data_type"] == 67:
+            # idk i dont have the block + noone is selling, so im purely guessing
+            data["ghost_jar_count"] = get_int(4)
+            data["unk_list_32_32"] = get_list_int(4,4) 
 
         # Spirit board
         elif tile["extra_tile_data_type"] == 68:
