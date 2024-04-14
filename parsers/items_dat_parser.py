@@ -62,8 +62,7 @@ for i in range(int(items_data["items_count"])):
         data["debug_cur_pos"] = f.tell()
     
         data["item_id"] = get_int(4)
-        data["flags"] = get_int(1)
-        data["category"] = get_int(1)
+        data["flags"] = get_int(2)
         data["item_type"] = get_int(1)
         data["material"] = get_int(1)
         data["name"] = get_enc_str(data["item_id"])
