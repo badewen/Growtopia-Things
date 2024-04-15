@@ -104,7 +104,12 @@ for i in range(int(items_data["items_count"])):
         # reserved part
         # data["unkarr_80"] = get_hex_arr(80)
     
-        skip(80)
+        skip(8)
+
+        # flags like "ITEM_INFO_ROBOT_DEADLY", etc.
+        data["flags_4"] = get_int(4);
+
+        skip(68)
 
         data["punch_options"] = get_str()
         data["unk1_32"] = get_int(4)
