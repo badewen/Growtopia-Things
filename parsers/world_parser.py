@@ -114,6 +114,13 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 9:
             data["time_left"] = get_int(4) 
 
+            # well of love. It is not valentine rn so i cant reverse this 2 bytes.
+            # tell me world with filled well of love would be helpful
+            if tile["fg"] == 10656:
+                skip(4)
+
+
+
         # achievement block
         elif tile["extra_tile_data_type"] == 10:
             # user id?
@@ -123,7 +130,7 @@ def parse_block(i):
         # heart monitor
         elif tile["extra_tile_data_type"] == 11:
             data["user_id"] = get_int(4)
-            data["growID"] = get_str()
+            data["growID"] = get_str() 
 
         # mannequin
         # idk where is ances, i dont have any ances plz donat
@@ -177,6 +184,18 @@ def parse_block(i):
         # Crystal
         elif tile["extra_tile_data_type"] == 20:
             data["crystal_list"] = get_list(2, 1)
+
+        # Crime in progress
+        elif tile["extra_tile_data_type"] == 21:
+            data["crime_name"] = get_str()
+
+            # i think this is the field, because it increments by one on every crime.
+            data["crime_index"] = get_int(4)
+
+            # supervillian level??
+            # it only appears for super villian.
+            # from testing, it seems like devil ham = 12, ms terry = 8
+            data["unk_8"] = get_int(1)
 
         # spotlight
         # fun fact: spotlight is set by the PACKET_SET_CHARACTER_STATE
@@ -233,10 +252,20 @@ def parse_block(i):
             data["unk2_16"] = get_int(2)
             data["decoration_percentage"] = get_int(1) 
 
+        # Giving tree stump
+        # gotta wait for winterfest lol.
+        # please remind me if winterfest happen or reverse it for me :>
+        # elif tile["extra_tile_data_type"] == 29:
+
+        # Steam Organ
+        elif tile["extra_tile_data_type"] == 30:
+            data["instrument_type"] = get_int(1)
+            data["note"] = get_int(4)
+
         # Silk worm
         elif tile["extra_tile_data_type"] == 31:
             # A quite hard and challenging tile extra, but i managed to guess most of the field :)
-            data["type"] = get_int(1) # 0 = normal, 1 = dead, 8 = devil horn. Maybe flagis more fitting?? idk
+            data["flags"] = get_int(1) # 0 = normal, 1 = dead, 8 = devil horn. Maybe flag is more fitting?? idk
             data["name"] = get_str()
             data["age_sec"] = get_int(4)
             data["unk1_32"] = get_int(4) # seems like time/day passed since death?
@@ -253,7 +282,9 @@ def parse_block(i):
             data["bolt_list_id"] = get_list_int(4, 4)
 
         # country flag
+        # apparently flags other than challenge flag has string.
         elif tile["extra_tile_data_type"] == 33:
+            # chekcs if it is country flag
             if tile["fg"] == 3394: 
                 data["country"] = get_str()
             pass
@@ -276,9 +307,31 @@ def parse_block(i):
             data["combined_pet_1"] = get_int(4)
             data["combined_pet_2"] = get_int(4)
 
+        # Pet trainer
+        elif tile["extra_tile_data_type"] == 37:
+            # trainer's name
+            data["name"] = get_str()
+            data["pet_total_count"] = get_int(4)
+            
+            # probably pet health? idk
+            data["unk_32"] = get_int(4)
+
+            # usually there are 6 pets.
+            # it can hold up to 2 sets of pet battle, each with 3 ability. hence, 6 pets.
+            data["pets"] = []
+
+            for i in range(int(data["pet_total_count"])):
+                data["pets"].append(get_int(4))
+
+
         # Steam Engine
         elif tile["extra_tile_data_type"] == 38:
             data["temperature"] = get_int(4)
+
+        # Lock bot
+        elif tile["extra_tile_data_type"] == 39:
+            # if 24 hours, bot is ded
+            data["time_passed_sec"] = get_int(4)
 
         # weather machine
         elif tile["extra_tile_data_type"] == 40:
@@ -488,6 +541,18 @@ def parse_block(i):
             data["unk2_32"] = get_int(4)
             data["unk3_32"] = get_int(4)
 
+        # they are too expensive lol.
+        # gimme world with these 3 items, or donat me :>
+
+        # Tesseract Manipulator
+        # elif tile["extra_tile_data_type"] == 69:
+
+        # Heart of Gaia
+        # elif tile["extra_tile_data_type"] == 70:
+
+        # Techno Organic Engine
+        # elif tile["extra_tile_data_Type"] == 71:
+
         # Stormy cloud
         elif tile["extra_tile_data_type"] == 72:
             data["sting_duration"] = get_int(4)
@@ -516,6 +581,13 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 77:
             data["interval_mins"] = get_int(4)
             data["weather_machine_list"] = get_list_int(4, 4)
+
+        # Pineapple guzzler
+        elif tile["extra_tile_data_type"] == 79:
+            # either chance of exploding or amount of pineapple.
+            # it is not pineapple party yet, so idk
+            # remind me when it is pineapple party lol.
+            data["unk_32"] = get_int(4)
 
         # Kraken's galatic block
         elif tile["extra_tile_data_type"] == 80:
