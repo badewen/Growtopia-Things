@@ -530,9 +530,10 @@ def parse_block(i):
 
         # Containment field power node
         elif tile["extra_tile_data_type"] == 67:
-            # idk i dont have the block + noone is selling, so im purely guessing
-            data["ghost_jar_count"] = get_int(4)
-            data["unk_list_32_32"] = get_list_int(4,4) 
+            # idk what kind of time this represents, but it increases every milliseconds.
+            data["time_ms"] = get_int(4)
+            # the block index on where the other node is placed os it link up to there.
+            data["other_node_list"] = get_list_int(4,4) 
 
         # Spirit board
         elif tile["extra_tile_data_type"] == 68:
