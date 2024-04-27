@@ -69,7 +69,7 @@ for i in range(int(items_data["items_count"])):
         data["texture_file"] = get_str()
         data["texture_file_hash"] = get_int(4)
         data["visual_effect"] = get_int(1)
-        data["flags_2"] = get_hex_arr(4)
+        data["ingredient_type"] = get_int(4) # for cooking thing
         data["tex_coord_x"] = get_int(1)
         data["tex_coord_y"] = get_int(1)
         data["spread_type"] = get_int(1)
@@ -82,7 +82,7 @@ for i in range(int(items_data["items_count"])):
         data["max_amount"] = get_int(1)
         data["extra_file"] = get_str()
         data["extra_file_hash"] = get_int(4)
-        data["audio_volume"] = get_int(4)
+        data["frame_interval_ms"] = get_int(4)
         data["pet_name"] = get_str()
         data["pet_prefix"] = get_str()
         data["pet_suffix"] = get_str()
@@ -94,8 +94,8 @@ for i in range(int(items_data["items_count"])):
         data["seed_color"] = get_byte_arr(4)
         data["seed_overlay_color"] = get_byte_arr(4)
         data["ingredient"] = get_int(4)
-        data["grow_time"] = get_int(4)
-        data["flags_3"] = get_hex_arr(2)
+        data["grow_time"] = get_int(4) 
+        data["flags_2"] = get_int(2) # things like Multi frame flag that is set by extra_options_1, etc
         data["rayman"] = get_int(2)
         data["extra_options_1"] = get_str()
         data["texture_file_2"] = get_str()
@@ -107,7 +107,7 @@ for i in range(int(items_data["items_count"])):
         skip(8)
 
         # flags like "ITEM_INFO_ROBOT_DEADLY", etc.
-        data["flags_4"] = get_int(4);
+        data["flags_3"] = get_int(4);
 
         skip(68)
 
@@ -124,6 +124,8 @@ for i in range(int(items_data["items_count"])):
     
     
         data["renderer_data"] = get_str()
+
+        data["unk4_32"] = get_int(4)
     
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
         if data["spread_type"] == 2 or data["spread_type"] == 5:
