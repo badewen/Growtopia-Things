@@ -126,6 +126,8 @@ for i in range(int(items_data["items_count"])):
         data["renderer_data"] = get_str()
 
         data["unk4_32"] = get_int(4)
+        data["renderer_data_hash"] = get_int(4)
+
     
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
         if data["spread_type"] == 2 or data["spread_type"] == 5:
