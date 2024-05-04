@@ -18,4 +18,4 @@ collection of my parsers<br>
 - https://github.com/badewen/GTPS3 (forked from https://github.com/GENTA7740/GTPS3 . Original author https://github.com/srmotion)
 - https://github.com/RebillionXX/GrowtopiaServer 
 - https://github.com/SyzuTopia54y/Growtopia_ItemsDatReader 
-- Thanks to [BotHax](https://github.com/sTYzaBUvqRIj) for providing me all the tile extra type and methods to get them. His discord server (PRIVATE) (i am close to completing this world parser:DD)
+- Thanks to [BotHax](https://github.com/sTYzaBUvqRIj) for providing me all the tile extra type and methods to get them. His discord server (https://discord.gg/z8rzEXpyTs)
