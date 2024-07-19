@@ -8,7 +8,7 @@ collection of my parsers<br>
   <b/>Usage</b> : ```python world_parser.py <dumped world filename>```
   
 - ```items_data_parser.py``` <br>
-  Script to parse items.dat into json. Only compatible for version 16.<br>
+  Script to parse items.dat into json. Only compatible for version 18.<br>
   <b/>Usage</b> : put items.dat in it and run the script. 
   
 - ```common.py```<br>
