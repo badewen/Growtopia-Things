@@ -1,3 +1,5 @@
+// for v19
+
 #pragma pattern_limit 3940343
 import std.io;
 import std.mem;
@@ -69,9 +71,9 @@ struct ItemInfo {
     u32		unk1;
     u32		unk2;
     u32		flags_2;
-    
+
     u8		unk3[60];
-    
+
     u32		tile_range;
     u32		vault_capacity;
     u16		punch_options_len;
