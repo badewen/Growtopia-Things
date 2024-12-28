@@ -64,19 +64,19 @@ for i in range(int(items_data["items_count"])):
         data["item_id"] = get_int(4)
         data["flags"] = get_int(2)
         data["item_type"] = get_int(1)
-        data["material"] = get_int(1)
+        data["material"] = get_int(1) 
         data["name"] = get_enc_str(data["item_id"])
         data["texture_file"] = get_str()
         data["texture_file_hash"] = get_int(4)
         data["visual_effect"] = get_int(1)
-        data["ingredient_type"] = get_int(4) # for cooking thing
+        data["cooking_time"] = get_int(4) # for cooking thing
         data["tex_coord_x"] = get_int(1)
         data["tex_coord_y"] = get_int(1)
-        data["spread_type"] = get_int(1)
+        data["texture_type"] = get_int(1)
         data["is_stripey_wallpaper"] = get_int(1)
         data["collision_type"] = get_int(1)
         data["health"] = get_int(1)
-        data["reset_time"] = get_int(4)
+        data["restore_time"] = get_int(4)
         data["clothing_type"] = get_int(1)
         data["rarity"] = get_int(2)
         data["max_amount"] = get_int(1)
@@ -93,48 +93,71 @@ for i in range(int(items_data["items_count"])):
         data["tree_leaves"] = get_int(1)
         data["seed_color"] = get_byte_arr(4)
         data["seed_overlay_color"] = get_byte_arr(4)
-        data["ingredient"] = get_int(4)
+        data["ingredient"] = get_int(4) # people used to say this is the ingredient / splice recipe, but then later removed
         data["grow_time"] = get_int(4) 
-        data["flags_2"] = get_int(2) # things like Multi frame flag that is set by extra_options_1, etc
-        data["rayman"] = get_int(2)
-        data["extra_options_1"] = get_str()
-        data["texture_file_2"] = get_str()
-        data["extra_options_2"] = get_str() # 83
+        data["fx_flags"] = get_int(4) # things like Multi frame flag that is set by extra_options_1, etc
+        data["animating_coordinates"] = get_str()
+        data["animating_texture_files"] = get_str()
+        data["animating_coordinates_2"] = get_str() # 83
         
         # reserved part
         # data["unkarr_80"] = get_hex_arr(80)
     
-        skip(8)
+        # skip(8)
+
+        data["unk1"] = get_int(4)
+        data["unk2"] = get_int(4)
+
 
         # flags like "ITEM_INFO_ROBOT_DEADLY", etc.
-        data["flags_3"] = get_int(4);
+        data["flags_2"] = get_int(4);
 
-        skip(68)
+        skip(60)
+
+        # any range you could think of. in unit of tile
+        # ex: extractor dynamo, disco rever range, etc
+        data["tile_range"] = get_int(4)
+
+        data["vault_capacity"] = get_int(4)
 
         data["punch_options"] = get_str()
-        data["unk1_32"] = get_int(4)
+        data["unk3"] = get_int(4) # only jack o lantern has this
         
         data["body_part_list"] = get_byte_arr(9)
     
-        data["unk2_32"] = get_int(4)
-        data["unk3_32"] = get_int(4)
-    
-        skip(25)
-        data["unk1_str"] = get_str()
-    
-    
-        data["renderer_data"] = get_str()
+        # light source range
+        # torch, etc 
+        data["light_range"] = get_int(4)
 
-        data["unk4_32"] = get_int(4)
-        data["renderer_data_hash"] = get_int(4)
+
+        data["unk4"] = get_int(4)
+    
+        data["can_sit"] = get_int(1)
+
+        data["player_offset_x"] = get_int(4)
+        data["player_offset_y"] = get_int(4)
+        data["chari_texture_x"] = get_int(4)
+        data["chair_texture_y"] = get_int(4)
+        data["chair_leg_offset_x"] = get_int(4)
+        data["chair_leg_offset_y"] = get_int(4)
+
+        data["chair_texture_file"] = get_str()
+    
+    
+        data["renderer_data_file"] = get_str()
+
+        data["unk5"] = get_int(4)
+        data["renderer_data_file_hash"] = get_int(4)
+
+        data["unk6"] = get_byte_arr(9)
 
     
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
-        if data["spread_type"] == 2 or data["spread_type"] == 5:
+        if data["texture_type"] == 2 or data["texture_type"] == 5:
             data["default_texture_x"] = data["tex_coord_x"] + 4
             data["default_texture_y"] = data["tex_coord_y"] + 1
         # TILESPREAD_VERTICAL or TILESPREAD_HORIZONTAL
-        elif data["spread_type"] == 3 or data["spread_type"] == 7: 
+        elif data["texture_type"] == 3 or data["texture_type"] == 7: 
             data["default_texture_x"] = data["tex_coord_x"] + 3
             data["default_texture_y"] = data["tex_coord_y"]
         else:

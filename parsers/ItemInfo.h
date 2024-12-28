@@ -4,6 +4,28 @@
 
 // plies cwredwit, me put 10+ houws REing fwags awnd ewnuwms
 
+/* Dont know what are these yet. just keeping it here
+ALIGNMENT_UPPER_LEFT
+ALIGNMENT_CENTER
+ALIGNMENT_DOWN_CENTER
+ALIGNMENT_UPPER_RIGHT
+ALIGNMENT_DOWN_LEFT
+ALIGNMENT_UPPER_CENTER
+ALIGNMENT_LEFT_CENTER
+ALIGNMENT_DOWN_RIGHT
+ALIGNMENT_RIGHT_CENTER
+ALIGNMENT_
+INTERPOLATE_LINEAR
+INTERPOLATE_SMOOTHSTEP
+INTERPOLATE_EASE_TO
+INTERPOLATE_EASE_FROM
+INTERPOLATE_EASE_TO_QUARTIC
+INTERPOLATE_EASE_FROM_QUARTIC
+INTERPOLATE_BOUNCE_TO
+INTERPOLATE_SMOOTHSTEP_AS_COLOR
+INTERPOLATE_LINEAR_AS_COLOR
+*/
+
 enum class eItemInfoMaterialType : uint8_t
 {
     Wooden,
@@ -35,8 +57,8 @@ struct ItemInfoFlag
 // idk for now
 struct FXFlags
 {
-    uint32_t MultiAnimStart : 1;
-    uint32_t MultiAnim2Start : 1;
+    uint32_t MultiAnimStartAndEnd : 1;
+    uint32_t MultiAnim2StartAndEnd : 1;
     uint32_t PingPongAnimStart : 1;
     uint32_t OverlayObject : 1;
     uint32_t RenderFXVariantVersion : 1;
@@ -54,13 +76,6 @@ struct FXFlags
     uint32_t SlowFallObject : 1;
     uint32_t ReplacementSprite : 1;
     uint32_t OrbFloat : 1;
-};
-
-struct ItemInfoFlag3
-{
-    uint16_t MultiFrame : 1; // the frame is dictated by extra option string
-    uint16_t ReverseFrame : 1; // reverse the frame order instead of returning to the first frame immediately
-    // idk the rest. Lazy
 };
 
 // lets go bits by bits
@@ -116,7 +131,7 @@ enum class eItemInfoItemType : uint8_t
     Gems = 4,
     Treasure = 5,
     Deadly = 6,
-    Trampoline0 = 7,
+    Trampoline = 7,
     Consumable = 8,
     Gateway = 9,
     Sign = 10,
@@ -126,7 +141,7 @@ enum class eItemInfoItemType : uint8_t
     Platform = 14,
     Bedrock = 15,
     Lava = 16,
-    Normal0 = 17,
+    Normal = 17,
     Background = 18,
     Seed = 19,
     Clothes = 20,
@@ -136,7 +151,7 @@ enum class eItemInfoItemType : uint8_t
     Bouncy = 24,
     Pointy = 25,
     Portal = 26,
-    Checkpoint0 = 27,
+    Checkpoint = 27,
     Musicnote = 28,
     Ice = 29,
     RaceFlag = 30,
@@ -146,7 +161,7 @@ enum class eItemInfoItemType : uint8_t
     Bulletin = 34,
     Pinata = 35,
     Dice = 36,
-    Component0 = 37,
+    Component = 37,
     Provider = 38,
     Lab = 39,
     Achievement = 40,
@@ -156,7 +171,7 @@ enum class eItemInfoItemType : uint8_t
     Profile = 44,
     DeadlyIfOn = 45,
     HeartMonitor = 46,
-    DonationBox0 = 47,
+    DonationBox = 47,
     Toybox = 48,
     Mannequin = 49,
     Camera = 50,
@@ -166,7 +181,7 @@ enum class eItemInfoItemType : uint8_t
     Xenonite = 54,
     Dressup = 55,
     Crystal = 56,
-    Burglar0 = 57,
+    Burglar = 57,
     Compactor = 58,
     Spotlight = 59,
     Wind = 60,
@@ -176,7 +191,7 @@ enum class eItemInfoItemType : uint8_t
     Petfish = 64,
     Solar = 65,
     Forge = 66,
-    GivingTree0 = 67,
+    GivingTree = 67,
     GivingTreeStump = 68,
     Steampunk = 69,
     SteamLavaIfOn = 70,
@@ -186,7 +201,7 @@ enum class eItemInfoItemType : uint8_t
     Flag = 74,
     LobsterTrap = 75,
     Artcanvas = 76,
-    BattleCage0 = 77,
+    BattleCage = 77,
     PetTrainer = 78,
     SteamEngine = 79,
     LockBot = 80,
@@ -196,7 +211,7 @@ enum class eItemInfoItemType : uint8_t
     VipDoor = 84,
     ChalTimer = 85,
     ChalFlag = 86,
-    FishMount0 = 87,
+    FishMount = 87,
     Portrait = 88,
     WeatherSpecial2 = 89,
     Fossil = 90,
@@ -206,17 +221,17 @@ enum class eItemInfoItemType : uint8_t
     Valhowla = 94,
     Chemsynth = 95,
     Chemtank = 96,
-    Storage00 = 97,
-    Oven01 = 98,
-    SuperMusic02 = 99,
-    Geigercharge03 = 100,
-    AdventureReset04 = 101,
-    TombRobber05 = 102,
-    Faction06 = 103,
-    RedFaction07 = 104,
-    GreenFaction08 = 105,
-    BlueFaction09 = 106,
-    Artifact0 = 107,
+    Storage = 97,
+    Oven = 98,
+    SuperMusic = 99,
+    Geigercharge = 100,
+    AdventureReset = 101,
+    TombRobber = 102,
+    Faction = 103,
+    RedFaction = 104,
+    GreenFaction = 105,
+    BlueFaction = 106,
+    Artifact = 107,
     TrampolineMomentum = 108,
     FishgotchiTank = 109,
     FishingBlock = 110,
@@ -226,7 +241,7 @@ enum class eItemInfoItemType : uint8_t
     Command = 114,
     LuckyTicket = 115,
     StatsBlock = 116,
-    FieldNode0 = 117,
+    FieldNode = 117,
     OuijaBoard = 118,
     ArchitectMachine = 119,
     Starship = 120,
@@ -236,7 +251,7 @@ enum class eItemInfoItemType : uint8_t
     AutoActionHarvest = 124,
     AutoActionHarvestSuck = 125,
     LightningCloud = 126,
-    PhasedBlock0 = 127,
+    PhasedBlock = 127,
     Mud = 128,
     RootCutting = 129,
     PasswordStorage = 130,
@@ -246,7 +261,7 @@ enum class eItemInfoItemType : uint8_t
     InfinityWeatherMachine = 134,
     Slime = 135,
     Acid = 136,
-    Completionist0 = 137,
+    Completionist = 137,
     PunchToggle = 138,
     AnzuBlock = 139,
     FeedingBlock = 140,
@@ -257,7 +272,7 @@ enum class eItemInfoItemType : uint8_t
 
 enum class eItemInfoVisualEffect : uint8_t
 {
-    None = 1,
+    None = 0,
     FlameLick = 1,
     Smoking = 2,
     GlowTint1 = 3,
@@ -310,16 +325,27 @@ enum class eItemInfoVisualEffect : uint8_t
 
 enum class eItemInfoTextureType : uint8_t
 {
-    None = 1,
-    EightDirection,
-    Horizontal,
-    AttachedToWall,
-    FourDirection,
-    Randomized,
-    Vertical,
-    HorizontalCavePlatform,
-    AttachedToWallGround,
-    Diagonal,
+    SingleFrameAlone = 0,
+    SingleFrame = 1,
+    SmartEdge = 2,
+    SmartEdgeHoriz = 3,
+    SmartCling = 4,
+    SmartCling2 = 5,
+    SmartOuter = 6,
+    Random = 7,
+    SmartEdgeVert = 8,
+    SmartEdgeHorizCave = 9,
+    SmartEdgeDiagon = 10    
+    // None = 1,
+    // EightDirection,
+    // Horizontal,
+    // AttachedToWall,
+    // FourDirection,
+    // Randomized,
+    // Vertical,
+    // HorizontalCavePlatform,
+    // AttachedToWallGround,
+    // Diagonal,
 };
      
 enum class eItemInfoCollisionType : uint8_t
@@ -425,7 +451,7 @@ struct ItemInfo
     std::string TextureFilePath;
     int32_t TextureFileHash;
     eItemInfoVisualEffect VisualEffect;
-    uint32_t CookingIngredientType;
+    uint32_t CookingTime;
     uint8_t TextureCoordX;
     uint8_t TextureCoordY;
     eItemInfoTextureType TextureType;
@@ -451,30 +477,30 @@ struct ItemInfo
     eItemInfoColor SeedOverlayColor;
     uint32_t Ingredient; // unused now.
     uint32_t GrowTime;
-    ItemInfoFlag3 Flags3; // idk 
-    uint16_t IsRayman;
-    std::string ExtraOption;
-    std::string TextureFile2;
-    std::string ExtraOption2;
+    FXFlags FxFlag; // idk 
+    std::string AnimatingCoordinates;
+    std::string AnimatingTextureFile;
+    std::string AnimatingCoordinates2;
     uint8_t __Unk_1[8];
     ItemInfoFlag2 Flags2;
     uint8_t __Unk_2[60];
-    uint32_t DomainRange; 
+    uint32_t TileRange; 
     uint32_t VaultCapacity; 
     std::string PunchOptions;
     uint8_t __Unk_3[4];
     uint8_t BodyPartList[9];
-    uint8_t __Unk_4[8];
+    uint32_t LightRange;
+    uint8_t __Unk_4[4];
     uint8_t CanSit;
-    uint32_t MovePlayerHorizontal;
-    uint32_t MovePlayerVertical;
+    uint32_t PlayerOffsetX;
+    uint32_t PlayerOffsetY;
     uint32_t ChairTextureX;
     uint32_t ChairTextureY;
-    uint32_t MoveChairLegHorizontal;
-    uint32_t MoveChairLegVertical;
-    std::string SitTextureFile;
-    std::string RendererFilePath;
+    uint32_t ChairLegOffsetX;
+    uint32_t ChairLegOffsetY;
+    std::string ChairTextureFile;
+    std::string RendererDataFile;
     uint8_t __Unk_5[4];
-    int32_t RendererFileHash;
+    int32_t RendererDataFileHash;
     uint8_t __Unk_6[6]; // v19
 };
