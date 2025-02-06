@@ -92,18 +92,18 @@ def parse_block(i):
 
             data["access_list_user_id"] = acc_id            
 
-            # sl, bl, hl, builder lock
-            non_world_locks = [202, 204, 206, 4994]
+            data["minimum_level"] = get_int(1)
+            data["unk2_arr"] = get_byte_arr(7).hex()
 
-            # worldlock
-            if not tile["fg"] in non_world_locks:
-                data["minimum_level"] = get_int(1)
-                data["unk2_arr"] = get_byte_arr(7).hex()
+            guild_locks = [5814]
+
+            if tile["fg"] in guild_locks:
+                data["guild_locks_unk"] = get_byte_arr(16).hex()
 
 
         # seed
         elif tile["extra_tile_data_type"] == 4:
-            data["time_left"] = get_int(4)
+            data["age"] = get_int(4)
             data["fruit_count"] = get_int(1)
         
         # dice-like item
@@ -248,7 +248,7 @@ def parse_block(i):
         # giving tree
         elif tile["extra_tile_data_type"] == 28:
             data["harvested"] = get_int(1)
-            data["unk1_16"] = get_int(2)
+            data["age"] = get_int(2) # max 4 hours
             data["unk2_16"] = get_int(2)
             data["decoration_percentage"] = get_int(1) 
 
@@ -573,10 +573,12 @@ def parse_block(i):
             # 1 = raffling
             # 2 = done raffling
             data["is_raffling"] = get_int(4)
-            data["unk1_16"] = get_int(2)
+            data["unk1_8"] = get_int(2)
 
             # growtopia somehow uses ascii code here and offsets it by 1
-            data["ascii_code"] = get_int(1)
+            # only for raffling that is done
+            if data["is_raffling"] == 2:
+                data["ascii_code"] = get_int(1)
 
         # Infinity Weather machine
         elif tile["extra_tile_data_type"] == 77:
