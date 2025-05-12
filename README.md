@@ -1,5 +1,3 @@
-# I WONT MAIINTAIN GROWTOPIA RELATED THINGS ANYMORE INDEFINETLY.
-i just kept getting banned and tracked by mods, and lost all of the motivation to play growtopia
 
 # Growtopia-Things
 This repository contains all the miscelaneous things i use. For example : world deserializer, item data deserializer and more. For all of the deserializer, it's in the ```parsers``` folder. <br>
