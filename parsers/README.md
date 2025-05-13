@@ -4,7 +4,9 @@ collection of my parsers<br>
 <b/>BEFORE RUNNING THE SCRIPT, INSTALL ALL DEPENDENCIES WITH ```pip install -r requirements.txt```</b><br>
 
 - ```world_parser.py```<br>
+  <b/>PREREQUISITES: RUN ```items_data_parser.py``` BEFORE RUNNING THIS!!</b><br>
   A script that is good enough to parse a dumped world data or the dumped ```PAKCET_SEND_MAP_DATA```'s data into <b/>json</b> <br>
+  Also supports ```Operating Table```, ```Auto Surgeon```, ```Shirt Rack```, etc.<br>
   <b/>Usage</b> : ```python world_parser.py <dumped world filename>```
   
 - ```items_data_parser.py``` <br>
