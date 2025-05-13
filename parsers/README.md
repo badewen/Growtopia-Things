@@ -4,11 +4,11 @@ collection of my parsers<br>
 <b/>BEFORE RUNNING THE SCRIPT, INSTALL ALL DEPENDENCIES WITH ```pip install -r requirements.txt```</b><br>
 
 - ```world_parser.py```<br>
-  A script that is good enough to parse a dumped world data or the dumped ```PAKCET_SEND_MAP_DATA```'s data into <b/>~~json~~</b> (the output is in the form of dumped python disctionary rather than ordinary json. Will be fixed later) <br>
+  A script that is good enough to parse a dumped world data or the dumped ```PAKCET_SEND_MAP_DATA```'s data into <b/>json</b> <br>
   <b/>Usage</b> : ```python world_parser.py <dumped world filename>```
   
 - ```items_data_parser.py``` <br>
-  Script to parse items.dat into json. Only compatible for version 18.<br>
+  Script to parse items.dat into json. Only compatible for version 21.<br>
   <b/>Usage</b> : put items.dat in it and run the script. 
   
 - ```common.py```<br>

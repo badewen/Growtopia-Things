@@ -6,10 +6,10 @@ FILE_CUR_POS = 1
 FILE_END_POS = 2
 
 
-def get_int(sz, f) -> int: 
+def get_int(sz, f, endian = "little") -> int: 
     int_arr = f.read(sz)
 
-    return int.from_bytes(int_arr, byteorder="little")
+    return int.from_bytes(int_arr, byteorder=endian)
     
 
 def get_list(len_sz, elm_sz, f) -> List:

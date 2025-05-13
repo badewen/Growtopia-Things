@@ -1,21 +1,23 @@
 from typing import List
 import orjson
-import struct
+import json
 import sys
 import math
 
 import common
+import cbor2
 
 f = None
 f_out = None
 
+item_data = json.load(open("parsed_data.json"))
 world_info = {}
 
 def get_str() -> str:
     return common.get_str(f)
 
-def get_int(sz) -> int: 
-    return common.get_int(sz, f)
+def get_int(sz, endian = "little") -> int: 
+    return common.get_int(sz, f, endian)
 
 def get_list(len_sz, elm_sz) -> List:
     return common.get_list(len_sz, elm_sz, f)
@@ -58,8 +60,6 @@ def parse_block(i):
     # TILE_EXTRA_DATA
     if tile["item_flags_low"] & 0x01:
         tile["extra_tile_data_type"] = get_int(1)
-
-
 
     if tile["extra_tile_data_type"] != 0:
     
@@ -573,7 +573,7 @@ def parse_block(i):
             # 1 = raffling
             # 2 = done raffling
             data["is_raffling"] = get_int(4)
-            data["unk1_8"] = get_int(2)
+            data["unk1"] = get_int(2)
 
             # growtopia somehow uses ascii code here and offsets it by 1
             # only for raffling that is done
@@ -615,16 +615,41 @@ def parse_block(i):
             print(tile)
 
             return None
-        
+
         tile["extra_tile_data"] = data
+        # check ItemInfo.h
     
+    item_type_with_json = [77]
+
+    # instead of hardcoding item id here which is more error prone,
+    #  we use the extra_file field instead. Since it is guaranteed that 
+    #  tile that has this extra json, will also has additional renderer file
+    extra_file_with_json = [
+        "AutoSurgeonStation.xml",
+        "ClothesRack.xml",
+        "OperatingTable.xml",
+    ]
+
+    tile_item_data = item_data["items"][str(tile["fg"])]
+
+    tile_has_json = tile_item_data["item_type"] in item_type_with_json
+
+    if not tile_has_json:
+        for file_name in extra_file_with_json:
+            if file_name in tile_item_data["extra_file"]:
+                tile_has_json = True
+                break
+
+    if tile_has_json:
+        # took me some time to figure it out
+        tile["extra_data_json"] = cbor2.loads(get_byte_arr(get_int(4)))
+
     return tile
 
 
 def parse_world():
     try:
         skip(6)
-    
         world_info["name"] = get_str()
         world_info["width"] = get_int(4)
         world_info["height"] = get_int(4)
@@ -642,7 +667,8 @@ def parse_world():
     
             world_info["tiles"].append(tile)
     
-    except:
+    except Exception as e:
+        print(e)
         return False
 
     return True

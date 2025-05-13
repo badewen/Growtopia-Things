@@ -240,6 +240,10 @@ struct WorldTile
         WorldTileInfinityWeatherMachineExtra InfinityWeatherMachineExtra;
         WorldTilePineappleGuzzlerExtra PineappleGuzzlerExtra;
     } ExtraTileData;
+
+    // OPTIONAL: depends on the item id. There are no 100% realiable indicator. See world_parser.py
+     uitn64_t CBORDataLength;
+     std::vector<uint8_t> CBORData;
 };
 
 struct World
@@ -258,5 +262,5 @@ struct World
     eWeatherType BaseWeather;
     uint8_t __Unk_4[2];
     eWeatherType CurrentWeather;
-    uint8_t __unk_5[6];
+    uint8_t __Unk_5[6];
 };

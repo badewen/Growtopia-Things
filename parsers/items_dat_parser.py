@@ -51,7 +51,7 @@ items_data = {}
 
 items_data["items_dat_version"] = get_int(2)
 items_data["items_count"] = get_int(4)
-items_data["items"] = []
+items_data["items"] = {}
 
 for i in range(int(items_data["items_count"])):
     try:
@@ -151,7 +151,8 @@ for i in range(int(items_data["items_count"])):
 
         data["unk6"] = get_byte_arr(9)
 
-    
+        data["unk7"] = get_int(2)
+
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
         if data["texture_type"] == 2 or data["texture_type"] == 5:
             data["default_texture_x"] = data["tex_coord_x"] + 4
@@ -164,7 +165,7 @@ for i in range(int(items_data["items_count"])):
             data["default_texture_x"] = data["tex_coord_x"]
             data["default_texture_y"] = data["tex_coord_y"]
     
-        items_data["items"].append(data)
+        items_data["items"][str(data["item_id"])] = data
     except Exception as e:
         print(f"ERROR DUMPING LAST DATA {data.__str__()}")
         raise e
