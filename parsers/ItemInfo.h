@@ -502,5 +502,6 @@ struct ItemInfo
     std::string RendererDataFile;
     uint8_t __Unk_5[4];
     int32_t RendererDataFileHash;
-    uint8_t __Unk_6[6]; // v19
+    uint8_t __Unk_6[9]; // v19
+    uint8_t __Unk_7[2]; // v21
 };
