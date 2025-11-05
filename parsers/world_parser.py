@@ -545,8 +545,13 @@ def parse_block(i):
         # they are too expensive lol.
         # gimme world with these 3 items, or donat me :>
 
+        # Special thanks to https://github.com/CLOEI for borrowing TM.
         # Tesseract Manipulator
-        # elif tile["extra_tile_data_type"] == 69:
+        elif tile["extra_tile_data_type"] == 69:
+            data["gems_left"] = get_int(4)
+            data["next_update_ms"] = get_int(4)
+            data["item_id"] = get_int(4)
+            data["enabled"] = get_int(4)
 
         # Heart of Gaia
         # elif tile["extra_tile_data_type"] == 70:

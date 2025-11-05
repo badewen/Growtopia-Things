@@ -22,3 +22,4 @@ collection of my parsers<br>
 - https://github.com/SyzuTopia54y/Growtopia_ItemsDatReader 
 - Thanks to [BotHax](https://github.com/sTYzaBUvqRIj) for providing me all the tile extra type and methods to get them. His discord server (https://discord.gg/z8rzEXpyTs)
 - Big thanks to https://github.com/FakeLeq/growtopia-utility discovered alot of new fields
+- Special thanks to [CLOEI](https://github.com/CLOEI) for borrowing expensive item
