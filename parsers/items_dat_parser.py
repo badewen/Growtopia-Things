@@ -153,6 +153,8 @@ for i in range(int(items_data["items_count"])):
 
         data["unk7"] = get_int(2)
 
+        data["info"] = get_str()
+
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
         if data["texture_type"] == 2 or data["texture_type"] == 5:
             data["default_texture_x"] = data["tex_coord_x"] + 4
