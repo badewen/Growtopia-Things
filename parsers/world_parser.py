@@ -624,7 +624,9 @@ def parse_block(i):
         # check ItemInfo.h
     
     item_type_with_json = [77]
-
+    # i hate how they kept hard coding this shit @#$@#$!@
+    # Auction block
+    item_id_with_json = [15546]
     # instead of hardcoding item id here which is more error prone,
     #  we use the extra_file field instead. Since it is guaranteed that 
     #  tile that has this extra json, will also has additional renderer file
@@ -639,10 +641,14 @@ def parse_block(i):
     tile_has_json = tile_item_data["item_type"] in item_type_with_json
 
     if not tile_has_json:
+        tile_has_json = tile_item_data["extra_file"] in extra_file_with_json
         for file_name in extra_file_with_json:
             if file_name in tile_item_data["extra_file"]:
                 tile_has_json = True
                 break
+    if not tile_has_json:
+        tile_has_json = tile["fg"] in item_id_with_json
+
 
     if tile_has_json:
         # took me some time to figure it out
