@@ -594,7 +594,6 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 79:
             # amount of pineapple fed
             data["pineapple_fed"] = get_int(4)
-            data["unk1"] = get_int(1)  # GT server is trippin rn
 
         # Kraken's galatic block
         elif tile["extra_tile_data_type"] == 80:
