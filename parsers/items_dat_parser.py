@@ -82,7 +82,7 @@ for i in range(int(items_data["items_count"])):
         data["max_amount"] = get_int(1)
         data["extra_file"] = get_str()
         data["extra_file_hash"] = get_int(4)
-        data["frame_interval_ms"] = get_int(4)
+        data["frame_interval_ms"] = get_int(4) # also used for weather id
         data["pet_name"] = get_str()
         data["pet_prefix"] = get_str()
         data["pet_suffix"] = get_str()
@@ -93,7 +93,7 @@ for i in range(int(items_data["items_count"])):
         data["tree_leaves"] = get_int(1)
         data["seed_color"] = get_byte_arr(4)
         data["seed_overlay_color"] = get_byte_arr(4)
-        data["ingredient"] = get_int(4) # people used to say this is the ingredient / splice recipe, but then later removed
+        data["unused_ingredient"] = get_int(4) # people used to say this is the ingredient / splice recipe, but then later removed
         data["grow_time"] = get_int(4) 
         data["fx_flags"] = get_int(4) # things like Multi frame flag that is set by extra_options_1, etc
         data["animating_coordinates"] = get_str()
@@ -154,6 +154,7 @@ for i in range(int(items_data["items_count"])):
         data["unk7"] = get_int(2)
 
         data["info"] = get_str()
+        data["ingredients"] = [get_int(2), get_int(2)]
 
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
         if data["texture_type"] == 2 or data["texture_type"] == 5:

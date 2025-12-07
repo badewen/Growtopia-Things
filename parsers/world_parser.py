@@ -333,7 +333,7 @@ def parse_block(i):
             # if 24 hours, bot is ded
             data["time_passed_sec"] = get_int(4)
 
-        # weather machine
+        # weather machine 1
         elif tile["extra_tile_data_type"] == 40:
             # weather machine specific data
             data["settings"] = get_byte_arr(4).hex()
@@ -386,11 +386,13 @@ def parse_block(i):
             data["hair"] = get_int(2)
             data["unk6_32"] = get_int(4)
 
-        # guild weather machine
+        # weather machine 2
         elif tile["extra_tile_data_type"] == 49:
-            data["unk1_32"] = get_int(4)
+            data["item_id"] = get_int(4) # this is used by weather machine - stuff atleast
             data["gravity"] = get_int(4)
             # contains if the weather machine has invert sky colour on and/or spin items
+            # 0x01 Spin
+            # 0x02 invert sky color
             data["flag"] = get_int(1)
 
         # Fossil prep station
