@@ -111,8 +111,8 @@ for i in range(int(items_data["items_count"])):
 
         # flags like "ITEM_INFO_ROBOT_DEADLY", etc.
         data["flags_2"] = get_int(4);
-
-        skip(60)
+        
+        skip(60); # no shit all of this is used by shockbot, etc
 
         # any range you could think of. in unit of tile
         # ex: extractor dynamo, disco rever range, etc
@@ -155,6 +155,7 @@ for i in range(int(items_data["items_count"])):
 
         data["info"] = get_str()
         data["ingredients"] = [get_int(2), get_int(2)]
+        data["unk8"] = get_int(1);
 
         # TILESPREAD_DIRECT8 or TILESPREAD_DIRECT4
         if data["texture_type"] == 2 or data["texture_type"] == 5:
