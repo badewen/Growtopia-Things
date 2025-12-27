@@ -112,7 +112,7 @@ def parse_block(i):
 
         # provider
         elif tile["extra_tile_data_type"] == 9:
-            data["time_left"] = get_int(4) 
+            data["growth"] = get_int(4) 
 
             # well of love. It is not valentine rn so i cant reverse this 2 bytes.
             # tell me world with filled well of love would be helpful
@@ -538,11 +538,12 @@ def parse_block(i):
             data["other_node_list"] = get_list_int(4,4) 
 
         # Spirit board
+        # Thanks for https://github.com/fann22 for helping me reverse this
         elif tile["extra_tile_data_type"] == 68:
-            # aint bothered to figure out what these meant
-            data["unk1_32"] = get_int(4)
-            data["unk2_32"] = get_int(4)
-            data["unk3_32"] = get_int(4)
+            data["player_required"] = get_int(4)
+            data["unk2"] = get_str();
+            data["command"] = get_str(); # command to do 
+            data["item_list"] = get_list_int(4, 4); # item list required
 
         # they are too expensive lol.
         # gimme world with these 3 items, or donat me :>

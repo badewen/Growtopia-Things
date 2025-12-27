@@ -10,7 +10,7 @@ collection of my parsers<br>
   <b/>Usage</b> : ```python world_parser.py <dumped world filename>```
   
 - ```items_data_parser.py``` <br>
-  Script to parse items.dat into json. Only compatible for version 23.<br>
+  Script to parse items.dat into json. Only compatible for version 24.<br>
   <b/>Usage</b> : put items.dat in it and run the script. 
   
 - ```common.py```<br>
@@ -23,3 +23,4 @@ collection of my parsers<br>
 - Thanks to [BotHax](https://github.com/sTYzaBUvqRIj) for providing me all the tile extra type and methods to get them. His discord server (https://discord.gg/z8rzEXpyTs)
 - Big thanks to https://github.com/FakeLeq/growtopia-utility discovered alot of new fields
 - Special thanks to [CLOEI](https://github.com/CLOEI) for borrowing me expensive item
+- Thanks to [.fann](https://github.com/fann22) for helping me reverse Spirit Boards
