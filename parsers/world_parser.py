@@ -61,6 +61,7 @@ def parse_block(i):
     if tile["item_flags_low"] & 0x01:
         tile["extra_tile_data_type"] = get_int(1)
 
+    print(tile)
     if tile["extra_tile_data_type"] != 0:
     
         data = {}
@@ -385,6 +386,11 @@ def parse_block(i):
             data["hat"] = get_int(2)
             data["hair"] = get_int(2)
             data["unk6_32"] = get_int(4)
+
+            # infinity crown
+            if data["hat"] == 12958:
+                data["infinity_crown_data"] = get_str()
+
 
         # weather machine 2
         elif tile["extra_tile_data_type"] == 49:
