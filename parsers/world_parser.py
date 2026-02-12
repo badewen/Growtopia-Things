@@ -456,7 +456,7 @@ def parse_block(i):
             for i in range(int(data["ingredient_list_size"])):
                 data["ingredients"].append({
                     "item_id" : get_int(4),
-                    "time_added_elapsed" : get_int(4)
+                    "time_added" : get_int(4)
                 })
 
             data["unk1_32"] = hex(get_int(4))
@@ -540,8 +540,8 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 67:
             # idk what kind of time this represents, but it increases every milliseconds.
             data["time_ms"] = get_int(4)
-            # the block index on where the other node is placed os it link up to there.
-            data["other_node_list"] = get_list_int(4,4) 
+            # the block index on where the other node is placed as it link up to there.
+            data["linked_nodes"] = get_list_int(4,4) 
 
         # Spirit board
         # Thanks for https://github.com/fann22 for helping me reverse this
@@ -586,18 +586,18 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 75:
             # 1 = raffling
             # 2 = done raffling
-            data["is_raffling"] = get_int(4)
+            data["state"] = get_int(4)
             data["unk1"] = get_int(2)
 
             # growtopia somehow uses ascii code here and offsets it by 1
             # only for raffling that is done
-            if data["is_raffling"] == 2:
+            if data["state"] == 2:
                 data["ascii_code"] = get_int(1)
 
         # Infinity Weather machine
         elif tile["extra_tile_data_type"] == 77:
             data["interval_mins"] = get_int(4)
-            data["weather_machine_list"] = get_list_int(4, 4)
+            data["weather_machines"] = get_list_int(4, 4)
 
         # Pineapple guzzler
         elif tile["extra_tile_data_type"] == 79:
@@ -700,7 +700,7 @@ def parse_drops():
     # idk why they give it 2 drop count
     item_drop_count = get_int(4)
     # maybe it is last dropped item uid? need to be investigated.
-    item_drop_count_clone = get_int(4)
+    last_object_uid = get_int(4)
 
     world_info["dropped_items"] = []
     for i in range(item_drop_count):
@@ -710,12 +710,12 @@ def parse_drops():
 
         data["item_id"] = get_int(2)
         # for pos, divide by 32 and floor it to get tile coordinate.
-        data["pos_x_raw"] = get_float()
-        data["pos_y_raw"] = get_float()
+        data["x"] = get_float()
+        data["y"] = get_float()
 
-        data["dropped_count"] = get_int(1)
-        data["item_flag"] = hex(get_int(1))
-        data["item_drop_uid"] = get_int(4)
+        data["amount"] = get_int(1)
+        data["flag"] = hex(get_int(1))
+        data["uid"] = get_int(4)
 
         world_info["dropped_items"].append(data)
 
@@ -745,4 +745,3 @@ if __name__ == "__main__":
 
     f_out.close()
     f.close()
-

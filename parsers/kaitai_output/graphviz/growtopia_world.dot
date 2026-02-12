@@ -1,0 +1,1098 @@
+digraph {
+	rankdir=LR;
+	node [shape=plaintext];
+	subgraph cluster__growtopia_world {
+		label="GrowtopiaWorld";
+		graph[style=dotted];
+
+		growtopia_world__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+			<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			<TR><TD PORT="version_pos">0</TD><TD PORT="version_size">2</TD><TD>u2le</TD><TD PORT="version_type">version</TD></TR>
+			<TR><TD PORT="unk1_pos">2</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+			<TR><TD PORT="name_pos">6</TD><TD PORT="name_size">...</TD><TD>GtStr</TD><TD PORT="name_type">name</TD></TR>
+			<TR><TD PORT="width_pos">...</TD><TD PORT="width_size">4</TD><TD>u4le</TD><TD PORT="width_type">width</TD></TR>
+			<TR><TD PORT="height_pos">...</TD><TD PORT="height_size">4</TD><TD>u4le</TD><TD PORT="height_type">height</TD></TR>
+			<TR><TD PORT="num_tiles_pos">...</TD><TD PORT="num_tiles_size">4</TD><TD>u4le</TD><TD PORT="num_tiles_type">num_tiles</TD></TR>
+			<TR><TD PORT="unk2_pos">...</TD><TD PORT="unk2_size">5</TD><TD></TD><TD PORT="unk2_type">unk2</TD></TR>
+			<TR><TD PORT="tiles_pos">...</TD><TD PORT="tiles_size">...</TD><TD>WorldTile</TD><TD PORT="tiles_type">tiles</TD></TR>
+			<TR><TD COLSPAN="4" PORT="tiles__repeat">repeat num_tiles times</TD></TR>
+			<TR><TD PORT="unk3_pos">...</TD><TD PORT="unk3_size">12</TD><TD></TD><TD PORT="unk3_type">unk3</TD></TR>
+			<TR><TD PORT="num_objects_pos">...</TD><TD PORT="num_objects_size">4</TD><TD>u4le</TD><TD PORT="num_objects_type">num_objects</TD></TR>
+			<TR><TD PORT="last_object_uid_pos">...</TD><TD PORT="last_object_uid_size">4</TD><TD>u4le</TD><TD PORT="last_object_uid_type">last_object_uid</TD></TR>
+			<TR><TD PORT="objects_pos">...</TD><TD PORT="objects_size">16</TD><TD>WorldObject</TD><TD PORT="objects_type">objects</TD></TR>
+			<TR><TD COLSPAN="4" PORT="objects__repeat">repeat num_objects times</TD></TR>
+		</TABLE>>];
+		subgraph cluster__a_r_g_b {
+			label="GrowtopiaWorld::ARGB";
+			graph[style=dotted];
+
+			a_r_g_b__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="a_pos">0</TD><TD PORT="a_size">1</TD><TD>u1</TD><TD PORT="a_type">a</TD></TR>
+				<TR><TD PORT="r_pos">1</TD><TD PORT="r_size">1</TD><TD>u1</TD><TD PORT="r_type">r</TD></TR>
+				<TR><TD PORT="g_pos">2</TD><TD PORT="g_size">1</TD><TD>u1</TD><TD PORT="g_type">g</TD></TR>
+				<TR><TD PORT="b_pos">3</TD><TD PORT="b_size">1</TD><TD>u1</TD><TD PORT="b_type">b</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__achievement_block_extra {
+			label="GrowtopiaWorld::AchievementBlockExtra";
+			graph[style=dotted];
+
+			achievement_block_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="achievement_id_pos">4</TD><TD PORT="achievement_id_size">1</TD><TD>u1</TD><TD PORT="achievement_id_type">achievement_id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__adventure_begins_extra {
+			label="GrowtopiaWorld::AdventureBeginsExtra";
+			graph[style=dotted];
+
+			adventure_begins_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__angelic_counting_cloud_extra {
+			label="GrowtopiaWorld::AngelicCountingCloudExtra";
+			graph[style=dotted];
+
+			angelic_counting_cloud_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="state_pos">0</TD><TD PORT="state_size">4</TD><TD>u4le→States</TD><TD PORT="state_type">state</TD></TR>
+				<TR><TD PORT="unk1_pos">4</TD><TD PORT="unk1_size">2</TD><TD>u2le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="ascii_code_pos">6</TD><TD PORT="ascii_code_size">1</TD><TD>u1</TD><TD PORT="ascii_code_type">ascii_code</TD></TR>
+				<TR><TD COLSPAN="4" PORT="ascii_code__if">if state == :states_done_raffling</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__audio_rack_extra {
+			label="GrowtopiaWorld::AudioRackExtra";
+			graph[style=dotted];
+
+			audio_rack_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="note_pos">0</TD><TD PORT="note_size">...</TD><TD>GtStr</TD><TD PORT="note_type">note</TD></TR>
+				<TR><TD PORT="volume_pos">...</TD><TD PORT="volume_size">4</TD><TD>u4le</TD><TD PORT="volume_type">volume</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__balloon_o_matic_extra {
+			label="GrowtopiaWorld::BalloonOMaticExtra";
+			graph[style=dotted];
+
+			balloon_o_matic_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="total_rarity_pos">0</TD><TD PORT="total_rarity_size">4</TD><TD>u4le</TD><TD PORT="total_rarity_type">total_rarity</TD></TR>
+				<TR><TD PORT="team_type_pos">4</TD><TD PORT="team_type_size">1</TD><TD>u1</TD><TD PORT="team_type_type">team_type</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__cbor_data {
+			label="GrowtopiaWorld::CborData";
+			graph[style=dotted];
+
+			cbor_data__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="len_data_pos">0</TD><TD PORT="len_data_size">4</TD><TD>u4le</TD><TD PORT="len_data_type">len_data</TD></TR>
+				<TR><TD PORT="data_pos">4</TD><TD PORT="data_size">len_data</TD><TD></TD><TD PORT="data_type">data</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__challenge_timer_extra {
+			label="GrowtopiaWorld::ChallengeTimerExtra";
+			graph[style=dotted];
+
+			challenge_timer_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__chemsynth_tank_extra {
+			label="GrowtopiaWorld::ChemsynthTankExtra";
+			graph[style=dotted];
+
+			chemsynth_tank_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="current_chem_id_pos">0</TD><TD PORT="current_chem_id_size">4</TD><TD>u4le</TD><TD PORT="current_chem_id_type">current_chem_id</TD></TR>
+				<TR><TD PORT="supposed_chem_id_pos">4</TD><TD PORT="supposed_chem_id_size">4</TD><TD>u4le</TD><TD PORT="supposed_chem_id_type">supposed_chem_id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__containment_field_power_node_extra {
+			label="GrowtopiaWorld::ContainmentFieldPowerNodeExtra";
+			graph[style=dotted];
+
+			containment_field_power_node_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="time_ms_pos">0</TD><TD PORT="time_ms_size">4</TD><TD>u4le</TD><TD PORT="time_ms_type">time_ms</TD></TR>
+				<TR><TD PORT="num_linked_nodes_pos">4</TD><TD PORT="num_linked_nodes_size">4</TD><TD>u4le</TD><TD PORT="num_linked_nodes_type">num_linked_nodes</TD></TR>
+				<TR><TD PORT="linked_nodes_pos">8</TD><TD PORT="linked_nodes_size">4</TD><TD>u4le</TD><TD PORT="linked_nodes_type">linked_nodes</TD></TR>
+				<TR><TD COLSPAN="4" PORT="linked_nodes__repeat">repeat num_linked_nodes times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__cooking_oven_extra {
+			label="GrowtopiaWorld::CookingOvenExtra";
+			graph[style=dotted];
+
+			cooking_oven_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="temp_level_pos">0</TD><TD PORT="temp_level_size">4</TD><TD>u4le</TD><TD PORT="temp_level_type">temp_level</TD></TR>
+				<TR><TD PORT="ingredient_list_size_pos">4</TD><TD PORT="ingredient_list_size_size">4</TD><TD>u4le</TD><TD PORT="ingredient_list_size_type">ingredient_list_size</TD></TR>
+				<TR><TD PORT="ingredients_pos">8</TD><TD PORT="ingredients_size">8</TD><TD>Ingredient</TD><TD PORT="ingredients_type">ingredients</TD></TR>
+				<TR><TD COLSPAN="4" PORT="ingredients__repeat">repeat ingredient_list_size / 2 times</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="unk2_pos">...</TD><TD PORT="unk2_size">4</TD><TD>u4le</TD><TD PORT="unk2_type">unk2</TD></TR>
+				<TR><TD PORT="unk3_pos">...</TD><TD PORT="unk3_size">4</TD><TD>u4le</TD><TD PORT="unk3_type">unk3</TD></TR>
+			</TABLE>>];
+			subgraph cluster__ingredient {
+				label="GrowtopiaWorld::CookingOvenExtra::Ingredient";
+				graph[style=dotted];
+
+				ingredient__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+					<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+					<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+					<TR><TD PORT="time_added_pos">4</TD><TD PORT="time_added_size">4</TD><TD>u4le</TD><TD PORT="time_added_type">time_added</TD></TR>
+				</TABLE>>];
+			}
+		}
+		subgraph cluster__country_flag_extra {
+			label="GrowtopiaWorld::CountryFlagExtra";
+			graph[style=dotted];
+
+			country_flag_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="country_pos">0</TD><TD PORT="country_size">...</TD><TD>GtStr</TD><TD PORT="country_type">country</TD></TR>
+				<TR><TD COLSPAN="4" PORT="country__if">if _parent.fg == 3394</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__crime_in_progress_extra {
+			label="GrowtopiaWorld::CrimeInProgressExtra";
+			graph[style=dotted];
+
+			crime_in_progress_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="crime_name_pos">0</TD><TD PORT="crime_name_size">...</TD><TD>GtStr</TD><TD PORT="crime_name_type">crime_name</TD></TR>
+				<TR><TD PORT="crime_index_pos">...</TD><TD PORT="crime_index_size">4</TD><TD>u4le</TD><TD PORT="crime_index_type">crime_index</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__crystal_extra {
+			label="GrowtopiaWorld::CrystalExtra";
+			graph[style=dotted];
+
+			crystal_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="num_crystals_pos">0</TD><TD PORT="num_crystals_size">2</TD><TD>u2le</TD><TD PORT="num_crystals_type">num_crystals</TD></TR>
+				<TR><TD PORT="crystals_pos">2</TD><TD PORT="crystals_size">1</TD><TD>u1</TD><TD PORT="crystals_type">crystals</TD></TR>
+				<TR><TD COLSPAN="4" PORT="crystals__repeat">repeat num_crystals times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__cybot_extra {
+			label="GrowtopiaWorld::CybotExtra";
+			graph[style=dotted];
+
+			cybot_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="num_commands_pos">0</TD><TD PORT="num_commands_size">4</TD><TD>u4le</TD><TD PORT="num_commands_type">num_commands</TD></TR>
+				<TR><TD PORT="commands_pos">4</TD><TD PORT="commands_size">15</TD><TD>Command</TD><TD PORT="commands_type">commands</TD></TR>
+				<TR><TD COLSPAN="4" PORT="commands__repeat">repeat num_commands times</TD></TR>
+				<TR><TD PORT="timer_pos">...</TD><TD PORT="timer_size">4</TD><TD>u4le</TD><TD PORT="timer_type">timer</TD></TR>
+				<TR><TD PORT="is_activated_pos">...</TD><TD PORT="is_activated_size">4</TD><TD>u4le</TD><TD PORT="is_activated_type">is_activated</TD></TR>
+			</TABLE>>];
+			subgraph cluster__command {
+				label="GrowtopiaWorld::CybotExtra::Command";
+				graph[style=dotted];
+
+				command__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+					<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+					<TR><TD PORT="command_id_pos">0</TD><TD PORT="command_id_size">4</TD><TD>u4le</TD><TD PORT="command_id_type">command_id</TD></TR>
+					<TR><TD PORT="is_command_used_pos">4</TD><TD PORT="is_command_used_size">4</TD><TD>u4le</TD><TD PORT="is_command_used_type">is_command_used</TD></TR>
+					<TR><TD PORT="unk1_pos">8</TD><TD PORT="unk1_size">7</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				</TABLE>>];
+			}
+		}
+		subgraph cluster__data_bedrock_extra {
+			label="GrowtopiaWorld::DataBedrockExtra";
+			graph[style=dotted];
+
+			data_bedrock_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">17</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="pad1_pos">17</TD><TD PORT="pad1_size">4</TD><TD></TD><TD PORT="pad1_type">pad1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__dice_extra {
+			label="GrowtopiaWorld::DiceExtra";
+			graph[style=dotted];
+
+			dice_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="symbol_pos">0</TD><TD PORT="symbol_size">1</TD><TD>u1</TD><TD PORT="symbol_type">symbol</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__display_block_extra {
+			label="GrowtopiaWorld::DisplayBlockExtra";
+			graph[style=dotted];
+
+			display_block_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__dna_extractor_extra {
+			label="GrowtopiaWorld::DnaExtractorExtra";
+			graph[style=dotted];
+
+			dna_extractor_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__door_extra {
+			label="GrowtopiaWorld::DoorExtra";
+			graph[style=dotted];
+
+			door_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__fish_tank_port_extra {
+			label="GrowtopiaWorld::FishTankPortExtra";
+			graph[style=dotted];
+
+			fish_tank_port_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="flags_pos">0</TD><TD PORT="flags_size">1</TD><TD>u1</TD><TD PORT="flags_type">flags</TD></TR>
+				<TR><TD PORT="fish_data_length_pos">1</TD><TD PORT="fish_data_length_size">4</TD><TD>u4le</TD><TD PORT="fish_data_length_type">fish_data_length</TD></TR>
+				<TR><TD PORT="fishes_pos">5</TD><TD PORT="fishes_size">8</TD><TD>FishInfo</TD><TD PORT="fishes_type">fishes</TD></TR>
+				<TR><TD COLSPAN="4" PORT="fishes__repeat">repeat fish_data_length / 2 times</TD></TR>
+			</TABLE>>];
+			subgraph cluster__fish_info {
+				label="GrowtopiaWorld::FishTankPortExtra::FishInfo";
+				graph[style=dotted];
+
+				fish_info__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+					<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+					<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+					<TR><TD PORT="lbs_pos">4</TD><TD PORT="lbs_size">4</TD><TD>u4le</TD><TD PORT="lbs_type">lbs</TD></TR>
+				</TABLE>>];
+			}
+		}
+		subgraph cluster__fish_wall_mount_extra {
+			label="GrowtopiaWorld::FishWallMountExtra";
+			graph[style=dotted];
+
+			fish_wall_mount_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+				<TR><TD PORT="item_id_pos">...</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="lbs_pos">...</TD><TD PORT="lbs_size">1</TD><TD>u1</TD><TD PORT="lbs_type">lbs</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__forge_extra {
+			label="GrowtopiaWorld::ForgeExtra";
+			graph[style=dotted];
+
+			forge_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="temperature_pos">0</TD><TD PORT="temperature_size">4</TD><TD>u4le</TD><TD PORT="temperature_type">temperature</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__fossil_prep_station_extra {
+			label="GrowtopiaWorld::FossilPrepStationExtra";
+			graph[style=dotted];
+
+			fossil_prep_station_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__friends_entrance_extra {
+			label="GrowtopiaWorld::FriendsEntranceExtra";
+			graph[style=dotted];
+
+			friends_entrance_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="owner_userid_pos">0</TD><TD PORT="owner_userid_size">4</TD><TD>u4le</TD><TD PORT="owner_userid_type">owner_userid</TD></TR>
+				<TR><TD PORT="unk1_pos">4</TD><TD PORT="unk1_size">2</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="num_allowed_friends_userid_pos">6</TD><TD PORT="num_allowed_friends_userid_size">2</TD><TD>u2le</TD><TD PORT="num_allowed_friends_userid_type">num_allowed_friends_userid</TD></TR>
+				<TR><TD PORT="allowed_friends_userid_pos">8</TD><TD PORT="allowed_friends_userid_size">4</TD><TD>u4le</TD><TD PORT="allowed_friends_userid_type">allowed_friends_userid</TD></TR>
+				<TR><TD COLSPAN="4" PORT="allowed_friends_userid__repeat">repeat num_allowed_friends_userid times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__game_generator_extra {
+			label="GrowtopiaWorld::GameGeneratorExtra";
+			graph[style=dotted];
+
+			game_generator_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__game_grave_extra {
+			label="GrowtopiaWorld::GameGraveExtra";
+			graph[style=dotted];
+
+			game_grave_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="team_id_pos">0</TD><TD PORT="team_id_size">1</TD><TD>u1</TD><TD PORT="team_id_type">team_id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__geiger_charger_extra {
+			label="GrowtopiaWorld::GeigerChargerExtra";
+			graph[style=dotted];
+
+			geiger_charger_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">4</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__giving_tree_extra {
+			label="GrowtopiaWorld::GivingTreeExtra";
+			graph[style=dotted];
+
+			giving_tree_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="harvested_pos">0</TD><TD PORT="harvested_size">1</TD><TD>u1</TD><TD PORT="harvested_type">harvested</TD></TR>
+				<TR><TD PORT="age_pos">1</TD><TD PORT="age_size">2</TD><TD>u2le</TD><TD PORT="age_type">age</TD></TR>
+				<TR><TD PORT="unk1_pos">3</TD><TD PORT="unk1_size">2</TD><TD>u2le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="decoration_percentage_pos">5</TD><TD PORT="decoration_percentage_size">1</TD><TD>u1</TD><TD PORT="decoration_percentage_type">decoration_percentage</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__growscan_extra {
+			label="GrowtopiaWorld::GrowscanExtra";
+			graph[style=dotted];
+
+			growscan_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__gt_str {
+			label="GrowtopiaWorld::GtStr";
+			graph[style=dotted];
+
+			gt_str__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="len_data_pos">0</TD><TD PORT="len_data_size">2</TD><TD>u2le</TD><TD PORT="len_data_type">len_data</TD></TR>
+				<TR><TD PORT="str_pos">2</TD><TD PORT="str_size">len_data</TD><TD>str(ASCII)</TD><TD PORT="str_type">str</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__guild_extra {
+			label="GrowtopiaWorld::GuildExtra";
+			graph[style=dotted];
+
+			guild_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">17</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__heart_monitor_extra {
+			label="GrowtopiaWorld::HeartMonitorExtra";
+			graph[style=dotted];
+
+			heart_monitor_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="user_id_pos">0</TD><TD PORT="user_id_size">4</TD><TD>u4le</TD><TD PORT="user_id_type">user_id</TD></TR>
+				<TR><TD PORT="grow_id_pos">4</TD><TD PORT="grow_id_size">...</TD><TD>GtStr</TD><TD PORT="grow_id_type">grow_id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__howler_extra {
+			label="GrowtopiaWorld::HowlerExtra";
+			graph[style=dotted];
+
+			howler_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__infinity_weather_machine_extra {
+			label="GrowtopiaWorld::InfinityWeatherMachineExtra";
+			graph[style=dotted];
+
+			infinity_weather_machine_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="interval_mins_pos">0</TD><TD PORT="interval_mins_size">4</TD><TD>u4le</TD><TD PORT="interval_mins_type">interval_mins</TD></TR>
+				<TR><TD PORT="num_weather_machines_pos">4</TD><TD PORT="num_weather_machines_size">4</TD><TD>u4le</TD><TD PORT="num_weather_machines_type">num_weather_machines</TD></TR>
+				<TR><TD PORT="weather_machines_pos">8</TD><TD PORT="weather_machines_size">4</TD><TD>u4le</TD><TD PORT="weather_machines_type">weather_machines</TD></TR>
+				<TR><TD COLSPAN="4" PORT="weather_machines__repeat">repeat num_weather_machines times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__item_sucker_extra {
+			label="GrowtopiaWorld::ItemSuckerExtra";
+			graph[style=dotted];
+
+			item_sucker_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="item_amount_pos">4</TD><TD PORT="item_amount_size">4</TD><TD>u4le</TD><TD PORT="item_amount_type">item_amount</TD></TR>
+				<TR><TD PORT="flags_pos">8</TD><TD PORT="flags_size">2</TD><TD>u2le</TD><TD PORT="flags_type">flags</TD></TR>
+				<TR><TD PORT="item_limit_pos">10</TD><TD PORT="item_limit_size">4</TD><TD>u4le</TD><TD PORT="item_limit_type">item_limit</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__krakens_galatic_block_extra {
+			label="GrowtopiaWorld::KrakensGalaticBlockExtra";
+			graph[style=dotted];
+
+			krakens_galatic_block_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="pattern_number_pos">0</TD><TD PORT="pattern_number_size">1</TD><TD>u1</TD><TD PORT="pattern_number_type">pattern_number</TD></TR>
+				<TR><TD PORT="unk1_pos">1</TD><TD PORT="unk1_size">4</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="color_rgb_pos">5</TD><TD PORT="color_rgb_size">3</TD><TD></TD><TD PORT="color_rgb_type">color_rgb</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__lobster_trap_extra {
+			label="GrowtopiaWorld::LobsterTrapExtra";
+			graph[style=dotted];
+
+			lobster_trap_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__lock_bot_extra {
+			label="GrowtopiaWorld::LockBotExtra";
+			graph[style=dotted];
+
+			lock_bot_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="time_passed_sec_pos">0</TD><TD PORT="time_passed_sec_size">4</TD><TD>u4le</TD><TD PORT="time_passed_sec_type">time_passed_sec</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__lock_extra {
+			label="GrowtopiaWorld::LockExtra";
+			graph[style=dotted];
+
+			lock_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="flag_pos">0</TD><TD PORT="flag_size">1</TD><TD>u1</TD><TD PORT="flag_type">flag</TD></TR>
+				<TR><TD PORT="owner_user_id_pos">1</TD><TD PORT="owner_user_id_size">4</TD><TD>u4le</TD><TD PORT="owner_user_id_type">owner_user_id</TD></TR>
+				<TR><TD PORT="num_authorized_userids_pos">5</TD><TD PORT="num_authorized_userids_size">4</TD><TD>u4le</TD><TD PORT="num_authorized_userids_type">num_authorized_userids</TD></TR>
+				<TR><TD PORT="authorized_userids_pos">9</TD><TD PORT="authorized_userids_size">4</TD><TD>u4le</TD><TD PORT="authorized_userids_type">authorized_userids</TD></TR>
+				<TR><TD COLSPAN="4" PORT="authorized_userids__repeat">repeat num_authorized_userids times</TD></TR>
+				<TR><TD PORT="minimum_level_pos">...</TD><TD PORT="minimum_level_size">1</TD><TD>u1</TD><TD PORT="minimum_level_type">minimum_level</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">7</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="guild_locks_unk_pos">...</TD><TD PORT="guild_locks_unk_size">16</TD><TD></TD><TD PORT="guild_locks_unk_type">guild_locks_unk</TD></TR>
+				<TR><TD COLSPAN="4" PORT="guild_locks_unk__if">if _parent.fg == 5814</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__magic_egg_extra {
+			label="GrowtopiaWorld::MagicEggExtra";
+			graph[style=dotted];
+
+			magic_egg_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="egg_amount_pos">0</TD><TD PORT="egg_amount_size">4</TD><TD>u4le</TD><TD PORT="egg_amount_type">egg_amount</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__mannequin_extra {
+			label="GrowtopiaWorld::MannequinExtra";
+			graph[style=dotted];
+
+			mannequin_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="unk2_pos">...</TD><TD PORT="unk2_size">2</TD><TD>u2le</TD><TD PORT="unk2_type">unk2</TD></TR>
+				<TR><TD PORT="unk3_pos">...</TD><TD PORT="unk3_size">2</TD><TD>u2le</TD><TD PORT="unk3_type">unk3</TD></TR>
+				<TR><TD PORT="hat_pos">...</TD><TD PORT="hat_size">2</TD><TD>u2le</TD><TD PORT="hat_type">hat</TD></TR>
+				<TR><TD PORT="shirt_pos">...</TD><TD PORT="shirt_size">2</TD><TD>u2le</TD><TD PORT="shirt_type">shirt</TD></TR>
+				<TR><TD PORT="pants_pos">...</TD><TD PORT="pants_size">2</TD><TD>u2le</TD><TD PORT="pants_type">pants</TD></TR>
+				<TR><TD PORT="boots_pos">...</TD><TD PORT="boots_size">2</TD><TD>u2le</TD><TD PORT="boots_type">boots</TD></TR>
+				<TR><TD PORT="face_pos">...</TD><TD PORT="face_size">2</TD><TD>u2le</TD><TD PORT="face_type">face</TD></TR>
+				<TR><TD PORT="hand_pos">...</TD><TD PORT="hand_size">2</TD><TD>u2le</TD><TD PORT="hand_type">hand</TD></TR>
+				<TR><TD PORT="back_pos">...</TD><TD PORT="back_size">2</TD><TD>u2le</TD><TD PORT="back_type">back</TD></TR>
+				<TR><TD PORT="hair_pos">...</TD><TD PORT="hair_size">2</TD><TD>u2le</TD><TD PORT="hair_type">hair</TD></TR>
+				<TR><TD PORT="neck_pos">...</TD><TD PORT="neck_size">2</TD><TD>u2le</TD><TD PORT="neck_type">neck</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__painting_easel_extra {
+			label="GrowtopiaWorld::PaintingEaselExtra";
+			graph[style=dotted];
+
+			painting_easel_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="label_pos">4</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__pet_battle_cage_extra {
+			label="GrowtopiaWorld::PetBattleCageExtra";
+			graph[style=dotted];
+
+			pet_battle_cage_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+				<TR><TD PORT="base_pet_pos">...</TD><TD PORT="base_pet_size">4</TD><TD>u4le</TD><TD PORT="base_pet_type">base_pet</TD></TR>
+				<TR><TD PORT="combined_pet_1_pos">...</TD><TD PORT="combined_pet_1_size">4</TD><TD>u4le</TD><TD PORT="combined_pet_1_type">combined_pet_1</TD></TR>
+				<TR><TD PORT="combined_pet_2_pos">...</TD><TD PORT="combined_pet_2_size">4</TD><TD>u4le</TD><TD PORT="combined_pet_2_type">combined_pet_2</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__pet_trainer_extra {
+			label="GrowtopiaWorld::PetTrainerExtra";
+			graph[style=dotted];
+
+			pet_trainer_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="name_pos">0</TD><TD PORT="name_size">...</TD><TD>GtStr</TD><TD PORT="name_type">name</TD></TR>
+				<TR><TD PORT="num_pets_pos">...</TD><TD PORT="num_pets_size">4</TD><TD>u4le</TD><TD PORT="num_pets_type">num_pets</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="pets_pos">...</TD><TD PORT="pets_size">4</TD><TD>u4le</TD><TD PORT="pets_type">pets</TD></TR>
+				<TR><TD COLSPAN="4" PORT="pets__repeat">repeat num_pets times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__phone_booth_extra {
+			label="GrowtopiaWorld::PhoneBoothExtra";
+			graph[style=dotted];
+
+			phone_booth_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="hat_pos">0</TD><TD PORT="hat_size">2</TD><TD>u2le</TD><TD PORT="hat_type">hat</TD></TR>
+				<TR><TD PORT="shirt_pos">2</TD><TD PORT="shirt_size">2</TD><TD>u2le</TD><TD PORT="shirt_type">shirt</TD></TR>
+				<TR><TD PORT="pants_pos">4</TD><TD PORT="pants_size">2</TD><TD>u2le</TD><TD PORT="pants_type">pants</TD></TR>
+				<TR><TD PORT="shoes_pos">6</TD><TD PORT="shoes_size">2</TD><TD>u2le</TD><TD PORT="shoes_type">shoes</TD></TR>
+				<TR><TD PORT="face_pos">8</TD><TD PORT="face_size">2</TD><TD>u2le</TD><TD PORT="face_type">face</TD></TR>
+				<TR><TD PORT="hand_pos">10</TD><TD PORT="hand_size">2</TD><TD>u2le</TD><TD PORT="hand_type">hand</TD></TR>
+				<TR><TD PORT="back_pos">12</TD><TD PORT="back_size">2</TD><TD>u2le</TD><TD PORT="back_type">back</TD></TR>
+				<TR><TD PORT="hair_pos">14</TD><TD PORT="hair_size">2</TD><TD>u2le</TD><TD PORT="hair_type">hair</TD></TR>
+				<TR><TD PORT="neck_pos">16</TD><TD PORT="neck_size">2</TD><TD>u2le</TD><TD PORT="neck_type">neck</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__pineapple_guzzler_extra {
+			label="GrowtopiaWorld::PineappleGuzzlerExtra";
+			graph[style=dotted];
+
+			pineapple_guzzler_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="pineapple_fed_pos">0</TD><TD PORT="pineapple_fed_size">4</TD><TD>u4le</TD><TD PORT="pineapple_fed_type">pineapple_fed</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__portrait_extra {
+			label="GrowtopiaWorld::PortraitExtra";
+			graph[style=dotted];
+
+			portrait_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="unk2_pos">...</TD><TD PORT="unk2_size">4</TD><TD>u4le</TD><TD PORT="unk2_type">unk2</TD></TR>
+				<TR><TD PORT="unk3_pos">...</TD><TD PORT="unk3_size">5</TD><TD></TD><TD PORT="unk3_type">unk3</TD></TR>
+				<TR><TD PORT="unk4_pos">...</TD><TD PORT="unk4_size">1</TD><TD>u1</TD><TD PORT="unk4_type">unk4</TD></TR>
+				<TR><TD PORT="unk5_pos">...</TD><TD PORT="unk5_size">2</TD><TD>u2le</TD><TD PORT="unk5_type">unk5</TD></TR>
+				<TR><TD PORT="face_pos">...</TD><TD PORT="face_size">2</TD><TD>u2le</TD><TD PORT="face_type">face</TD></TR>
+				<TR><TD PORT="hat_pos">...</TD><TD PORT="hat_size">2</TD><TD>u2le</TD><TD PORT="hat_type">hat</TD></TR>
+				<TR><TD PORT="hair_pos">...</TD><TD PORT="hair_size">2</TD><TD>u2le</TD><TD PORT="hair_type">hair</TD></TR>
+				<TR><TD PORT="unk6_pos">...</TD><TD PORT="unk6_size">4</TD><TD>u4le</TD><TD PORT="unk6_type">unk6</TD></TR>
+				<TR><TD PORT="infinity_crown_data_pos">...</TD><TD PORT="infinity_crown_data_size">...</TD><TD>GtStr</TD><TD PORT="infinity_crown_data_type">infinity_crown_data</TD></TR>
+				<TR><TD COLSPAN="4" PORT="infinity_crown_data__if">if hat == 12958</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__provider_extra {
+			label="GrowtopiaWorld::ProviderExtra";
+			graph[style=dotted];
+
+			provider_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="growth_pos">0</TD><TD PORT="growth_size">4</TD><TD>u4le</TD><TD PORT="growth_type">growth</TD></TR>
+				<TR><TD PORT="pad1_pos">4</TD><TD PORT="pad1_size">4</TD><TD></TD><TD PORT="pad1_type">pad1</TD></TR>
+				<TR><TD COLSPAN="4" PORT="pad1__if">if _parent.fg == 10656</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__safe_vault_extra {
+			label="GrowtopiaWorld::SafeVaultExtra";
+			graph[style=dotted];
+
+			safe_vault_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__seed_extra {
+			label="GrowtopiaWorld::SeedExtra";
+			graph[style=dotted];
+
+			seed_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="age_pos">0</TD><TD PORT="age_size">4</TD><TD>u4le</TD><TD PORT="age_type">age</TD></TR>
+				<TR><TD PORT="fruit_count_pos">4</TD><TD PORT="fruit_count_size">1</TD><TD>u1</TD><TD PORT="fruit_count_type">fruit_count</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__sewing_machine_extra {
+			label="GrowtopiaWorld::SewingMachineExtra";
+			graph[style=dotted];
+
+			sewing_machine_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="num_bolt_ids_pos">0</TD><TD PORT="num_bolt_ids_size">4</TD><TD>u4le</TD><TD PORT="num_bolt_ids_type">num_bolt_ids</TD></TR>
+				<TR><TD PORT="bolt_ids_pos">4</TD><TD PORT="bolt_ids_size">4</TD><TD>u4le</TD><TD PORT="bolt_ids_type">bolt_ids</TD></TR>
+				<TR><TD COLSPAN="4" PORT="bolt_ids__repeat">repeat num_bolt_ids times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__shelf_extra {
+			label="GrowtopiaWorld::ShelfExtra";
+			graph[style=dotted];
+
+			shelf_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="top_left_item_id_pos">0</TD><TD PORT="top_left_item_id_size">4</TD><TD>u4le</TD><TD PORT="top_left_item_id_type">top_left_item_id</TD></TR>
+				<TR><TD PORT="top_right_item_id_pos">4</TD><TD PORT="top_right_item_id_size">4</TD><TD>u4le</TD><TD PORT="top_right_item_id_type">top_right_item_id</TD></TR>
+				<TR><TD PORT="bottom_left_item_id_pos">8</TD><TD PORT="bottom_left_item_id_size">4</TD><TD>u4le</TD><TD PORT="bottom_left_item_id_type">bottom_left_item_id</TD></TR>
+				<TR><TD PORT="bottom_right_item_id_pos">12</TD><TD PORT="bottom_right_item_id_size">4</TD><TD>u4le</TD><TD PORT="bottom_right_item_id_type">bottom_right_item_id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__sign_extra {
+			label="GrowtopiaWorld::SignExtra";
+			graph[style=dotted];
+
+			sign_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
+				<TR><TD PORT="pad1_pos">...</TD><TD PORT="pad1_size">4</TD><TD></TD><TD PORT="pad1_type">pad1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__silk_worm_extra {
+			label="GrowtopiaWorld::SilkWormExtra";
+			graph[style=dotted];
+
+			silk_worm_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="flags_pos">0</TD><TD PORT="flags_size">1</TD><TD>u1</TD><TD PORT="flags_type">flags</TD></TR>
+				<TR><TD PORT="name_pos">1</TD><TD PORT="name_size">...</TD><TD>GtStr</TD><TD PORT="name_type">name</TD></TR>
+				<TR><TD PORT="age_sec_pos">...</TD><TD PORT="age_sec_size">4</TD><TD>u4le</TD><TD PORT="age_sec_type">age_sec</TD></TR>
+				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="unk2_pos">...</TD><TD PORT="unk2_size">4</TD><TD>u4le</TD><TD PORT="unk2_type">unk2</TD></TR>
+				<TR><TD PORT="can_be_fed_pos">...</TD><TD PORT="can_be_fed_size">1</TD><TD>u1</TD><TD PORT="can_be_fed_type">can_be_fed</TD></TR>
+				<TR><TD PORT="food_saturation_pos">...</TD><TD PORT="food_saturation_size">4</TD><TD>u4le</TD><TD PORT="food_saturation_type">food_saturation</TD></TR>
+				<TR><TD PORT="water_saturation_pos">...</TD><TD PORT="water_saturation_size">4</TD><TD>u4le</TD><TD PORT="water_saturation_type">water_saturation</TD></TR>
+				<TR><TD PORT="color_argb_pos">...</TD><TD PORT="color_argb_size">4</TD><TD>ARGB</TD><TD PORT="color_argb_type">color_argb</TD></TR>
+				<TR><TD PORT="sick_duration_pos">...</TD><TD PORT="sick_duration_size">4</TD><TD>u4le</TD><TD PORT="sick_duration_type">sick_duration</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__solar_collector_extra {
+			label="GrowtopiaWorld::SolarCollectorExtra";
+			graph[style=dotted];
+
+			solar_collector_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">5</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__spirit_board_extra {
+			label="GrowtopiaWorld::SpiritBoardExtra";
+			graph[style=dotted];
+
+			spirit_board_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="player_required_pos">0</TD><TD PORT="player_required_size">4</TD><TD>u4le</TD><TD PORT="player_required_type">player_required</TD></TR>
+				<TR><TD PORT="unk1_pos">4</TD><TD PORT="unk1_size">...</TD><TD>GtStr</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="command_pos">...</TD><TD PORT="command_size">...</TD><TD>GtStr</TD><TD PORT="command_type">command</TD></TR>
+				<TR><TD PORT="num_required_items_pos">...</TD><TD PORT="num_required_items_size">4</TD><TD>u4le</TD><TD PORT="num_required_items_type">num_required_items</TD></TR>
+				<TR><TD PORT="required_items_pos">...</TD><TD PORT="required_items_size">4</TD><TD>u4le</TD><TD PORT="required_items_type">required_items</TD></TR>
+				<TR><TD COLSPAN="4" PORT="required_items__repeat">repeat num_required_items times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__spirit_storage_unit_extra {
+			label="GrowtopiaWorld::SpiritStorageUnitExtra";
+			graph[style=dotted];
+
+			spirit_storage_unit_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="ghost_jar_count_pos">0</TD><TD PORT="ghost_jar_count_size">4</TD><TD>u4le</TD><TD PORT="ghost_jar_count_type">ghost_jar_count</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__spotlight_extra {
+			label="GrowtopiaWorld::SpotlightExtra";
+			graph[style=dotted];
+
+			spotlight_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__steam_engine_extra {
+			label="GrowtopiaWorld::SteamEngineExtra";
+			graph[style=dotted];
+
+			steam_engine_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="temperature_pos">0</TD><TD PORT="temperature_size">4</TD><TD>u4le</TD><TD PORT="temperature_type">temperature</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__steam_organ_extra {
+			label="GrowtopiaWorld::SteamOrganExtra";
+			graph[style=dotted];
+
+			steam_organ_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="instrument_type_pos">0</TD><TD PORT="instrument_type_size">1</TD><TD>u1</TD><TD PORT="instrument_type_type">instrument_type</TD></TR>
+				<TR><TD PORT="note_pos">1</TD><TD PORT="note_size">4</TD><TD>u4le</TD><TD PORT="note_type">note</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__storage_box_xtreme_extra {
+			label="GrowtopiaWorld::StorageBoxXtremeExtra";
+			graph[style=dotted];
+
+			storage_box_xtreme_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="data_len_pos">0</TD><TD PORT="data_len_size">2</TD><TD>u2le</TD><TD PORT="data_len_type">data_len</TD></TR>
+				<TR><TD PORT="items_pos">2</TD><TD PORT="items_size">13</TD><TD>StorageItem</TD><TD PORT="items_type">items</TD></TR>
+				<TR><TD COLSPAN="4" PORT="items__repeat">repeat data_len / 13 times</TD></TR>
+			</TABLE>>];
+			subgraph cluster__storage_item {
+				label="GrowtopiaWorld::StorageBoxXtremeExtra::StorageItem";
+				graph[style=dotted];
+
+				storage_item__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+					<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+					<TR><TD PORT="pad1_pos">0</TD><TD PORT="pad1_size">3</TD><TD></TD><TD PORT="pad1_type">pad1</TD></TR>
+					<TR><TD PORT="item_id_pos">3</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+					<TR><TD PORT="pad2_pos">7</TD><TD PORT="pad2_size">2</TD><TD></TD><TD PORT="pad2_type">pad2</TD></TR>
+					<TR><TD PORT="item_amt_pos">9</TD><TD PORT="item_amt_size">4</TD><TD>u4le</TD><TD PORT="item_amt_type">item_amt</TD></TR>
+				</TABLE>>];
+			}
+		}
+		subgraph cluster__stormy_cloud_extra {
+			label="GrowtopiaWorld::StormyCloudExtra";
+			graph[style=dotted];
+
+			stormy_cloud_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="sting_duration_pos">0</TD><TD PORT="sting_duration_size">4</TD><TD>u4le</TD><TD PORT="sting_duration_type">sting_duration</TD></TR>
+				<TR><TD PORT="is_solid_pos">4</TD><TD PORT="is_solid_size">4</TD><TD>u4le</TD><TD PORT="is_solid_type">is_solid</TD></TR>
+				<TR><TD PORT="non_solid_duration_pos">8</TD><TD PORT="non_solid_duration_size">4</TD><TD>u4le</TD><TD PORT="non_solid_duration_type">non_solid_duration</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__temporary_platform_extra {
+			label="GrowtopiaWorld::TemporaryPlatformExtra";
+			graph[style=dotted];
+
+			temporary_platform_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">4</TD><TD>u4le</TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__tesseract_manipulator_extra {
+			label="GrowtopiaWorld::TesseractManipulatorExtra";
+			graph[style=dotted];
+
+			tesseract_manipulator_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="gems_left_pos">0</TD><TD PORT="gems_left_size">4</TD><TD>u4le</TD><TD PORT="gems_left_type">gems_left</TD></TR>
+				<TR><TD PORT="next_update_ms_pos">4</TD><TD PORT="next_update_ms_size">4</TD><TD>u4le</TD><TD PORT="next_update_ms_type">next_update_ms</TD></TR>
+				<TR><TD PORT="item_id_pos">8</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="enabled_pos">12</TD><TD PORT="enabled_size">4</TD><TD>u4le</TD><TD PORT="enabled_type">enabled</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__tomb_robber_extra {
+			label="GrowtopiaWorld::TombRobberExtra";
+			graph[style=dotted];
+
+			tomb_robber_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__training_port_extra {
+			label="GrowtopiaWorld::TrainingPortExtra";
+			graph[style=dotted];
+
+			training_port_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="fish_lb_pos">0</TD><TD PORT="fish_lb_size">4</TD><TD>u4le</TD><TD PORT="fish_lb_type">fish_lb</TD></TR>
+				<TR><TD PORT="status_pos">4</TD><TD PORT="status_size">2</TD><TD>u2le</TD><TD PORT="status_type">status</TD></TR>
+				<TR><TD PORT="item_id_pos">6</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="total_exp_pos">10</TD><TD PORT="total_exp_size">4</TD><TD>u4le</TD><TD PORT="total_exp_type">total_exp</TD></TR>
+				<TR><TD PORT="unk1_pos">14</TD><TD PORT="unk1_size">8</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="fish_level_pos">22</TD><TD PORT="fish_level_size">4</TD><TD>u4le</TD><TD PORT="fish_level_type">fish_level</TD></TR>
+				<TR><TD PORT="unk2_pos">26</TD><TD PORT="unk2_size">4</TD><TD>u4le</TD><TD PORT="unk2_type">unk2</TD></TR>
+				<TR><TD PORT="unk3_pos">30</TD><TD PORT="unk3_size">5</TD><TD></TD><TD PORT="unk3_type">unk3</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__unknown_extra {
+			label="GrowtopiaWorld::UnknownExtra";
+			graph[style=dotted];
+
+			unknown_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="this_is_just_to_error_out_kaitai_pls_pos">0</TD><TD PORT="this_is_just_to_error_out_kaitai_pls_size">⇲</TD><TD></TD><TD PORT="this_is_just_to_error_out_kaitai_pls_type">this_is_just_to_error_out_kaitai_pls</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__vending_machine_extra {
+			label="GrowtopiaWorld::VendingMachineExtra";
+			graph[style=dotted];
+
+			vending_machine_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="price_pos">4</TD><TD PORT="price_size">4</TD><TD>s4le</TD><TD PORT="price_type">price</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__vip_entrance_extra {
+			label="GrowtopiaWorld::VipEntranceExtra";
+			graph[style=dotted];
+
+			vip_entrance_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="owner_userid_pos">1</TD><TD PORT="owner_userid_size">4</TD><TD>u4le</TD><TD PORT="owner_userid_type">owner_userid</TD></TR>
+				<TR><TD PORT="num_allowed_userids_pos">5</TD><TD PORT="num_allowed_userids_size">4</TD><TD>u4le</TD><TD PORT="num_allowed_userids_type">num_allowed_userids</TD></TR>
+				<TR><TD PORT="allowed_userids_pos">9</TD><TD PORT="allowed_userids_size">4</TD><TD>u4le</TD><TD PORT="allowed_userids_type">allowed_userids</TD></TR>
+				<TR><TD COLSPAN="4" PORT="allowed_userids__repeat">repeat num_allowed_userids times</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__weather_machine_1_extra {
+			label="GrowtopiaWorld::WeatherMachine1Extra";
+			graph[style=dotted];
+
+			weather_machine_1_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="settings_pos">0</TD><TD PORT="settings_size">4</TD><TD></TD><TD PORT="settings_type">settings</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__weather_machine_2_extra {
+			label="GrowtopiaWorld::WeatherMachine2Extra";
+			graph[style=dotted];
+
+			weather_machine_2_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">4</TD><TD>u4le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="gravity_pos">4</TD><TD PORT="gravity_size">4</TD><TD>u4le</TD><TD PORT="gravity_type">gravity</TD></TR>
+				<TR><TD PORT="flag_pos">8</TD><TD PORT="flag_size">1</TD><TD>u1</TD><TD PORT="flag_type">flag</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__world_object {
+			label="GrowtopiaWorld::WorldObject";
+			graph[style=dotted];
+
+			world_object__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="item_id_pos">0</TD><TD PORT="item_id_size">2</TD><TD>u2le</TD><TD PORT="item_id_type">item_id</TD></TR>
+				<TR><TD PORT="x_pos">2</TD><TD PORT="x_size">4</TD><TD>f4le</TD><TD PORT="x_type">x</TD></TR>
+				<TR><TD PORT="y_pos">6</TD><TD PORT="y_size">4</TD><TD>f4le</TD><TD PORT="y_type">y</TD></TR>
+				<TR><TD PORT="amount_pos">10</TD><TD PORT="amount_size">1</TD><TD>u1</TD><TD PORT="amount_type">amount</TD></TR>
+				<TR><TD PORT="flag_pos">11</TD><TD PORT="flag_size">1</TD><TD>u1</TD><TD PORT="flag_type">flag</TD></TR>
+				<TR><TD PORT="uid_pos">12</TD><TD PORT="uid_size">4</TD><TD>u4le</TD><TD PORT="uid_type">uid</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__world_tile {
+			label="GrowtopiaWorld::WorldTile";
+			graph[style=dotted];
+
+			world_tile__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="fg_pos">0</TD><TD PORT="fg_size">2</TD><TD>u2le</TD><TD PORT="fg_type">fg</TD></TR>
+				<TR><TD PORT="bg_pos">2</TD><TD PORT="bg_size">2</TD><TD>u2le</TD><TD PORT="bg_type">bg</TD></TR>
+				<TR><TD PORT="invalid_tile_fg_bg_kaitai_crasher_pos">4</TD><TD PORT="invalid_tile_fg_bg_kaitai_crasher_size">⇲</TD><TD></TD><TD PORT="invalid_tile_fg_bg_kaitai_crasher_type">invalid_tile_fg_bg_kaitai_crasher</TD></TR>
+				<TR><TD COLSPAN="4" PORT="invalid_tile_fg_bg_kaitai_crasher__if">if  ((fg &gt; 25000) || (bg &gt; 25000)) </TD></TR>
+				<TR><TD PORT="parent_block_index_pos">...</TD><TD PORT="parent_block_index_size">2</TD><TD>u2le</TD><TD PORT="parent_block_index_type">parent_block_index</TD></TR>
+				<TR><TD PORT="flag_pos">...</TD><TD PORT="flag_size">2</TD><TD>u2le</TD><TD PORT="flag_type">flag</TD></TR>
+				<TR><TD PORT="parent_lock_pos">...</TD><TD PORT="parent_lock_size">2</TD><TD>u2le</TD><TD PORT="parent_lock_type">parent_lock</TD></TR>
+				<TR><TD COLSPAN="4" PORT="parent_lock__if">if flag &amp; 2 == 2</TD></TR>
+				<TR><TD PORT="extra_data_type_pos">...</TD><TD PORT="extra_data_type_size">1</TD><TD>u1</TD><TD PORT="extra_data_type_type">extra_data_type</TD></TR>
+				<TR><TD COLSPAN="4" PORT="extra_data_type__if">if flag &amp; 1 == 1</TD></TR>
+				<TR><TD PORT="tile_extra_pos">...</TD><TD PORT="tile_extra_size">...</TD><TD>switch (extra_data_type)</TD><TD PORT="tile_extra_type">tile_extra</TD></TR>
+				<TR><TD COLSPAN="4" PORT="tile_extra__if">if flag &amp; 1 == 1</TD></TR>
+				<TR><TD PORT="cbor_data_pos">...</TD><TD PORT="cbor_data_size">...</TD><TD>CborData</TD><TD PORT="cbor_data_type">cbor_data</TD></TR>
+				<TR><TD COLSPAN="4" PORT="cbor_data__if">if  (( ((flag &amp; 1 == 1) &amp;&amp; (extra_data_type == 36)) ) || (fg == 15546) || (fg == 14666) || (fg == 14962) || (fg == 14662)) </TD></TR>
+			</TABLE>>];
+world_tile__seq_tile_extra_switch [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+	<TR><TD BGCOLOR="#F0F2E4">case</TD><TD BGCOLOR="#F0F2E4">type</TD></TR>
+	<TR><TD>1</TD><TD PORT="case0">DoorExtra</TD></TR>
+	<TR><TD>10</TD><TD PORT="case1">AchievementBlockExtra</TD></TR>
+	<TR><TD>11</TD><TD PORT="case2">HeartMonitorExtra</TD></TR>
+	<TR><TD>14</TD><TD PORT="case3">MannequinExtra</TD></TR>
+	<TR><TD>15</TD><TD PORT="case4">MagicEggExtra</TD></TR>
+	<TR><TD>16</TD><TD PORT="case5">GameGraveExtra</TD></TR>
+	<TR><TD>17</TD><TD PORT="case6">GameGeneratorExtra</TD></TR>
+	<TR><TD>18</TD><TD PORT="case7">XenoniteExtra</TD></TR>
+	<TR><TD>19</TD><TD PORT="case8">PhoneBoothExtra</TD></TR>
+	<TR><TD>2</TD><TD PORT="case9">SignExtra</TD></TR>
+	<TR><TD>20</TD><TD PORT="case10">CrystalExtra</TD></TR>
+	<TR><TD>21</TD><TD PORT="case11">CrimeInProgressExtra</TD></TR>
+	<TR><TD>22</TD><TD PORT="case12">SpotlightExtra</TD></TR>
+	<TR><TD>23</TD><TD PORT="case13">DisplayBlockExtra</TD></TR>
+	<TR><TD>24</TD><TD PORT="case14">VendingMachineExtra</TD></TR>
+	<TR><TD>25</TD><TD PORT="case15">FishTankPortExtra</TD></TR>
+	<TR><TD>26</TD><TD PORT="case16">SolarCollectorExtra</TD></TR>
+	<TR><TD>27</TD><TD PORT="case17">ForgeExtra</TD></TR>
+	<TR><TD>28</TD><TD PORT="case18">GivingTreeExtra</TD></TR>
+	<TR><TD>3</TD><TD PORT="case19">LockExtra</TD></TR>
+	<TR><TD>30</TD><TD PORT="case20">SteamOrganExtra</TD></TR>
+	<TR><TD>31</TD><TD PORT="case21">SilkWormExtra</TD></TR>
+	<TR><TD>32</TD><TD PORT="case22">SewingMachineExtra</TD></TR>
+	<TR><TD>33</TD><TD PORT="case23">CountryFlagExtra</TD></TR>
+	<TR><TD>34</TD><TD PORT="case24">LobsterTrapExtra</TD></TR>
+	<TR><TD>35</TD><TD PORT="case25">PaintingEaselExtra</TD></TR>
+	<TR><TD>36</TD><TD PORT="case26">PetBattleCageExtra</TD></TR>
+	<TR><TD>37</TD><TD PORT="case27">PetTrainerExtra</TD></TR>
+	<TR><TD>38</TD><TD PORT="case28">SteamEngineExtra</TD></TR>
+	<TR><TD>39</TD><TD PORT="case29">LockBotExtra</TD></TR>
+	<TR><TD>4</TD><TD PORT="case30">SeedExtra</TD></TR>
+	<TR><TD>40</TD><TD PORT="case31">WeatherMachine1Extra</TD></TR>
+	<TR><TD>41</TD><TD PORT="case32">SpiritStorageUnitExtra</TD></TR>
+	<TR><TD>42</TD><TD PORT="case33">DataBedrockExtra</TD></TR>
+	<TR><TD>43</TD><TD PORT="case34">ShelfExtra</TD></TR>
+	<TR><TD>44</TD><TD PORT="case35">VipEntranceExtra</TD></TR>
+	<TR><TD>45</TD><TD PORT="case36">ChallengeTimerExtra</TD></TR>
+	<TR><TD>47</TD><TD PORT="case37">FishWallMountExtra</TD></TR>
+	<TR><TD>48</TD><TD PORT="case38">PortraitExtra</TD></TR>
+	<TR><TD>49</TD><TD PORT="case39">WeatherMachine2Extra</TD></TR>
+	<TR><TD>50</TD><TD PORT="case40">FossilPrepStationExtra</TD></TR>
+	<TR><TD>51</TD><TD PORT="case41">DnaExtractorExtra</TD></TR>
+	<TR><TD>52</TD><TD PORT="case42">HowlerExtra</TD></TR>
+	<TR><TD>53</TD><TD PORT="case43">ChemsynthTankExtra</TD></TR>
+	<TR><TD>54</TD><TD PORT="case44">StorageBoxXtremeExtra</TD></TR>
+	<TR><TD>55</TD><TD PORT="case45">CookingOvenExtra</TD></TR>
+	<TR><TD>56</TD><TD PORT="case46">AudioRackExtra</TD></TR>
+	<TR><TD>57</TD><TD PORT="case47">GeigerChargerExtra</TD></TR>
+	<TR><TD>58</TD><TD PORT="case48">AdventureBeginsExtra</TD></TR>
+	<TR><TD>59</TD><TD PORT="case49">TombRobberExtra</TD></TR>
+	<TR><TD>60</TD><TD PORT="case50">BalloonOMaticExtra</TD></TR>
+	<TR><TD>61</TD><TD PORT="case51">TrainingPortExtra</TD></TR>
+	<TR><TD>62</TD><TD PORT="case52">ItemSuckerExtra</TD></TR>
+	<TR><TD>63</TD><TD PORT="case53">CybotExtra</TD></TR>
+	<TR><TD>65</TD><TD PORT="case54">GuildExtra</TD></TR>
+	<TR><TD>66</TD><TD PORT="case55">GrowscanExtra</TD></TR>
+	<TR><TD>67</TD><TD PORT="case56">ContainmentFieldPowerNodeExtra</TD></TR>
+	<TR><TD>68</TD><TD PORT="case57">SpiritBoardExtra</TD></TR>
+	<TR><TD>69</TD><TD PORT="case58">TesseractManipulatorExtra</TD></TR>
+	<TR><TD>72</TD><TD PORT="case59">StormyCloudExtra</TD></TR>
+	<TR><TD>73</TD><TD PORT="case60">TemporaryPlatformExtra</TD></TR>
+	<TR><TD>74</TD><TD PORT="case61">SafeVaultExtra</TD></TR>
+	<TR><TD>75</TD><TD PORT="case62">AngelicCountingCloudExtra</TD></TR>
+	<TR><TD>77</TD><TD PORT="case63">InfinityWeatherMachineExtra</TD></TR>
+	<TR><TD>79</TD><TD PORT="case64">PineappleGuzzlerExtra</TD></TR>
+	<TR><TD>8</TD><TD PORT="case65">DiceExtra</TD></TR>
+	<TR><TD>80</TD><TD PORT="case66">KrakensGalaticBlockExtra</TD></TR>
+	<TR><TD>81</TD><TD PORT="case67">FriendsEntranceExtra</TD></TR>
+	<TR><TD>9</TD><TD PORT="case68">ProviderExtra</TD></TR>
+	<TR><TD>_</TD><TD PORT="case69">UnknownExtra</TD></TR>
+</TABLE>>];
+		}
+		subgraph cluster__xenonite_extra {
+			label="GrowtopiaWorld::XenoniteExtra";
+			graph[style=dotted];
+
+			xenonite_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">5</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+			</TABLE>>];
+		}
+	}
+	growtopia_world__seq:name_type -> gt_str__seq [style=bold];
+	growtopia_world__seq:tiles_type -> world_tile__seq [style=bold];
+	growtopia_world__seq:num_tiles_type -> growtopia_world__seq:tiles__repeat [color="#404040"];
+	growtopia_world__seq:objects_type -> world_object__seq [style=bold];
+	growtopia_world__seq:num_objects_type -> growtopia_world__seq:objects__repeat [color="#404040"];
+	angelic_counting_cloud_extra__seq:state_type -> angelic_counting_cloud_extra__seq:ascii_code__if [color="#404040"];
+	audio_rack_extra__seq:note_type -> gt_str__seq [style=bold];
+	cbor_data__seq:len_data_type -> cbor_data__seq:data_size [color="#404040"];
+	containment_field_power_node_extra__seq:num_linked_nodes_type -> containment_field_power_node_extra__seq:linked_nodes__repeat [color="#404040"];
+	cooking_oven_extra__seq:ingredients_type -> ingredient__seq [style=bold];
+	cooking_oven_extra__seq:ingredient_list_size_type -> cooking_oven_extra__seq:ingredients__repeat [color="#404040"];
+	country_flag_extra__seq:country_type -> gt_str__seq [style=bold];
+	world_tile__seq:fg_type -> country_flag_extra__seq:country__if [color="#404040"];
+	crime_in_progress_extra__seq:crime_name_type -> gt_str__seq [style=bold];
+	crystal_extra__seq:num_crystals_type -> crystal_extra__seq:crystals__repeat [color="#404040"];
+	cybot_extra__seq:commands_type -> command__seq [style=bold];
+	cybot_extra__seq:num_commands_type -> cybot_extra__seq:commands__repeat [color="#404040"];
+	door_extra__seq:label_type -> gt_str__seq [style=bold];
+	fish_tank_port_extra__seq:fishes_type -> fish_info__seq [style=bold];
+	fish_tank_port_extra__seq:fish_data_length_type -> fish_tank_port_extra__seq:fishes__repeat [color="#404040"];
+	fish_wall_mount_extra__seq:label_type -> gt_str__seq [style=bold];
+	friends_entrance_extra__seq:num_allowed_friends_userid_type -> friends_entrance_extra__seq:allowed_friends_userid__repeat [color="#404040"];
+	gt_str__seq:len_data_type -> gt_str__seq:str_size [color="#404040"];
+	heart_monitor_extra__seq:grow_id_type -> gt_str__seq [style=bold];
+	infinity_weather_machine_extra__seq:num_weather_machines_type -> infinity_weather_machine_extra__seq:weather_machines__repeat [color="#404040"];
+	lock_extra__seq:num_authorized_userids_type -> lock_extra__seq:authorized_userids__repeat [color="#404040"];
+	world_tile__seq:fg_type -> lock_extra__seq:guild_locks_unk__if [color="#404040"];
+	mannequin_extra__seq:label_type -> gt_str__seq [style=bold];
+	painting_easel_extra__seq:label_type -> gt_str__seq [style=bold];
+	pet_battle_cage_extra__seq:label_type -> gt_str__seq [style=bold];
+	pet_trainer_extra__seq:name_type -> gt_str__seq [style=bold];
+	pet_trainer_extra__seq:num_pets_type -> pet_trainer_extra__seq:pets__repeat [color="#404040"];
+	portrait_extra__seq:label_type -> gt_str__seq [style=bold];
+	portrait_extra__seq:infinity_crown_data_type -> gt_str__seq [style=bold];
+	portrait_extra__seq:hat_type -> portrait_extra__seq:infinity_crown_data__if [color="#404040"];
+	world_tile__seq:fg_type -> provider_extra__seq:pad1__if [color="#404040"];
+	sewing_machine_extra__seq:num_bolt_ids_type -> sewing_machine_extra__seq:bolt_ids__repeat [color="#404040"];
+	sign_extra__seq:label_type -> gt_str__seq [style=bold];
+	silk_worm_extra__seq:name_type -> gt_str__seq [style=bold];
+	silk_worm_extra__seq:color_argb_type -> a_r_g_b__seq [style=bold];
+	spirit_board_extra__seq:unk1_type -> gt_str__seq [style=bold];
+	spirit_board_extra__seq:command_type -> gt_str__seq [style=bold];
+	spirit_board_extra__seq:num_required_items_type -> spirit_board_extra__seq:required_items__repeat [color="#404040"];
+	storage_box_xtreme_extra__seq:items_type -> storage_item__seq [style=bold];
+	storage_box_xtreme_extra__seq:data_len_type -> storage_box_xtreme_extra__seq:items__repeat [color="#404040"];
+	vip_entrance_extra__seq:num_allowed_userids_type -> vip_entrance_extra__seq:allowed_userids__repeat [color="#404040"];
+	world_tile__seq:fg_type -> world_tile__seq:invalid_tile_fg_bg_kaitai_crasher__if [color="#404040"];
+	world_tile__seq:bg_type -> world_tile__seq:invalid_tile_fg_bg_kaitai_crasher__if [color="#404040"];
+	world_tile__seq:flag_type -> world_tile__seq:parent_lock__if [color="#404040"];
+	world_tile__seq:flag_type -> world_tile__seq:extra_data_type__if [color="#404040"];
+	world_tile__seq:tile_extra_type -> world_tile__seq_tile_extra_switch [style=bold];
+	world_tile__seq_tile_extra_switch:case0 -> door_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case1 -> achievement_block_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case2 -> heart_monitor_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case3 -> mannequin_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case4 -> magic_egg_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case5 -> game_grave_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case6 -> game_generator_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case7 -> xenonite_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case8 -> phone_booth_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case9 -> sign_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case10 -> crystal_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case11 -> crime_in_progress_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case12 -> spotlight_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case13 -> display_block_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case14 -> vending_machine_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case15 -> fish_tank_port_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case16 -> solar_collector_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case17 -> forge_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case18 -> giving_tree_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case19 -> lock_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case20 -> steam_organ_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case21 -> silk_worm_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case22 -> sewing_machine_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case23 -> country_flag_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case24 -> lobster_trap_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case25 -> painting_easel_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case26 -> pet_battle_cage_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case27 -> pet_trainer_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case28 -> steam_engine_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case29 -> lock_bot_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case30 -> seed_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case31 -> weather_machine_1_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case32 -> spirit_storage_unit_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case33 -> data_bedrock_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case34 -> shelf_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case35 -> vip_entrance_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case36 -> challenge_timer_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case37 -> fish_wall_mount_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case38 -> portrait_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case39 -> weather_machine_2_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case40 -> fossil_prep_station_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case41 -> dna_extractor_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case42 -> howler_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case43 -> chemsynth_tank_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case44 -> storage_box_xtreme_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case45 -> cooking_oven_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case46 -> audio_rack_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case47 -> geiger_charger_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case48 -> adventure_begins_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case49 -> tomb_robber_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case50 -> balloon_o_matic_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case51 -> training_port_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case52 -> item_sucker_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case53 -> cybot_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case54 -> guild_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case55 -> growscan_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case56 -> containment_field_power_node_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case57 -> spirit_board_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case58 -> tesseract_manipulator_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case59 -> stormy_cloud_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case60 -> temporary_platform_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case61 -> safe_vault_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case62 -> angelic_counting_cloud_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case63 -> infinity_weather_machine_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case64 -> pineapple_guzzler_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case65 -> dice_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case66 -> krakens_galatic_block_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case67 -> friends_entrance_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case68 -> provider_extra__seq [style=bold];
+	world_tile__seq_tile_extra_switch:case69 -> unknown_extra__seq [style=bold];
+	world_tile__seq:extra_data_type_type -> world_tile__seq:tile_extra_type [color="#404040"];
+	world_tile__seq:flag_type -> world_tile__seq:tile_extra__if [color="#404040"];
+	world_tile__seq:cbor_data_type -> cbor_data__seq [style=bold];
+	world_tile__seq:flag_type -> world_tile__seq:cbor_data__if [color="#404040"];
+	world_tile__seq:extra_data_type_type -> world_tile__seq:cbor_data__if [color="#404040"];
+	world_tile__seq:fg_type -> world_tile__seq:cbor_data__if [color="#404040"];
+}

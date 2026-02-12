@@ -1,0 +1,2131 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>GrowtopiaWorld format specification</title>
+  </head>
+  <body>
+           <div class="container">
+  <h1>GrowtopiaWorld format specification</h1>
+
+      
+<a name='type-growtopia_world'></a>
+<h1>Type: GrowtopiaWorld</h1>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>version</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>...</td>
+<td>name</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>width</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>height</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>num_tiles</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>tiles</td>
+<td><a href="#type-growtopia_world-world_tile">WorldTile</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>num_objects</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>last_object_uid</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>objects</td>
+<td><a href="#type-growtopia_world-world_object">WorldObject</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-a_r_g_b'></a>
+<h2>Type: ARGB</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>a</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>r</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>g</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>...</td>
+<td>b</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-achievement_block_extra'></a>
+<h2>Type: AchievementBlockExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>achievement_id</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-adventure_begins_extra'></a>
+<h2>Type: AdventureBeginsExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-angelic_counting_cloud_extra'></a>
+<h2>Type: AngelicCountingCloudExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>state</td>
+<td>u4le→States</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>unk1</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>...</td>
+<td>ascii_code</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='enum-growtopia_world-angelic_counting_cloud_extra-states'></a>
+<h3>Enum: states</h3>
+
+<table class="table">
+<tr>
+<th>ID</th><th>Name</th><th>Note</th>
+</tr>
+<tr>
+<td>1</td><td>raffling</td><td></td></tr>
+</tr>
+<tr>
+<td>2</td><td>done_raffling</td><td></td></tr>
+</tr>
+</table>
+<a name='type-growtopia_world-audio_rack_extra'></a>
+<h2>Type: AudioRackExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>note</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>volume</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-balloon_o_matic_extra'></a>
+<h2>Type: BalloonOMaticExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>total_rarity</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>team_type</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-cbor_data'></a>
+<h2>Type: CborData</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>len_data</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>data</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-challenge_timer_extra'></a>
+<h2>Type: ChallengeTimerExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-chemsynth_tank_extra'></a>
+<h2>Type: ChemsynthTankExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>current_chem_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>supposed_chem_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-containment_field_power_node_extra'></a>
+<h2>Type: ContainmentFieldPowerNodeExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>time_ms</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>num_linked_nodes</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>linked_nodes</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-cooking_oven_extra'></a>
+<h2>Type: CookingOvenExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>temp_level</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>ingredient_list_size</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>ingredients</td>
+<td><a href="#type-growtopia_world-cooking_oven_extra-ingredient">Ingredient</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk2</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk3</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-cooking_oven_extra-ingredient'></a>
+<h3>Type: Ingredient</h3>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>time_added</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-country_flag_extra'></a>
+<h2>Type: CountryFlagExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>country</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-crime_in_progress_extra'></a>
+<h2>Type: CrimeInProgressExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>crime_name</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>crime_index</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-crystal_extra'></a>
+<h2>Type: CrystalExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>num_crystals</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>crystals</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-cybot_extra'></a>
+<h2>Type: CybotExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>num_commands</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>commands</td>
+<td><a href="#type-growtopia_world-cybot_extra-command">Command</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>timer</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>is_activated</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-cybot_extra-command'></a>
+<h3>Type: Command</h3>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>command_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>is_command_used</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-data_bedrock_extra'></a>
+<h2>Type: DataBedrockExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>...</td>
+<td>pad1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-dice_extra'></a>
+<h2>Type: DiceExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>symbol</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-display_block_extra'></a>
+<h2>Type: DisplayBlockExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-dna_extractor_extra'></a>
+<h2>Type: DnaExtractorExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-door_extra'></a>
+<h2>Type: DoorExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-fish_tank_port_extra'></a>
+<h2>Type: FishTankPortExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>flags</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>fish_data_length</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>...</td>
+<td>fishes</td>
+<td><a href="#type-growtopia_world-fish_tank_port_extra-fish_info">FishInfo</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-fish_tank_port_extra-fish_info'></a>
+<h3>Type: FishInfo</h3>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>lbs</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-fish_wall_mount_extra'></a>
+<h2>Type: FishWallMountExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>lbs</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-forge_extra'></a>
+<h2>Type: ForgeExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>temperature</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-fossil_prep_station_extra'></a>
+<h2>Type: FossilPrepStationExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-friends_entrance_extra'></a>
+<h2>Type: FriendsEntranceExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>owner_userid</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>...</td>
+<td>num_allowed_friends_userid</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>allowed_friends_userid</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-game_generator_extra'></a>
+<h2>Type: GameGeneratorExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-game_grave_extra'></a>
+<h2>Type: GameGraveExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>team_id</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-geiger_charger_extra'></a>
+<h2>Type: GeigerChargerExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-giving_tree_extra'></a>
+<h2>Type: GivingTreeExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>harvested</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>age</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>...</td>
+<td>unk1</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>...</td>
+<td>decoration_percentage</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-growscan_extra'></a>
+<h2>Type: GrowscanExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-gt_str'></a>
+<h2>Type: GtStr</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>len_data</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>str</td>
+<td>str(ASCII)</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-guild_extra'></a>
+<h2>Type: GuildExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-heart_monitor_extra'></a>
+<h2>Type: HeartMonitorExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>user_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>grow_id</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-howler_extra'></a>
+<h2>Type: HowlerExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-infinity_weather_machine_extra'></a>
+<h2>Type: InfinityWeatherMachineExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>interval_mins</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>num_weather_machines</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>weather_machines</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-item_sucker_extra'></a>
+<h2>Type: ItemSuckerExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>item_amount</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>flags</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>...</td>
+<td>item_limit</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-krakens_galatic_block_extra'></a>
+<h2>Type: KrakensGalaticBlockExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>pattern_number</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>...</td>
+<td>color_rgb</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-lobster_trap_extra'></a>
+<h2>Type: LobsterTrapExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-lock_bot_extra'></a>
+<h2>Type: LockBotExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>time_passed_sec</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-lock_extra'></a>
+<h2>Type: LockExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>flag</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>owner_user_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>...</td>
+<td>num_authorized_userids</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>...</td>
+<td>authorized_userids</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>minimum_level</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>guild_locks_unk</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-magic_egg_extra'></a>
+<h2>Type: MagicEggExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>egg_amount</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-mannequin_extra'></a>
+<h2>Type: MannequinExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk2</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk3</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>hat</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>shirt</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>pants</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>boots</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>face</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>hand</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>back</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>hair</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>neck</td>
+<td>u2le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-painting_easel_extra'></a>
+<h2>Type: PaintingEaselExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-pet_battle_cage_extra'></a>
+<h2>Type: PetBattleCageExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>base_pet</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>combined_pet_1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>combined_pet_2</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-pet_trainer_extra'></a>
+<h2>Type: PetTrainerExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>name</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>num_pets</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>pets</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-phone_booth_extra'></a>
+<h2>Type: PhoneBoothExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>hat</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>shirt</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>pants</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>...</td>
+<td>shoes</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>face</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>...</td>
+<td>hand</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>...</td>
+<td>back</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>...</td>
+<td>hair</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>...</td>
+<td>neck</td>
+<td>u2le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-pineapple_guzzler_extra'></a>
+<h2>Type: PineappleGuzzlerExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>pineapple_fed</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-portrait_extra'></a>
+<h2>Type: PortraitExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk2</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk4</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk5</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>face</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>hat</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>hair</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk6</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>infinity_crown_data</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-provider_extra'></a>
+<h2>Type: ProviderExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>growth</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>pad1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-safe_vault_extra'></a>
+<h2>Type: SafeVaultExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-seed_extra'></a>
+<h2>Type: SeedExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>age</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>fruit_count</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-sewing_machine_extra'></a>
+<h2>Type: SewingMachineExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>num_bolt_ids</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>bolt_ids</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-shelf_extra'></a>
+<h2>Type: ShelfExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>top_left_item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>top_right_item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>bottom_left_item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>...</td>
+<td>bottom_right_item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-sign_extra'></a>
+<h2>Type: SignExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>label</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>pad1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-silk_worm_extra'></a>
+<h2>Type: SilkWormExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>flags</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>name</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>age_sec</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>unk2</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>can_be_fed</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>food_saturation</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>water_saturation</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>color_argb</td>
+<td><a href="#type-growtopia_world-a_r_g_b">ARGB</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>sick_duration</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-solar_collector_extra'></a>
+<h2>Type: SolarCollectorExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-spirit_board_extra'></a>
+<h2>Type: SpiritBoardExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>player_required</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>unk1</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>command</td>
+<td><a href="#type-growtopia_world-gt_str">GtStr</a></td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>num_required_items</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>required_items</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-spirit_storage_unit_extra'></a>
+<h2>Type: SpiritStorageUnitExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>ghost_jar_count</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-spotlight_extra'></a>
+<h2>Type: SpotlightExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-steam_engine_extra'></a>
+<h2>Type: SteamEngineExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>temperature</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-steam_organ_extra'></a>
+<h2>Type: SteamOrganExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>instrument_type</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>note</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-storage_box_xtreme_extra'></a>
+<h2>Type: StorageBoxXtremeExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>data_len</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>items</td>
+<td><a href="#type-growtopia_world-storage_box_xtreme_extra-storage_item">StorageItem</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-storage_box_xtreme_extra-storage_item'></a>
+<h3>Type: StorageItem</h3>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>pad1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>...</td>
+<td>pad2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>...</td>
+<td>item_amt</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-stormy_cloud_extra'></a>
+<h2>Type: StormyCloudExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>sting_duration</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>is_solid</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>non_solid_duration</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-temporary_platform_extra'></a>
+<h2>Type: TemporaryPlatformExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-tesseract_manipulator_extra'></a>
+<h2>Type: TesseractManipulatorExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>gems_left</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>next_update_ms</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>...</td>
+<td>enabled</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-tomb_robber_extra'></a>
+<h2>Type: TombRobberExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+</table>
+<a name='type-growtopia_world-training_port_extra'></a>
+<h2>Type: TrainingPortExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>fish_lb</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>status</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>...</td>
+<td>total_exp</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>22</td>
+<td>...</td>
+<td>fish_level</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td>...</td>
+<td>unk2</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>30</td>
+<td>...</td>
+<td>unk3</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-unknown_extra'></a>
+<h2>Type: UnknownExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>this_is_just_to_error_out_kaitai_pls</td>
+<td></td>
+<td>This type is just to error out kaitai. So if you encounter any error, 
+please either give the world name or dump the world and submit it to me
+(81739844+badewen@users.noreply.github.com).  
+</td>
+</tr>
+</table>
+<a name='type-growtopia_world-vending_machine_extra'></a>
+<h2>Type: VendingMachineExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>price</td>
+<td>s4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-vip_entrance_extra'></a>
+<h2>Type: VipEntranceExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>owner_userid</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>...</td>
+<td>num_allowed_userids</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>...</td>
+<td>allowed_userids</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-weather_machine_1_extra'></a>
+<h2>Type: WeatherMachine1Extra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>settings</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-weather_machine_2_extra'></a>
+<h2>Type: WeatherMachine2Extra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>gravity</td>
+<td>u4le</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>...</td>
+<td>flag</td>
+<td>u1</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-world_object'></a>
+<h2>Type: WorldObject</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>item_id</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>x</td>
+<td>f4le</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>...</td>
+<td>y</td>
+<td>f4le</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>...</td>
+<td>amount</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>...</td>
+<td>flag</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>...</td>
+<td>uid</td>
+<td>u4le</td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-world_tile'></a>
+<h2>Type: WorldTile</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>fg</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>...</td>
+<td>bg</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>...</td>
+<td>invalid_tile_fg_bg_kaitai_crasher</td>
+<td></td>
+<td>This type is just to error out kaitai. If this is 
+encountered, then maybe there was a parsing error.
+Please report :)
+</td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>parent_block_index</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>flag</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>parent_lock</td>
+<td>u2le</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>extra_data_type</td>
+<td>u1</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>tile_extra</td>
+<td>SwitchType(Name(identifier(extra_data_type)),TreeMap(IntNum(1) -> UserTypeInstream(List(door_extra),None,List()), IntNum(10) -> UserTypeInstream(List(achievement_block_extra),None,List()), IntNum(11) -> UserTypeInstream(List(heart_monitor_extra),None,List()), IntNum(14) -> UserTypeInstream(List(mannequin_extra),None,List()), IntNum(15) -> UserTypeInstream(List(magic_egg_extra),None,List()), IntNum(16) -> UserTypeInstream(List(game_grave_extra),None,List()), IntNum(17) -> UserTypeInstream(List(game_generator_extra),None,List()), IntNum(18) -> UserTypeInstream(List(xenonite_extra),None,List()), IntNum(19) -> UserTypeInstream(List(phone_booth_extra),None,List()), IntNum(2) -> UserTypeInstream(List(sign_extra),None,List()), IntNum(20) -> UserTypeInstream(List(crystal_extra),None,List()), IntNum(21) -> UserTypeInstream(List(crime_in_progress_extra),None,List()), IntNum(22) -> UserTypeInstream(List(spotlight_extra),None,List()), IntNum(23) -> UserTypeInstream(List(display_block_extra),None,List()), IntNum(24) -> UserTypeInstream(List(vending_machine_extra),None,List()), IntNum(25) -> UserTypeInstream(List(fish_tank_port_extra),None,List()), IntNum(26) -> UserTypeInstream(List(solar_collector_extra),None,List()), IntNum(27) -> UserTypeInstream(List(forge_extra),None,List()), IntNum(28) -> UserTypeInstream(List(giving_tree_extra),None,List()), IntNum(3) -> UserTypeInstream(List(lock_extra),None,List()), IntNum(30) -> UserTypeInstream(List(steam_organ_extra),None,List()), IntNum(31) -> UserTypeInstream(List(silk_worm_extra),None,List()), IntNum(32) -> UserTypeInstream(List(sewing_machine_extra),None,List()), IntNum(33) -> UserTypeInstream(List(country_flag_extra),None,List()), IntNum(34) -> UserTypeInstream(List(lobster_trap_extra),None,List()), IntNum(35) -> UserTypeInstream(List(painting_easel_extra),None,List()), IntNum(36) -> UserTypeInstream(List(pet_battle_cage_extra),None,List()), IntNum(37) -> UserTypeInstream(List(pet_trainer_extra),None,List()), IntNum(38) -> UserTypeInstream(List(steam_engine_extra),None,List()), IntNum(39) -> UserTypeInstream(List(lock_bot_extra),None,List()), IntNum(4) -> UserTypeInstream(List(seed_extra),None,List()), IntNum(40) -> UserTypeInstream(List(weather_machine_1_extra),None,List()), IntNum(41) -> UserTypeInstream(List(spirit_storage_unit_extra),None,List()), IntNum(42) -> UserTypeInstream(List(data_bedrock_extra),None,List()), IntNum(43) -> UserTypeInstream(List(shelf_extra),None,List()), IntNum(44) -> UserTypeInstream(List(vip_entrance_extra),None,List()), IntNum(45) -> UserTypeInstream(List(challenge_timer_extra),None,List()), IntNum(47) -> UserTypeInstream(List(fish_wall_mount_extra),None,List()), IntNum(48) -> UserTypeInstream(List(portrait_extra),None,List()), IntNum(49) -> UserTypeInstream(List(weather_machine_2_extra),None,List()), IntNum(50) -> UserTypeInstream(List(fossil_prep_station_extra),None,List()), IntNum(51) -> UserTypeInstream(List(dna_extractor_extra),None,List()), IntNum(52) -> UserTypeInstream(List(howler_extra),None,List()), IntNum(53) -> UserTypeInstream(List(chemsynth_tank_extra),None,List()), IntNum(54) -> UserTypeInstream(List(storage_box_xtreme_extra),None,List()), IntNum(55) -> UserTypeInstream(List(cooking_oven_extra),None,List()), IntNum(56) -> UserTypeInstream(List(audio_rack_extra),None,List()), IntNum(57) -> UserTypeInstream(List(geiger_charger_extra),None,List()), IntNum(58) -> UserTypeInstream(List(adventure_begins_extra),None,List()), IntNum(59) -> UserTypeInstream(List(tomb_robber_extra),None,List()), IntNum(60) -> UserTypeInstream(List(balloon_o_matic_extra),None,List()), IntNum(61) -> UserTypeInstream(List(training_port_extra),None,List()), IntNum(62) -> UserTypeInstream(List(item_sucker_extra),None,List()), IntNum(63) -> UserTypeInstream(List(cybot_extra),None,List()), IntNum(65) -> UserTypeInstream(List(guild_extra),None,List()), IntNum(66) -> UserTypeInstream(List(growscan_extra),None,List()), IntNum(67) -> UserTypeInstream(List(containment_field_power_node_extra),None,List()), IntNum(68) -> UserTypeInstream(List(spirit_board_extra),None,List()), IntNum(69) -> UserTypeInstream(List(tesseract_manipulator_extra),None,List()), IntNum(72) -> UserTypeInstream(List(stormy_cloud_extra),None,List()), IntNum(73) -> UserTypeInstream(List(temporary_platform_extra),None,List()), IntNum(74) -> UserTypeInstream(List(safe_vault_extra),None,List()), IntNum(75) -> UserTypeInstream(List(angelic_counting_cloud_extra),None,List()), IntNum(77) -> UserTypeInstream(List(infinity_weather_machine_extra),None,List()), IntNum(79) -> UserTypeInstream(List(pineapple_guzzler_extra),None,List()), IntNum(8) -> UserTypeInstream(List(dice_extra),None,List()), IntNum(80) -> UserTypeInstream(List(krakens_galatic_block_extra),None,List()), IntNum(81) -> UserTypeInstream(List(friends_entrance_extra),None,List()), IntNum(9) -> UserTypeInstream(List(provider_extra),None,List()), Name(identifier(_)) -> UserTypeInstream(List(unknown_extra),None,List())),true,false)</td>
+<td></td>
+</tr>
+<tr>
+<td>???</td>
+<td>...</td>
+<td>cbor_data</td>
+<td><a href="#type-growtopia_world-cbor_data">CborData</a></td>
+<td></td>
+</tr>
+</table>
+<a name='type-growtopia_world-xenonite_extra'></a>
+<h2>Type: XenoniteExtra</h2>
+
+<table class="table">
+<tr><th>Offset</th><th>Size</th><th>ID</th><th>Type</th><th>Note</th></tr>
+<tr>
+<td>0</td>
+<td>...</td>
+<td>unk1</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+  </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>
+      
