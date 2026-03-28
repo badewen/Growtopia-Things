@@ -363,11 +363,11 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
 
     def _read
       @label = GtStr.new(@_io, self, @_root)
-      @unk1 = @_io.read_u1
+      @flags = @_io.read_u1
       self
     end
     attr_reader :label
-    attr_reader :unk1
+    attr_reader :flags
   end
   class FishTankPortExtra < Kaitai::Struct::Struct
     def initialize(_io, _parent = nil, _root = nil)
@@ -647,10 +647,10 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
     end
 
     def _read
-      @time_passed_sec = @_io.read_u4le
+      @age = @_io.read_u4le
       self
     end
-    attr_reader :time_passed_sec
+    attr_reader :age
   end
   class LockExtra < Kaitai::Struct::Struct
     def initialize(_io, _parent = nil, _root = nil)
@@ -863,13 +863,13 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
     end
 
     def _read
-      @growth = @_io.read_u4le
+      @age = @_io.read_u4le
       if _parent.fg == 10656
         @pad1 = @_io.read_bytes(4)
       end
       self
     end
-    attr_reader :growth
+    attr_reader :age
     attr_reader :pad1
   end
   class SafeVaultExtra < Kaitai::Struct::Struct

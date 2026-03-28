@@ -872,18 +872,18 @@ public class GrowtopiaWorld extends KaitaiStruct {
         }
         private void _read() {
             this.label = new GtStr(this._io, this, _root);
-            this.unk1 = this._io.readU1();
+            this.flags = this._io.readU1();
         }
 
         public void _fetchInstances() {
             this.label._fetchInstances();
         }
         private GtStr label;
-        private int unk1;
+        private int flags;
         private GrowtopiaWorld _root;
         private GrowtopiaWorld.WorldTile _parent;
         public GtStr label() { return label; }
-        public int unk1() { return unk1; }
+        public int flags() { return flags; }
         public GrowtopiaWorld _root() { return _root; }
         public GrowtopiaWorld.WorldTile _parent() { return _parent; }
     }
@@ -1584,15 +1584,15 @@ public class GrowtopiaWorld extends KaitaiStruct {
             _read();
         }
         private void _read() {
-            this.timePassedSec = this._io.readU4le();
+            this.age = this._io.readU4le();
         }
 
         public void _fetchInstances() {
         }
-        private long timePassedSec;
+        private long age;
         private GrowtopiaWorld _root;
         private GrowtopiaWorld.WorldTile _parent;
-        public long timePassedSec() { return timePassedSec; }
+        public long age() { return age; }
         public GrowtopiaWorld _root() { return _root; }
         public GrowtopiaWorld.WorldTile _parent() { return _parent; }
     }
@@ -2057,7 +2057,7 @@ public class GrowtopiaWorld extends KaitaiStruct {
             _read();
         }
         private void _read() {
-            this.growth = this._io.readU4le();
+            this.age = this._io.readU4le();
             if (_parent().fg() == 10656) {
                 this.pad1 = this._io.readBytes(4);
             }
@@ -2067,11 +2067,11 @@ public class GrowtopiaWorld extends KaitaiStruct {
             if (_parent().fg() == 10656) {
             }
         }
-        private long growth;
+        private long age;
         private byte[] pad1;
         private GrowtopiaWorld _root;
         private GrowtopiaWorld.WorldTile _parent;
-        public long growth() { return growth; }
+        public long age() { return age; }
         public byte[] pad1() { return pad1; }
         public GrowtopiaWorld _root() { return _root; }
         public GrowtopiaWorld.WorldTile _parent() { return _parent; }

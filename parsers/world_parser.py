@@ -68,7 +68,7 @@ def parse_block(i):
         # door
         if tile["extra_tile_data_type"] == 1:
             data["label"] = get_str()
-            data["unk1_8"] = get_int(1)
+            data["flags"] = get_int(1)
 
         # sign
         # bulletin board
@@ -94,7 +94,7 @@ def parse_block(i):
             data["access_list_user_id"] = acc_id            
 
             data["minimum_level"] = get_int(1)
-            data["unk2_arr"] = get_byte_arr(7).hex()
+            data["unk1"] = get_byte_arr(7).hex()
 
             guild_locks = [5814]
 
@@ -113,7 +113,7 @@ def parse_block(i):
 
         # provider
         elif tile["extra_tile_data_type"] == 9:
-            data["growth"] = get_int(4) 
+            data["age"] = get_int(4) 
 
             # well of love. It is not valentine rn so i cant reverse this 2 bytes.
             # tell me world with filled well of love would be helpful
@@ -125,7 +125,7 @@ def parse_block(i):
         # achievement block
         elif tile["extra_tile_data_type"] == 10:
             # user id?
-            data["unk_32"] = get_int(4)
+            data["unk1"] = get_int(4)
             data["achievement_id"] = get_int(1)
 
         # heart monitor
@@ -138,9 +138,9 @@ def parse_block(i):
         # if you have ances, try checking in these unk field.
         elif tile["extra_tile_data_type"] == 14:
             data["label"] = get_str()
-            data["unk_8"] = get_int(1)
-            data["unk_16"] = get_int(2)
-            data["unk_16"] = get_int(2)
+            data["unk1"] = get_int(1)
+            data["unk2"] = get_int(2)
+            data["unk3"] = get_int(2)
             data["hat"] = get_int(2)
             data["shirt"] = get_int(2)
             data["pants"] = get_int(2)
@@ -168,7 +168,7 @@ def parse_block(i):
         # Xenonite
         elif tile["extra_tile_data_type"] == 18:
             # i dont have any access to the xenonite because im brokie.
-            data["unk_arr"] = get_byte_arr(5).hex()
+            data["unk1"] = get_byte_arr(5).hex()
         
         # phone booth
         elif tile["extra_tile_data_type"] == 19:
@@ -196,7 +196,7 @@ def parse_block(i):
             # supervillian level??
             # it only appears for super villian.
             # from testing, it seems like devil ham = 12, ms terry = 8
-            data["unk_8"] = get_int(1)
+            data["unk1"] = get_int(1)
 
         # spotlight
         # fun fact: spotlight is set by the PACKET_SET_CHARACTER_STATE
@@ -240,7 +240,7 @@ def parse_block(i):
 
         # Solar Collector
         elif tile["extra_tile_data_type"] == 26:
-            data["Unk1_40"] = get_byte_arr(5).hex()
+            data["unk1"] = get_byte_arr(5).hex()
 
         # forge
         elif tile["extra_tile_data_type"] == 27:
@@ -250,7 +250,7 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 28:
             data["harvested"] = get_int(1)
             data["age"] = get_int(2) # max 4 hours
-            data["unk2_16"] = get_int(2)
+            data["unk1"] = get_int(2)
             data["decoration_percentage"] = get_int(1) 
 
         # Giving tree stump
@@ -269,8 +269,8 @@ def parse_block(i):
             data["flags"] = get_int(1) # 0 = normal, 1 = dead, 8 = devil horn. Maybe flag is more fitting?? idk
             data["name"] = get_str()
             data["age_sec"] = get_int(4)
-            data["unk1_32"] = get_int(4) # seems like time/day passed since death?
-            data["unk2_32"] = get_int(4) 
+            data["unk1"] = get_int(4) # seems like time/day passed since death?
+            data["unk2"] = get_int(4) 
             data["can_be_fed"] = get_int(1)
             data["food_saturation"] = get_int(4) # saturations decreases every seconds
             data["water_saturation"] = get_int(4)
@@ -315,7 +315,7 @@ def parse_block(i):
             data["pet_total_count"] = get_int(4)
             
             # probably pet health? idk
-            data["unk_32"] = get_int(4)
+            data["unk1"] = get_int(4)
 
             # usually there are 6 pets.
             # it can hold up to 2 sets of pet battle, each with 3 ability. hence, 6 pets.
@@ -332,7 +332,7 @@ def parse_block(i):
         # Lock bot
         elif tile["extra_tile_data_type"] == 39:
             # if 24 hours, bot is ded
-            data["time_passed_sec"] = get_int(4)
+            data["age"] = get_int(4)
 
         # weather machine 1
         elif tile["extra_tile_data_type"] == 40:
@@ -345,7 +345,7 @@ def parse_block(i):
 
         # data bedrock
         elif tile["extra_tile_data_type"] == 42:
-            data["unk1_arr"] = get_byte_arr(17)
+            data["unk1"] = get_byte_arr(17)
             skip(4)
 
         # shelf
@@ -357,7 +357,7 @@ def parse_block(i):
 
         # vip entrance
         elif tile["extra_tile_data_type"] == 44:
-            data["unk1_8"] = get_int(1)
+            data["unk1"] = get_int(1)
             data["owner_userid"] = get_int(4)
             ls = get_list(4, 4)
             data["allowed_userid"] = ls
@@ -377,15 +377,15 @@ def parse_block(i):
         # portrait
         elif tile["extra_tile_data_type"] == 48:
             data["label"] = get_str()
-            data["unk1_32"] = get_int(4)
-            data["unk2_32"] = get_int(4)
-            data["unk3_arr"] = get_byte_arr(5)
-            data["unk4_8"] = get_int(1)
-            data["unk5_16"] = get_int(2)
+            data["unk1"] = get_int(4)
+            data["unk2"] = get_int(4)
+            data["unk3"] = get_byte_arr(5)
+            data["unk4"] = get_int(1)
+            data["unk5"] = get_int(2)
             data["face"] = get_int(2)
             data["hat"] = get_int(2)
             data["hair"] = get_int(2)
-            data["unk6_32"] = get_int(4)
+            data["unk6"] = get_int(4)
 
             # infinity crown
             if data["hat"] == 12958:
@@ -403,7 +403,7 @@ def parse_block(i):
 
         # Fossil prep station
         elif tile["extra_tile_data_type"] == 50:
-            data["unk1_32"] = get_int(4) # idk what this field is. i think it is time? idk im broke and fossil is expensive
+            data["unk1"] = get_int(4) # idk what this field is. i think it is time? idk im broke and fossil is expensive
 
         # dna extractor
         elif tile["extra_tile_data_type"] == 51:
@@ -459,9 +459,9 @@ def parse_block(i):
                     "time_added" : get_int(4)
                 })
 
-            data["unk1_32"] = hex(get_int(4))
-            data["unk2_32"] = hex(get_int(4))
-            data["unk3_32"] = hex(get_int(4)) 
+            data["unk1"] = hex(get_int(4))
+            data["unk2"] = hex(get_int(4))
+            data["unk3"] = hex(get_int(4)) 
 
             pass
 
@@ -473,7 +473,7 @@ def parse_block(i):
         # Geiger Charger
         elif tile["extra_tile_data_type"] == 57:
             # watafak idk
-            data["Unk_hex_arr"] = get_byte_arr(4).hex()  
+            data["unk1"] = get_byte_arr(4).hex()  
 
         # the adventure begins
         elif tile["extra_tile_data_type"] == 58:
@@ -497,10 +497,10 @@ def parse_block(i):
             data["status"] = get_int(2)
             data["item_id"] = get_int(4)
             data["total_exp"] = get_int(4) 
-            data["unk_arr"] = get_byte_arr(8).hex().upper()
+            data["unk1"] = get_byte_arr(8).hex().upper()
             data["fish_level"] = get_int(4)
-            data["unk_32"] = get_int(4)
-            data["unk_arr_30"] = get_byte_arr(5).hex().upper()
+            data["unk2"] = get_int(4)
+            data["unk3"] = get_byte_arr(5).hex().upper()
 
         # Item Sucker
         # like gaia, magplant, etc
@@ -520,7 +520,7 @@ def parse_block(i):
                 data["commands"].append({
                     "command_id": get_int(4),
                     "is_command_used": get_int(4),
-                    "unk_arr": get_byte_arr(7)
+                    "unk1": get_byte_arr(7)
                 })
 
             # Some sort of syncing timer? my observations tells me that it increases every ms
@@ -528,13 +528,14 @@ def parse_block(i):
             data["is_activated"] = get_int(4);
 
         # guild things?
+        # probably includes guild id, has mascot, mascot data
         elif tile["extra_tile_data_type"] == 65:
-            data["unk_arr"] = get_byte_arr(17).hex()
+            data["unk1"] = get_byte_arr(17).hex()
 
         # Growscan
         elif tile["extra_tile_data_type"] == 66:
             # maybe a flag that indicates it is being used?
-            data["Unk1_8"] = get_int(1)
+            data["unk1"] = get_int(1)
 
         # Containment field power node
         elif tile["extra_tile_data_type"] == 67:
@@ -544,10 +545,10 @@ def parse_block(i):
             data["linked_nodes"] = get_list_int(4,4) 
 
         # Spirit board
-        # Thanks for https://github.com/fann22 for helping me reverse this
+        # Thanks to https://github.com/fann22 for helping me reverse this
         elif tile["extra_tile_data_type"] == 68:
             data["player_required"] = get_int(4)
-            data["unk2"] = get_str();
+            data["unk1"] = get_str();
             data["command"] = get_str(); # command to do 
             data["item_list"] = get_list_int(4, 4); # item list required
 
@@ -576,7 +577,7 @@ def parse_block(i):
 
         # Temporary Platform
         elif tile["extra_tile_data_type"] == 73:
-            data["Unk1_32"] = get_int(4)
+            data["unk1"] = get_int(4)
 
         # Safe Vault
         elif tile["extra_tile_data_type"] == 74:
@@ -607,7 +608,7 @@ def parse_block(i):
         # Kraken's galatic block
         elif tile["extra_tile_data_type"] == 80:
             data["pattern_number"] = get_int(1)
-            data["unk_arr"] = get_byte_arr(4).hex()
+            data["unk1"] = get_byte_arr(4).hex()
             data["color_rgb"] = get_byte_arr(3).hex().upper()
 
         # Friends entrance
@@ -616,7 +617,7 @@ def parse_block(i):
             data["owner_userid"] = get_int(4)
             
             # maybe a flag??
-            data["unk_arr"] = get_byte_arr(2)
+            data["unk1"] = get_byte_arr(2)
 
             data["allowed_friends_userid"] = get_list_int(2, 4); 
 

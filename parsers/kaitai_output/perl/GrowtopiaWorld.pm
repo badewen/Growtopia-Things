@@ -1113,7 +1113,7 @@ sub _read {
     my ($self) = @_;
 
     $self->{label} = GrowtopiaWorld::GtStr->new($self->{_io}, $self, $self->{_root});
-    $self->{unk1} = $self->{_io}->read_u1();
+    $self->{flags} = $self->{_io}->read_u1();
 }
 
 sub label {
@@ -1121,9 +1121,9 @@ sub label {
     return $self->{label};
 }
 
-sub unk1 {
+sub flags {
     my ($self) = @_;
-    return $self->{unk1};
+    return $self->{flags};
 }
 
 ########################################################################
@@ -1992,12 +1992,12 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{time_passed_sec} = $self->{_io}->read_u4le();
+    $self->{age} = $self->{_io}->read_u4le();
 }
 
-sub time_passed_sec {
+sub age {
     my ($self) = @_;
-    return $self->{time_passed_sec};
+    return $self->{age};
 }
 
 ########################################################################
@@ -2642,15 +2642,15 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{growth} = $self->{_io}->read_u4le();
+    $self->{age} = $self->{_io}->read_u4le();
     if ($self->_parent()->fg() == 10656) {
         $self->{pad1} = $self->{_io}->read_bytes(4);
     }
 }
 
-sub growth {
+sub age {
     my ($self) = @_;
-    return $self->{growth};
+    return $self->{age};
 }
 
 sub pad1 {

@@ -695,13 +695,13 @@ public:
 
     private:
         gt_str_t* m_label;
-        uint8_t m_unk1;
+        uint8_t m_flags;
         growtopia_world_t* m__root;
         growtopia_world_t::world_tile_t* m__parent;
 
     public:
         gt_str_t* label() const { return m_label; }
-        uint8_t unk1() const { return m_unk1; }
+        uint8_t flags() const { return m_flags; }
         growtopia_world_t* _root() const { return m__root; }
         growtopia_world_t::world_tile_t* _parent() const { return m__parent; }
     };
@@ -1211,12 +1211,12 @@ public:
         ~lock_bot_extra_t();
 
     private:
-        uint32_t m_time_passed_sec;
+        uint32_t m_age;
         growtopia_world_t* m__root;
         growtopia_world_t::world_tile_t* m__parent;
 
     public:
-        uint32_t time_passed_sec() const { return m_time_passed_sec; }
+        uint32_t age() const { return m_age; }
         growtopia_world_t* _root() const { return m__root; }
         growtopia_world_t::world_tile_t* _parent() const { return m__parent; }
     };
@@ -1549,7 +1549,7 @@ public:
         ~provider_extra_t();
 
     private:
-        uint32_t m_growth;
+        uint32_t m_age;
         std::string m_pad1;
         bool n_pad1;
 
@@ -1561,7 +1561,7 @@ public:
         growtopia_world_t::world_tile_t* m__parent;
 
     public:
-        uint32_t growth() const { return m_growth; }
+        uint32_t age() const { return m_age; }
         std::string pad1() const { return m_pad1; }
         growtopia_world_t* _root() const { return m__root; }
         growtopia_world_t::world_tile_t* _parent() const { return m__parent; }

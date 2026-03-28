@@ -196,7 +196,7 @@ types:
     seq:
       - id: label
         type: gt_str
-      - id: unk1
+      - id: flags
         type: u1
 
   sign_extra:
@@ -319,7 +319,7 @@ types:
 
   lock_bot_extra:
     seq:
-      - id: time_passed_sec
+      - id: age
         type: u4
 
   weather_machine_1_extra:
@@ -456,7 +456,7 @@ types:
 
   provider_extra:
     seq:
-      - id: growth
+      - id: age
         type: u4
       - id: pad1
         size: 4

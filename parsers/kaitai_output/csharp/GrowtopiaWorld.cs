@@ -658,14 +658,14 @@ namespace Kaitai
             private void _read()
             {
                 _label = new GtStr(m_io, this, m_root);
-                _unk1 = m_io.ReadU1();
+                _flags = m_io.ReadU1();
             }
             private GtStr _label;
-            private byte _unk1;
+            private byte _flags;
             private GrowtopiaWorld m_root;
             private GrowtopiaWorld.WorldTile m_parent;
             public GtStr Label { get { return _label; } }
-            public byte Unk1 { get { return _unk1; } }
+            public byte Flags { get { return _flags; } }
             public GrowtopiaWorld M_Root { get { return m_root; } }
             public GrowtopiaWorld.WorldTile M_Parent { get { return m_parent; } }
         }
@@ -1203,12 +1203,12 @@ namespace Kaitai
             }
             private void _read()
             {
-                _timePassedSec = m_io.ReadU4le();
+                _age = m_io.ReadU4le();
             }
-            private uint _timePassedSec;
+            private uint _age;
             private GrowtopiaWorld m_root;
             private GrowtopiaWorld.WorldTile m_parent;
-            public uint TimePassedSec { get { return _timePassedSec; } }
+            public uint Age { get { return _age; } }
             public GrowtopiaWorld M_Root { get { return m_root; } }
             public GrowtopiaWorld.WorldTile M_Parent { get { return m_parent; } }
         }
@@ -1584,16 +1584,16 @@ namespace Kaitai
             }
             private void _read()
             {
-                _growth = m_io.ReadU4le();
+                _age = m_io.ReadU4le();
                 if (M_Parent.Fg == 10656) {
                     _pad1 = m_io.ReadBytes(4);
                 }
             }
-            private uint _growth;
+            private uint _age;
             private byte[] _pad1;
             private GrowtopiaWorld m_root;
             private GrowtopiaWorld.WorldTile m_parent;
-            public uint Growth { get { return _growth; } }
+            public uint Age { get { return _age; } }
             public byte[] Pad1 { get { return _pad1; } }
             public GrowtopiaWorld M_Root { get { return m_root; } }
             public GrowtopiaWorld.WorldTile M_Parent { get { return m_parent; } }

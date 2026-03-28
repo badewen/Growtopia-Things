@@ -486,12 +486,12 @@ namespace GrowtopiaWorld {
 
         private function _read() {
             $this->_m_label = new \GrowtopiaWorld\GtStr($this->_io, $this, $this->_root);
-            $this->_m_unk1 = $this->_io->readU1();
+            $this->_m_flags = $this->_io->readU1();
         }
         protected $_m_label;
-        protected $_m_unk1;
+        protected $_m_flags;
         public function label() { return $this->_m_label; }
-        public function unk1() { return $this->_m_unk1; }
+        public function flags() { return $this->_m_flags; }
     }
 }
 
@@ -851,10 +851,10 @@ namespace GrowtopiaWorld {
         }
 
         private function _read() {
-            $this->_m_timePassedSec = $this->_io->readU4le();
+            $this->_m_age = $this->_io->readU4le();
         }
-        protected $_m_timePassedSec;
-        public function timePassedSec() { return $this->_m_timePassedSec; }
+        protected $_m_age;
+        public function age() { return $this->_m_age; }
     }
 }
 
@@ -1142,14 +1142,14 @@ namespace GrowtopiaWorld {
         }
 
         private function _read() {
-            $this->_m_growth = $this->_io->readU4le();
+            $this->_m_age = $this->_io->readU4le();
             if ($this->_parent()->fg() == 10656) {
                 $this->_m_pad1 = $this->_io->readBytes(4);
             }
         }
-        protected $_m_growth;
+        protected $_m_age;
         protected $_m_pad1;
-        public function growth() { return $this->_m_growth; }
+        public function age() { return $this->_m_age; }
         public function pad1() { return $this->_m_pad1; }
     }
 }

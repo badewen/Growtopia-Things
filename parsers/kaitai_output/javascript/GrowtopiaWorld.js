@@ -411,7 +411,7 @@ var GrowtopiaWorld = (function() {
     }
     DoorExtra.prototype._read = function() {
       this.label = new GtStr(this._io, this, this._root);
-      this.unk1 = this._io.readU1();
+      this.flags = this._io.readU1();
     }
 
     return DoorExtra;
@@ -737,7 +737,7 @@ var GrowtopiaWorld = (function() {
       this._read();
     }
     LockBotExtra.prototype._read = function() {
-      this.timePassedSec = this._io.readU4le();
+      this.age = this._io.readU4le();
     }
 
     return LockBotExtra;
@@ -940,7 +940,7 @@ var GrowtopiaWorld = (function() {
       this._read();
     }
     ProviderExtra.prototype._read = function() {
-      this.growth = this._io.readU4le();
+      this.age = this._io.readU4le();
       if (this._parent.fg == 10656) {
         this.pad1 = this._io.readBytes(4);
       }

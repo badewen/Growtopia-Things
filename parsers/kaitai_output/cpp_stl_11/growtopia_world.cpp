@@ -473,7 +473,7 @@ growtopia_world_t::door_extra_t::door_extra_t(kaitai::kstream* p__io, growtopia_
 
 void growtopia_world_t::door_extra_t::_read() {
     m_label = std::unique_ptr<gt_str_t>(new gt_str_t(m__io, this, m__root));
-    m_unk1 = m__io->read_u1();
+    m_flags = m__io->read_u1();
 }
 
 growtopia_world_t::door_extra_t::~door_extra_t() {
@@ -847,7 +847,7 @@ growtopia_world_t::lock_bot_extra_t::lock_bot_extra_t(kaitai::kstream* p__io, gr
 }
 
 void growtopia_world_t::lock_bot_extra_t::_read() {
-    m_time_passed_sec = m__io->read_u4le();
+    m_age = m__io->read_u4le();
 }
 
 growtopia_world_t::lock_bot_extra_t::~lock_bot_extra_t() {
@@ -1088,7 +1088,7 @@ growtopia_world_t::provider_extra_t::provider_extra_t(kaitai::kstream* p__io, gr
 }
 
 void growtopia_world_t::provider_extra_t::_read() {
-    m_growth = m__io->read_u4le();
+    m_age = m__io->read_u4le();
     n_pad1 = true;
     if (_parent()->fg() == 10656) {
         n_pad1 = false;

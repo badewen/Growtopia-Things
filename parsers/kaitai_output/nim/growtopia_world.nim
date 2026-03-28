@@ -108,7 +108,7 @@ type
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_DoorExtra* = ref object of KaitaiStruct
     `label`*: GrowtopiaWorld_GtStr
-    `unk1`*: uint8
+    `flags`*: uint8
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_FishTankPortExtra* = ref object of KaitaiStruct
     `flags`*: uint8
@@ -185,7 +185,7 @@ type
   GrowtopiaWorld_LobsterTrapExtra* = ref object of KaitaiStruct
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_LockBotExtra* = ref object of KaitaiStruct
-    `timePassedSec`*: uint32
+    `age`*: uint32
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_LockExtra* = ref object of KaitaiStruct
     `flag`*: uint8
@@ -258,7 +258,7 @@ type
     `infinityCrownData`*: GrowtopiaWorld_GtStr
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_ProviderExtra* = ref object of KaitaiStruct
-    `growth`*: uint32
+    `age`*: uint32
     `pad1`*: seq[byte]
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_SafeVaultExtra* = ref object of KaitaiStruct
@@ -873,8 +873,8 @@ proc read*(_: typedesc[GrowtopiaWorld_DoorExtra], io: KaitaiStream, root: Kaitai
 
   let labelExpr = GrowtopiaWorld_GtStr.read(this.io, this.root, this)
   this.label = labelExpr
-  let unk1Expr = this.io.readU1()
-  this.unk1 = unk1Expr
+  let flagsExpr = this.io.readU1()
+  this.flags = flagsExpr
 
 proc fromFile*(_: typedesc[GrowtopiaWorld_DoorExtra], filename: string): GrowtopiaWorld_DoorExtra =
   GrowtopiaWorld_DoorExtra.read(newKaitaiFileStream(filename), nil, nil)
@@ -1190,8 +1190,8 @@ proc read*(_: typedesc[GrowtopiaWorld_LockBotExtra], io: KaitaiStream, root: Kai
   this.root = root
   this.parent = parent
 
-  let timePassedSecExpr = this.io.readU4le()
-  this.timePassedSec = timePassedSecExpr
+  let ageExpr = this.io.readU4le()
+  this.age = ageExpr
 
 proc fromFile*(_: typedesc[GrowtopiaWorld_LockBotExtra], filename: string): GrowtopiaWorld_LockBotExtra =
   GrowtopiaWorld_LockBotExtra.read(newKaitaiFileStream(filename), nil, nil)
@@ -1420,8 +1420,8 @@ proc read*(_: typedesc[GrowtopiaWorld_ProviderExtra], io: KaitaiStream, root: Ka
   this.root = root
   this.parent = parent
 
-  let growthExpr = this.io.readU4le()
-  this.growth = growthExpr
+  let ageExpr = this.io.readU4le()
+  this.age = ageExpr
   if this.parent.fg == 10656:
     let pad1Expr = this.io.readBytes(int(4))
     this.pad1 = pad1Expr

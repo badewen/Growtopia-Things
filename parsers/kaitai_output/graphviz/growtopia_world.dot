@@ -248,7 +248,7 @@ digraph {
 			door_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
 				<TR><TD PORT="label_pos">0</TD><TD PORT="label_size">...</TD><TD>GtStr</TD><TD PORT="label_type">label</TD></TR>
-				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="flags_pos">...</TD><TD PORT="flags_size">1</TD><TD>u1</TD><TD PORT="flags_type">flags</TD></TR>
 			</TABLE>>];
 		}
 		subgraph cluster__fish_tank_port_extra {
@@ -448,7 +448,7 @@ digraph {
 
 			lock_bot_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
-				<TR><TD PORT="time_passed_sec_pos">0</TD><TD PORT="time_passed_sec_size">4</TD><TD>u4le</TD><TD PORT="time_passed_sec_type">time_passed_sec</TD></TR>
+				<TR><TD PORT="age_pos">0</TD><TD PORT="age_size">4</TD><TD>u4le</TD><TD PORT="age_type">age</TD></TR>
 			</TABLE>>];
 		}
 		subgraph cluster__lock_extra {
@@ -585,7 +585,7 @@ digraph {
 
 			provider_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
-				<TR><TD PORT="growth_pos">0</TD><TD PORT="growth_size">4</TD><TD>u4le</TD><TD PORT="growth_type">growth</TD></TR>
+				<TR><TD PORT="age_pos">0</TD><TD PORT="age_size">4</TD><TD>u4le</TD><TD PORT="age_type">age</TD></TR>
 				<TR><TD PORT="pad1_pos">4</TD><TD PORT="pad1_size">4</TD><TD></TD><TD PORT="pad1_type">pad1</TD></TR>
 				<TR><TD COLSPAN="4" PORT="pad1__if">if _parent.fg == 10656</TD></TR>
 			</TABLE>>];

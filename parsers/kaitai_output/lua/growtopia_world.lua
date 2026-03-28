@@ -388,7 +388,7 @@ end
 
 function GrowtopiaWorld.DoorExtra:_read()
   self.label = GrowtopiaWorld.GtStr(self._io, self, self._root)
-  self.unk1 = self._io:read_u1()
+  self.flags = self._io:read_u1()
 end
 
 
@@ -694,7 +694,7 @@ function GrowtopiaWorld.LockBotExtra:_init(io, parent, root)
 end
 
 function GrowtopiaWorld.LockBotExtra:_read()
-  self.time_passed_sec = self._io:read_u4le()
+  self.age = self._io:read_u4le()
 end
 
 
@@ -887,7 +887,7 @@ function GrowtopiaWorld.ProviderExtra:_init(io, parent, root)
 end
 
 function GrowtopiaWorld.ProviderExtra:_read()
-  self.growth = self._io:read_u4le()
+  self.age = self._io:read_u4le()
   if self._parent.fg == 10656 then
     self.pad1 = self._io:read_bytes(4)
   end

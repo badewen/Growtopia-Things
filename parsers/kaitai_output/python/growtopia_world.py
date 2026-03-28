@@ -445,7 +445,7 @@ class GrowtopiaWorld(KaitaiStruct):
 
         def _read(self):
             self.label = GrowtopiaWorld.GtStr(self._io, self, self._root)
-            self.unk1 = self._io.read_u1()
+            self.flags = self._io.read_u1()
 
 
         def _fetch_instances(self):
@@ -787,7 +787,7 @@ class GrowtopiaWorld(KaitaiStruct):
             self._read()
 
         def _read(self):
-            self.time_passed_sec = self._io.read_u4le()
+            self.age = self._io.read_u4le()
 
 
         def _fetch_instances(self):
@@ -1010,7 +1010,7 @@ class GrowtopiaWorld(KaitaiStruct):
             self._read()
 
         def _read(self):
-            self.growth = self._io.read_u4le()
+            self.age = self._io.read_u4le()
             if self._parent.fg == 10656:
                 pass
                 self.pad1 = self._io.read_bytes(4)

@@ -116,7 +116,7 @@ growtopia_world__dna_extractor_extra = Struct(
 
 growtopia_world__door_extra = Struct(
 	'label' / LazyBound(lambda: growtopia_world__gt_str),
-	'unk1' / Int8ub,
+	'flags' / Int8ub,
 )
 
 growtopia_world__fish_tank_port_extra__fish_info = Struct(
@@ -213,7 +213,7 @@ growtopia_world__lobster_trap_extra = Struct(
 )
 
 growtopia_world__lock_bot_extra = Struct(
-	'time_passed_sec' / Int32ul,
+	'age' / Int32ul,
 )
 
 growtopia_world__lock_extra = Struct(
@@ -296,7 +296,7 @@ growtopia_world__portrait_extra = Struct(
 )
 
 growtopia_world__provider_extra = Struct(
-	'growth' / Int32ul,
+	'age' / Int32ul,
 	'pad1' / If(this._.fg == 10656, FixedSized(4, GreedyBytes)),
 )
 

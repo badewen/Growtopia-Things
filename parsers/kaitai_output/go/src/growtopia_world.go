@@ -855,7 +855,7 @@ func (this *GrowtopiaWorld_DnaExtractorExtra) Read(io *kaitai.Stream, parent *Gr
 }
 type GrowtopiaWorld_DoorExtra struct {
 	Label *GrowtopiaWorld_GtStr
-	Unk1 uint8
+	Flags uint8
 	_io *kaitai.Stream
 	_root *GrowtopiaWorld
 	_parent *GrowtopiaWorld_WorldTile
@@ -884,7 +884,7 @@ func (this *GrowtopiaWorld_DoorExtra) Read(io *kaitai.Stream, parent *GrowtopiaW
 	if err != nil {
 		return err
 	}
-	this.Unk1 = tmp59
+	this.Flags = tmp59
 	return err
 }
 type GrowtopiaWorld_FishTankPortExtra struct {
@@ -1521,7 +1521,7 @@ func (this *GrowtopiaWorld_LobsterTrapExtra) Read(io *kaitai.Stream, parent *Gro
 	return err
 }
 type GrowtopiaWorld_LockBotExtra struct {
-	TimePassedSec uint32
+	Age uint32
 	_io *kaitai.Stream
 	_root *GrowtopiaWorld
 	_parent *GrowtopiaWorld_WorldTile
@@ -1544,7 +1544,7 @@ func (this *GrowtopiaWorld_LockBotExtra) Read(io *kaitai.Stream, parent *Growtop
 	if err != nil {
 		return err
 	}
-	this.TimePassedSec = uint32(tmp96)
+	this.Age = uint32(tmp96)
 	return err
 }
 type GrowtopiaWorld_LockExtra struct {
@@ -2068,7 +2068,7 @@ func (this *GrowtopiaWorld_PortraitExtra) Read(io *kaitai.Stream, parent *Growto
 	return err
 }
 type GrowtopiaWorld_ProviderExtra struct {
-	Growth uint32
+	Age uint32
 	Pad1 []byte
 	_io *kaitai.Stream
 	_root *GrowtopiaWorld
@@ -2092,7 +2092,7 @@ func (this *GrowtopiaWorld_ProviderExtra) Read(io *kaitai.Stream, parent *Growto
 	if err != nil {
 		return err
 	}
-	this.Growth = uint32(tmp149)
+	this.Age = uint32(tmp149)
 	if (this._parent.Fg == 10656) {
 		tmp150, err := this._io.ReadBytes(int(4))
 		if err != nil {

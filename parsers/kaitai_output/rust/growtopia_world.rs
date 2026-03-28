@@ -1255,7 +1255,7 @@ pub struct GrowtopiaWorld_DoorExtra {
     pub _parent: SharedType<GrowtopiaWorld_WorldTile>,
     pub _self: SharedType<Self>,
     label: RefCell<OptRc<GrowtopiaWorld_GtStr>>,
-    unk1: RefCell<u8>,
+    flags: RefCell<u8>,
     _io: RefCell<BytesReader>,
 }
 impl KStruct for GrowtopiaWorld_DoorExtra {
@@ -1277,7 +1277,7 @@ impl KStruct for GrowtopiaWorld_DoorExtra {
         let _r = _rrc.as_ref().unwrap();
         let t = Self::read_into::<_, GrowtopiaWorld_GtStr>(&*_io, Some(self_rc._root.clone()), None)?.into();
         *self_rc.label.borrow_mut() = t;
-        *self_rc.unk1.borrow_mut() = _io.read_u1()?.into();
+        *self_rc.flags.borrow_mut() = _io.read_u1()?.into();
         Ok(())
     }
 }
@@ -1289,8 +1289,8 @@ impl GrowtopiaWorld_DoorExtra {
     }
 }
 impl GrowtopiaWorld_DoorExtra {
-    pub fn unk1(&self) -> Ref<'_, u8> {
-        self.unk1.borrow()
+    pub fn flags(&self) -> Ref<'_, u8> {
+        self.flags.borrow()
     }
 }
 impl GrowtopiaWorld_DoorExtra {
@@ -2236,7 +2236,7 @@ pub struct GrowtopiaWorld_LockBotExtra {
     pub _root: SharedType<GrowtopiaWorld>,
     pub _parent: SharedType<GrowtopiaWorld_WorldTile>,
     pub _self: SharedType<Self>,
-    time_passed_sec: RefCell<u32>,
+    age: RefCell<u32>,
     _io: RefCell<BytesReader>,
 }
 impl KStruct for GrowtopiaWorld_LockBotExtra {
@@ -2256,15 +2256,15 @@ impl KStruct for GrowtopiaWorld_LockBotExtra {
         let _rrc = self_rc._root.get_value().borrow().upgrade();
         let _prc = self_rc._parent.get_value().borrow().upgrade();
         let _r = _rrc.as_ref().unwrap();
-        *self_rc.time_passed_sec.borrow_mut() = _io.read_u4le()?.into();
+        *self_rc.age.borrow_mut() = _io.read_u4le()?.into();
         Ok(())
     }
 }
 impl GrowtopiaWorld_LockBotExtra {
 }
 impl GrowtopiaWorld_LockBotExtra {
-    pub fn time_passed_sec(&self) -> Ref<'_, u32> {
-        self.time_passed_sec.borrow()
+    pub fn age(&self) -> Ref<'_, u32> {
+        self.age.borrow()
     }
 }
 impl GrowtopiaWorld_LockBotExtra {
@@ -2975,7 +2975,7 @@ pub struct GrowtopiaWorld_ProviderExtra {
     pub _root: SharedType<GrowtopiaWorld>,
     pub _parent: SharedType<GrowtopiaWorld_WorldTile>,
     pub _self: SharedType<Self>,
-    growth: RefCell<u32>,
+    age: RefCell<u32>,
     pad1: RefCell<Vec<u8>>,
     _io: RefCell<BytesReader>,
 }
@@ -2996,7 +2996,7 @@ impl KStruct for GrowtopiaWorld_ProviderExtra {
         let _rrc = self_rc._root.get_value().borrow().upgrade();
         let _prc = self_rc._parent.get_value().borrow().upgrade();
         let _r = _rrc.as_ref().unwrap();
-        *self_rc.growth.borrow_mut() = _io.read_u4le()?.into();
+        *self_rc.age.borrow_mut() = _io.read_u4le()?.into();
         if ((*_prc.as_ref().unwrap().fg() as i32) == (10656 as i32)) {
             *self_rc.pad1.borrow_mut() = _io.read_bytes(4 as usize)?.into();
         }
@@ -3006,8 +3006,8 @@ impl KStruct for GrowtopiaWorld_ProviderExtra {
 impl GrowtopiaWorld_ProviderExtra {
 }
 impl GrowtopiaWorld_ProviderExtra {
-    pub fn growth(&self) -> Ref<'_, u32> {
-        self.growth.borrow()
+    pub fn age(&self) -> Ref<'_, u32> {
+        self.age.borrow()
     }
 }
 impl GrowtopiaWorld_ProviderExtra {
