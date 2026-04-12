@@ -1230,13 +1230,13 @@ namespace Kaitai
                 _flag = m_io.ReadU1();
                 _ownerUserId = m_io.ReadU4le();
                 _numAuthorizedUserids = m_io.ReadU4le();
-                _authorizedUserids = new List<uint>();
+                _authorizedUserids = new List<int>();
                 for (var i = 0; i < NumAuthorizedUserids; i++)
                 {
-                    _authorizedUserids.Add(m_io.ReadU4le());
+                    _authorizedUserids.Add(m_io.ReadS4le());
                 }
-                _minimumLevel = m_io.ReadU1();
-                _unk1 = m_io.ReadBytes(7);
+                _minimumLevel = m_io.ReadU4le();
+                _worldTimer = m_io.ReadU4le();
                 if (M_Parent.Fg == 5814) {
                     _guildLocksUnk = m_io.ReadBytes(16);
                 }
@@ -1244,18 +1244,23 @@ namespace Kaitai
             private byte _flag;
             private uint _ownerUserId;
             private uint _numAuthorizedUserids;
-            private List<uint> _authorizedUserids;
-            private byte _minimumLevel;
-            private byte[] _unk1;
+            private List<int> _authorizedUserids;
+            private uint _minimumLevel;
+            private uint _worldTimer;
             private byte[] _guildLocksUnk;
             private GrowtopiaWorld m_root;
             private GrowtopiaWorld.WorldTile m_parent;
             public byte Flag { get { return _flag; } }
             public uint OwnerUserId { get { return _ownerUserId; } }
             public uint NumAuthorizedUserids { get { return _numAuthorizedUserids; } }
-            public List<uint> AuthorizedUserids { get { return _authorizedUserids; } }
-            public byte MinimumLevel { get { return _minimumLevel; } }
-            public byte[] Unk1 { get { return _unk1; } }
+
+            /// <summary>
+            /// if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+            /// complex logic yet. 
+            /// </summary>
+            public List<int> AuthorizedUserids { get { return _authorizedUserids; } }
+            public uint MinimumLevel { get { return _minimumLevel; } }
+            public uint WorldTimer { get { return _worldTimer; } }
             public byte[] GuildLocksUnk { get { return _guildLocksUnk; } }
             public GrowtopiaWorld M_Root { get { return m_root; } }
             public GrowtopiaWorld.WorldTile M_Parent { get { return m_parent; } }

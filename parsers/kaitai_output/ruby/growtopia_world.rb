@@ -664,10 +664,10 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
       @num_authorized_userids = @_io.read_u4le
       @authorized_userids = []
       (num_authorized_userids).times { |i|
-        @authorized_userids << @_io.read_u4le
+        @authorized_userids << @_io.read_s4le
       }
-      @minimum_level = @_io.read_u1
-      @unk1 = @_io.read_bytes(7)
+      @minimum_level = @_io.read_u4le
+      @world_timer = @_io.read_u4le
       if _parent.fg == 5814
         @guild_locks_unk = @_io.read_bytes(16)
       end
@@ -676,9 +676,13 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
     attr_reader :flag
     attr_reader :owner_user_id
     attr_reader :num_authorized_userids
+
+    ##
+    # if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+    # complex logic yet. 
     attr_reader :authorized_userids
     attr_reader :minimum_level
-    attr_reader :unk1
+    attr_reader :world_timer
     attr_reader :guild_locks_unk
   end
   class MagicEggExtra < Kaitai::Struct::Struct

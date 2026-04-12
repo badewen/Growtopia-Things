@@ -807,10 +807,10 @@ class GrowtopiaWorld(KaitaiStruct):
             self.num_authorized_userids = self._io.read_u4le()
             self.authorized_userids = []
             for i in range(self.num_authorized_userids):
-                self.authorized_userids.append(self._io.read_u4le())
+                self.authorized_userids.append(self._io.read_s4le())
 
-            self.minimum_level = self._io.read_u1()
-            self.unk1 = self._io.read_bytes(7)
+            self.minimum_level = self._io.read_u4le()
+            self.world_timer = self._io.read_u4le()
             if self._parent.fg == 5814:
                 pass
                 self.guild_locks_unk = self._io.read_bytes(16)

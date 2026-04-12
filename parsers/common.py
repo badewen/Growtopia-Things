@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 import struct
 
 FILE_BEG_FILE = 0
@@ -6,11 +6,10 @@ FILE_CUR_POS = 1
 FILE_END_POS = 2
 
 
-def get_int(sz, f, endian = "little") -> int: 
+def get_int(sz, f, endian: Literal["little","big"] = "little", signed = False) -> int: 
     int_arr = f.read(sz)
 
-    return int.from_bytes(int_arr, byteorder=endian)
-    
+    return int.from_bytes(int_arr, byteorder=endian, signed=signed)
 
 def get_list(len_sz, elm_sz, f) -> List:
     list_length = int.from_bytes(f.read(len_sz), byteorder="little")
@@ -29,12 +28,12 @@ def get_byte_arr(len, f) -> bytes:
 
     return bytes(ret)
 
-def get_list_int(len_sz, elm_sz, f) -> List:
+def get_list_int(len_sz, elm_sz, f, signed = False) -> List:
     ls = get_list(len_sz, elm_sz, f)
     res_ls = []
 
     for arr in ls:
-        res_ls.append(int.from_bytes(arr, byteorder="little"))
+        res_ls.append(int.from_bytes(arr, byteorder="little", signed=signed))
 
     return res_ls
 

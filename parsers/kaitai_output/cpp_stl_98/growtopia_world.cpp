@@ -1198,13 +1198,13 @@ void growtopia_world_t::lock_extra_t::_read() {
     m_flag = m__io->read_u1();
     m_owner_user_id = m__io->read_u4le();
     m_num_authorized_userids = m__io->read_u4le();
-    m_authorized_userids = new std::vector<uint32_t>();
+    m_authorized_userids = new std::vector<int32_t>();
     const int l_authorized_userids = num_authorized_userids();
     for (int i = 0; i < l_authorized_userids; i++) {
-        m_authorized_userids->push_back(m__io->read_u4le());
+        m_authorized_userids->push_back(m__io->read_s4le());
     }
-    m_minimum_level = m__io->read_u1();
-    m_unk1 = m__io->read_bytes(7);
+    m_minimum_level = m__io->read_u4le();
+    m_world_timer = m__io->read_u4le();
     n_guild_locks_unk = true;
     if (_parent()->fg() == 5814) {
         n_guild_locks_unk = false;

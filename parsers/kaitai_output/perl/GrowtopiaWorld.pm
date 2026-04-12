@@ -2036,10 +2036,10 @@ sub _read {
     $self->{authorized_userids} = [];
     my $n_authorized_userids = $self->num_authorized_userids();
     for (my $i = 0; $i < $n_authorized_userids; $i++) {
-        push @{$self->{authorized_userids}}, $self->{_io}->read_u4le();
+        push @{$self->{authorized_userids}}, $self->{_io}->read_s4le();
     }
-    $self->{minimum_level} = $self->{_io}->read_u1();
-    $self->{unk1} = $self->{_io}->read_bytes(7);
+    $self->{minimum_level} = $self->{_io}->read_u4le();
+    $self->{world_timer} = $self->{_io}->read_u4le();
     if ($self->_parent()->fg() == 5814) {
         $self->{guild_locks_unk} = $self->{_io}->read_bytes(16);
     }
@@ -2070,9 +2070,9 @@ sub minimum_level {
     return $self->{minimum_level};
 }
 
-sub unk1 {
+sub world_timer {
     my ($self) = @_;
-    return $self->{unk1};
+    return $self->{world_timer};
 }
 
 sub guild_locks_unk {

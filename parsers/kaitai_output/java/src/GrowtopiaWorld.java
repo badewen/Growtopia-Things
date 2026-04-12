@@ -1619,12 +1619,12 @@ public class GrowtopiaWorld extends KaitaiStruct {
             this.flag = this._io.readU1();
             this.ownerUserId = this._io.readU4le();
             this.numAuthorizedUserids = this._io.readU4le();
-            this.authorizedUserids = new ArrayList<Long>();
+            this.authorizedUserids = new ArrayList<Integer>();
             for (int i = 0; i < numAuthorizedUserids(); i++) {
-                this.authorizedUserids.add(this._io.readU4le());
+                this.authorizedUserids.add(this._io.readS4le());
             }
-            this.minimumLevel = this._io.readU1();
-            this.unk1 = this._io.readBytes(7);
+            this.minimumLevel = this._io.readU4le();
+            this.worldTimer = this._io.readU4le();
             if (_parent().fg() == 5814) {
                 this.guildLocksUnk = this._io.readBytes(16);
             }
@@ -1639,18 +1639,23 @@ public class GrowtopiaWorld extends KaitaiStruct {
         private int flag;
         private long ownerUserId;
         private long numAuthorizedUserids;
-        private List<Long> authorizedUserids;
-        private int minimumLevel;
-        private byte[] unk1;
+        private List<Integer> authorizedUserids;
+        private long minimumLevel;
+        private long worldTimer;
         private byte[] guildLocksUnk;
         private GrowtopiaWorld _root;
         private GrowtopiaWorld.WorldTile _parent;
         public int flag() { return flag; }
         public long ownerUserId() { return ownerUserId; }
         public long numAuthorizedUserids() { return numAuthorizedUserids; }
-        public List<Long> authorizedUserids() { return authorizedUserids; }
-        public int minimumLevel() { return minimumLevel; }
-        public byte[] unk1() { return unk1; }
+
+        /**
+         * if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+         * complex logic yet. 
+         */
+        public List<Integer> authorizedUserids() { return authorizedUserids; }
+        public long minimumLevel() { return minimumLevel; }
+        public long worldTimer() { return worldTimer; }
         public byte[] guildLocksUnk() { return guildLocksUnk; }
         public GrowtopiaWorld _root() { return _root; }
         public GrowtopiaWorld.WorldTile _parent() { return _parent; }

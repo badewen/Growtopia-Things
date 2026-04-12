@@ -215,13 +215,16 @@ types:
       - id: num_authorized_userids
         type: u4
       - id: authorized_userids
-        type: u4
+        type: s4
+        doc: |
+          if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+          complex logic yet. 
         repeat: expr
         repeat-expr: num_authorized_userids
       - id: minimum_level
-        type: u1
-      - id: unk1
-        size: 7
+        type: u4
+      - id: world_timer
+        type: u4
       - id: guild_locks_unk
         size: 16
         if: _parent.fg == 5814

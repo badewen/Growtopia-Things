@@ -713,15 +713,18 @@ function GrowtopiaWorld.LockExtra:_read()
   self.num_authorized_userids = self._io:read_u4le()
   self.authorized_userids = {}
   for i = 0, self.num_authorized_userids - 1 do
-    self.authorized_userids[i + 1] = self._io:read_u4le()
+    self.authorized_userids[i + 1] = self._io:read_s4le()
   end
-  self.minimum_level = self._io:read_u1()
-  self.unk1 = self._io:read_bytes(7)
+  self.minimum_level = self._io:read_u4le()
+  self.world_timer = self._io:read_u4le()
   if self._parent.fg == 5814 then
     self.guild_locks_unk = self._io:read_bytes(16)
   end
 end
 
+-- 
+-- if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+-- complex logic yet. 
 
 GrowtopiaWorld.MagicEggExtra = class.class(KaitaiStruct)
 

@@ -191,9 +191,9 @@ type
     `flag`*: uint8
     `ownerUserId`*: uint32
     `numAuthorizedUserids`*: uint32
-    `authorizedUserids`*: seq[uint32]
-    `minimumLevel`*: uint8
-    `unk1`*: seq[byte]
+    `authorizedUserids`*: seq[int32]
+    `minimumLevel`*: uint32
+    `worldTimer`*: uint32
     `guildLocksUnk`*: seq[byte]
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_MagicEggExtra* = ref object of KaitaiStruct
@@ -1210,13 +1210,19 @@ proc read*(_: typedesc[GrowtopiaWorld_LockExtra], io: KaitaiStream, root: Kaitai
   this.ownerUserId = ownerUserIdExpr
   let numAuthorizedUseridsExpr = this.io.readU4le()
   this.numAuthorizedUserids = numAuthorizedUseridsExpr
+
+  ##[
+  if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+complex logic yet. 
+
+  ]##
   for i in 0 ..< int(this.numAuthorizedUserids):
-    let it = this.io.readU4le()
+    let it = this.io.readS4le()
     this.authorizedUserids.add(it)
-  let minimumLevelExpr = this.io.readU1()
+  let minimumLevelExpr = this.io.readU4le()
   this.minimumLevel = minimumLevelExpr
-  let unk1Expr = this.io.readBytes(int(7))
-  this.unk1 = unk1Expr
+  let worldTimerExpr = this.io.readU4le()
+  this.worldTimer = worldTimerExpr
   if this.parent.fg == 5814:
     let guildLocksUnkExpr = this.io.readBytes(int(16))
     this.guildLocksUnk = guildLocksUnkExpr

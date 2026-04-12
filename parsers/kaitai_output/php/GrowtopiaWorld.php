@@ -872,10 +872,10 @@ namespace GrowtopiaWorld {
             $this->_m_authorizedUserids = [];
             $n = $this->numAuthorizedUserids();
             for ($i = 0; $i < $n; $i++) {
-                $this->_m_authorizedUserids[] = $this->_io->readU4le();
+                $this->_m_authorizedUserids[] = $this->_io->readS4le();
             }
-            $this->_m_minimumLevel = $this->_io->readU1();
-            $this->_m_unk1 = $this->_io->readBytes(7);
+            $this->_m_minimumLevel = $this->_io->readU4le();
+            $this->_m_worldTimer = $this->_io->readU4le();
             if ($this->_parent()->fg() == 5814) {
                 $this->_m_guildLocksUnk = $this->_io->readBytes(16);
             }
@@ -885,14 +885,19 @@ namespace GrowtopiaWorld {
         protected $_m_numAuthorizedUserids;
         protected $_m_authorizedUserids;
         protected $_m_minimumLevel;
-        protected $_m_unk1;
+        protected $_m_worldTimer;
         protected $_m_guildLocksUnk;
         public function flag() { return $this->_m_flag; }
         public function ownerUserId() { return $this->_m_ownerUserId; }
         public function numAuthorizedUserids() { return $this->_m_numAuthorizedUserids; }
+
+        /**
+         * if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+         * complex logic yet. 
+         */
         public function authorizedUserids() { return $this->_m_authorizedUserids; }
         public function minimumLevel() { return $this->_m_minimumLevel; }
-        public function unk1() { return $this->_m_unk1; }
+        public function worldTimer() { return $this->_m_worldTimer; }
         public function guildLocksUnk() { return $this->_m_guildLocksUnk; }
     }
 }

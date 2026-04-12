@@ -220,9 +220,9 @@ growtopia_world__lock_extra = Struct(
 	'flag' / Int8ub,
 	'owner_user_id' / Int32ul,
 	'num_authorized_userids' / Int32ul,
-	'authorized_userids' / Array(this.num_authorized_userids, Int32ul),
-	'minimum_level' / Int8ub,
-	'unk1' / FixedSized(7, GreedyBytes),
+	'authorized_userids' / Array(this.num_authorized_userids, Int32sl),
+	'minimum_level' / Int32ul,
+	'world_timer' / Int32ul,
 	'guild_locks_unk' / If(this._.fg == 5814, FixedSized(16, GreedyBytes)),
 )
 

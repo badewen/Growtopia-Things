@@ -1,4 +1,5 @@
-from typing import List
+from io import BufferedReader
+from typing import List, Literal
 import orjson
 import json
 import sys
@@ -7,7 +8,7 @@ import math
 import common
 import cbor2
 
-f = None
+f: BufferedReader | None = None
 f_out = None
 
 item_data = json.load(open("parsed_data.json"))
@@ -16,8 +17,11 @@ world_info = {}
 def get_str() -> str:
     return common.get_str(f)
 
-def get_int(sz, endian = "little") -> int: 
-    return common.get_int(sz, f, endian)
+def get_int(sz, endian: Literal["little","big"] = "little") -> int: 
+    return common.get_int(sz, f, endian, True)
+
+def get_uint(sz, endian: Literal["little","big"] = "little") -> int: 
+    return common.get_int(sz, f, endian, False)
 
 def get_list(len_sz, elm_sz) -> List:
     return common.get_list(len_sz, elm_sz, f)
@@ -26,8 +30,10 @@ def get_byte_arr(len) -> bytes:
     return common.get_byte_arr(len, f)
 
 def get_list_int(len_sz, elm_sz) -> List:
-    return common.get_list_int(len_sz, elm_sz, f)
+    return common.get_list_int(len_sz, elm_sz, f, True)
 
+def get_list_uint(len_sz, elm_sz) -> List:
+    return common.get_list_int(len_sz, elm_sz, f, False)
 
 def get_float() -> float:
     return common.get_float(f)
@@ -39,27 +45,26 @@ def skip(len):
 def parse_block(i):
     tile = {}
     tile["debug_block_indx"] = i
-    tile["debug_curr_pos"] = f.tell()
+    tile["debug_curr_pos"] = f.tell() # type: ignore
 
     tile["x"] = i % int(world_info["width"])
     tile["y"] = math.floor(i / int(world_info["width"]))
 
     tile["extra_tile_data_type"] = 0
 
-    tile["fg"] = get_int(2)
-    tile["bg"] = get_int(2)
-    tile["parent_block_index"] = get_int(2)
-    tile["item_flags_low"] = get_int(1)
-    tile["item_flags_high"] = get_int(1)
+    tile["fg"] = get_uint(2)
+    tile["bg"] = get_uint(2)
+    tile["parent_block_index"] = get_uint(2)
+    tile["tile_flags"] = get_uint(2)
 
     # TILE_FLAG_LOCKED
-    if tile["item_flags_low"] & 0x02:
+    if tile["tile_flags"] & 0x02:
         # lock position 
-        tile["lock_block_index"] = get_int(2)
+        tile["lock_block_index"] = get_uint(2)
     
     # TILE_EXTRA_DATA
-    if tile["item_flags_low"] & 0x01:
-        tile["extra_tile_data_type"] = get_int(1)
+    if tile["tile_flags"] & 0x01:
+        tile["extra_tile_data_type"] = get_uint(1)
 
     print(tile)
     if tile["extra_tile_data_type"] != 0:
@@ -68,7 +73,7 @@ def parse_block(i):
         # door
         if tile["extra_tile_data_type"] == 1:
             data["label"] = get_str()
-            data["flags"] = get_int(1)
+            data["flags"] = get_uint(1)
 
         # sign
         # bulletin board
@@ -80,21 +85,27 @@ def parse_block(i):
             skip(4)
 
         # lock
+        # Thanks fumiko for giving me heads up
         elif tile["extra_tile_data_type"] == 3:
-        
-            data["flag"] = get_int(1)
-            data["owner_user_id"] = get_int(4)
-            temp = get_list(4, 4)
+            # 0x10 Disable Music Note 
+            # 0x20 Invisible Music note
+            data["flag"] = get_uint(1)
+            data["owner_user_id"] = get_uint(4)
+            temp = get_list_int(4, 4)
             data["access_count"] = temp.__len__()
+            data["bpm"] = 100
 
             acc_id = []
             for id in temp:
-                acc_id.append(int.from_bytes(id, byteorder="little"))
+                if id < 0: 
+                    data["bpm"] = abs(id);
+                else:
+                    acc_id.append(int.from_bytes(id, byteorder="little"))
 
             data["access_list_user_id"] = acc_id            
 
-            data["minimum_level"] = get_int(1)
-            data["unk1"] = get_byte_arr(7).hex()
+            data["minimum_level"] = get_uint(4)
+            data["world_timer"] = get_uint(4)
 
             guild_locks = [5814]
 
@@ -104,16 +115,16 @@ def parse_block(i):
 
         # seed
         elif tile["extra_tile_data_type"] == 4:
-            data["age"] = get_int(4)
-            data["fruit_count"] = get_int(1)
+            data["age"] = get_uint(4)
+            data["fruit_count"] = get_uint(1)
         
         # dice-like item
         elif tile["extra_tile_data_type"] == 8:
-            data["symbol"] = get_int(1)
+            data["symbol"] = get_uint(1)
 
         # provider
         elif tile["extra_tile_data_type"] == 9:
-            data["age"] = get_int(4) 
+            data["age"] = get_uint(4) 
 
             # well of love. It is not valentine rn so i cant reverse this 2 bytes.
             # tell me world with filled well of love would be helpful
@@ -125,12 +136,12 @@ def parse_block(i):
         # achievement block
         elif tile["extra_tile_data_type"] == 10:
             # user id?
-            data["unk1"] = get_int(4)
-            data["achievement_id"] = get_int(1)
+            data["unk1"] = get_uint(4)
+            data["achievement_id"] = get_uint(1)
 
         # heart monitor
         elif tile["extra_tile_data_type"] == 11:
-            data["user_id"] = get_int(4)
+            data["user_id"] = get_uint(4)
             data["growID"] = get_str() 
 
         # mannequin
@@ -138,26 +149,26 @@ def parse_block(i):
         # if you have ances, try checking in these unk field.
         elif tile["extra_tile_data_type"] == 14:
             data["label"] = get_str()
-            data["unk1"] = get_int(1)
-            data["unk2"] = get_int(2)
-            data["unk3"] = get_int(2)
-            data["hat"] = get_int(2)
-            data["shirt"] = get_int(2)
-            data["pants"] = get_int(2)
-            data["boots"] = get_int(2)
-            data["face"] = get_int(2) 
-            data["hand"] = get_int(2)
-            data["back"] = get_int(2)
-            data["hair"] = get_int(2)
-            data["neck"] = get_int(2)
+            data["unk1"] = get_uint(1)
+            data["unk2"] = get_uint(2)
+            data["unk3"] = get_uint(2)
+            data["hat"] = get_uint(2)
+            data["shirt"] = get_uint(2)
+            data["pants"] = get_uint(2)
+            data["boots"] = get_uint(2)
+            data["face"] = get_uint(2) 
+            data["hand"] = get_uint(2)
+            data["back"] = get_uint(2)
+            data["hair"] = get_uint(2)
+            data["neck"] = get_uint(2)
 
         # Magic egg
         elif tile["extra_tile_data_type"] == 15:
-            data["egg_amount"] = get_int(4)  
+            data["egg_amount"] = get_uint(4)  
 
         # game grave
         elif tile["extra_tile_data_type"] == 16:
-            data["team_id"] = get_int(1)
+            data["team_id"] = get_uint(1)
 
         # game generator
         elif tile["extra_tile_data_type"] == 17:
@@ -172,31 +183,31 @@ def parse_block(i):
         
         # phone booth
         elif tile["extra_tile_data_type"] == 19:
-            data["hat"] = get_int(2)
-            data["shirt"] = get_int(2)
-            data["pants"] = get_int(2)
-            data["shoes"] = get_int(2)
-            data["face"] = get_int(2)
-            data["hand"] = get_int(2)
-            data["back"] = get_int(2)
-            data["hair"] = get_int(2)
-            data["neck"] = get_int(2)   
+            data["hat"] = get_uint(2)
+            data["shirt"] = get_uint(2)
+            data["pants"] = get_uint(2)
+            data["shoes"] = get_uint(2)
+            data["face"] = get_uint(2)
+            data["hand"] = get_uint(2)
+            data["back"] = get_uint(2)
+            data["hair"] = get_uint(2)
+            data["neck"] = get_uint(2)   
 
         # Crystal
         elif tile["extra_tile_data_type"] == 20:
-            data["crystal_list"] = get_list(2, 1)
+            data["crystal_list"] = get_list_uint(2, 1)
 
         # Crime in progress
         elif tile["extra_tile_data_type"] == 21:
             data["crime_name"] = get_str()
 
             # i think this is the field, because it increments by one on every crime.
-            data["crime_index"] = get_int(4)
+            data["crime_index"] = get_uint(4)
 
             # supervillian level??
             # it only appears for super villian.
             # from testing, it seems like devil ham = 12, ms terry = 8
-            data["unk1"] = get_int(1)
+            data["unk1"] = get_uint(1)
 
         # spotlight
         # fun fact: spotlight is set by the PACKET_SET_CHARACTER_STATE
@@ -206,22 +217,19 @@ def parse_block(i):
         
         # display block
         elif tile["extra_tile_data_type"] == 23:
-            data["item_id"] = get_int(4)
+            data["item_id"] = get_uint(4)
 
         # vending machine
         elif tile["extra_tile_data_type"] == 24:
-            data["item_id"] = get_int(4)
+            data["item_id"] = get_uint(4)
 
-            # if the most significant bit is set, the price mode is ITEM per WORLD LOCK and in form of two's complement
-            # if the most significant bit is not set, the price mode is in WORLD LOCK per ITEM. no transformation needs to be done.
-
-             # in short, if the price is negative then it is ITEM per WORLD LOCK
+             # if the price is negative then it is ITEM per WORLD LOCK
             data["price"] = get_int(4)
 
         # fish tank port
         elif tile["extra_tile_data_type"] == 25:
             # 0x10 = perfect fish glow
-            data["flags"] = get_int(1)
+            data["flags"] = get_uint(1)
             data["fishes"] = []
             # the format is 
             # uint32 list length
@@ -232,10 +240,10 @@ def parse_block(i):
             # uint32 fish lbs
             # this repeats until the end of the list.
 
-            for i in range(int(get_int(4) / 2)):
+            for i in range(int(get_uint(4) / 2)):
                 fish_info = {}
-                fish_info["item_id"] = get_int(4)
-                fish_info["lbs"] = get_int(4)
+                fish_info["item_id"] = get_uint(4)
+                fish_info["lbs"] = get_uint(4)
                 data["fishes"].append(fish_info)
 
         # Solar Collector
@@ -244,14 +252,14 @@ def parse_block(i):
 
         # forge
         elif tile["extra_tile_data_type"] == 27:
-            data["temperature"] = get_int(4)
+            data["temperature"] = get_uint(4)
 
         # giving tree
         elif tile["extra_tile_data_type"] == 28:
-            data["harvested"] = get_int(1)
-            data["age"] = get_int(2) # max 4 hours
-            data["unk1"] = get_int(2)
-            data["decoration_percentage"] = get_int(1) 
+            data["harvested"] = get_uint(1)
+            data["age"] = get_uint(2) # max 4 hours
+            data["unk1"] = get_uint(2)
+            data["decoration_percentage"] = get_uint(1) 
 
         # Giving tree stump
         # gotta wait for winterfest lol.
@@ -260,27 +268,27 @@ def parse_block(i):
 
         # Steam Organ
         elif tile["extra_tile_data_type"] == 30:
-            data["instrument_type"] = get_int(1)
-            data["note"] = get_int(4)
+            data["instrument_type"] = get_uint(1)
+            data["note"] = get_uint(4)
 
         # Silk worm
         elif tile["extra_tile_data_type"] == 31:
             # A quite hard and challenging tile extra, but i managed to guess most of the field :)
-            data["flags"] = get_int(1) # 0 = normal, 1 = dead, 8 = devil horn. Maybe flag is more fitting?? idk
+            data["flags"] = get_uint(1) # 0 = normal, 1 = dead, 8 = devil horn. Maybe flag is more fitting?? idk
             data["name"] = get_str()
-            data["age_sec"] = get_int(4)
-            data["unk1"] = get_int(4) # seems like time/day passed since death?
-            data["unk2"] = get_int(4) 
-            data["can_be_fed"] = get_int(1)
-            data["food_saturation"] = get_int(4) # saturations decreases every seconds
-            data["water_saturation"] = get_int(4)
+            data["age_sec"] = get_uint(4)
+            data["unk1"] = get_uint(4) # seems like time/day passed since death?
+            data["unk2"] = get_uint(4) 
+            data["can_be_fed"] = get_uint(1)
+            data["food_saturation"] = get_uint(4) # saturations decreases every seconds
+            data["water_saturation"] = get_uint(4)
             data["color_argb"] = get_byte_arr(4).hex()
-            data["sick_duration"] = get_int(4)
+            data["sick_duration"] = get_uint(4)
 
 
         # sewing machine
         elif tile["extra_tile_data_type"] == 32:
-            data["bolt_list_id"] = get_list_int(4, 4)
+            data["bolt_list_id"] = get_list_uint(4, 4)
 
         # country flag
         # apparently flags other than challenge flag has string.
@@ -298,41 +306,41 @@ def parse_block(i):
 
         # painting easel
         elif tile["extra_tile_data_type"] == 35:
-            data["item_id"] = get_int(4)
+            data["item_id"] = get_uint(4)
             data["label"] = get_str()
 
         # Pet battle cage
         elif tile["extra_tile_data_type"] == 36:
             data["label"] = get_str()
-            data["base_pet"] = get_int(4)
-            data["combined_pet_1"] = get_int(4)
-            data["combined_pet_2"] = get_int(4)
+            data["base_pet"] = get_uint(4)
+            data["combined_pet_1"] = get_uint(4)
+            data["combined_pet_2"] = get_uint(4)
 
         # Pet trainer
         elif tile["extra_tile_data_type"] == 37:
             # trainer's name
             data["name"] = get_str()
-            data["pet_total_count"] = get_int(4)
+            data["pet_total_count"] = get_uint(4)
             
             # probably pet health? idk
-            data["unk1"] = get_int(4)
+            data["unk1"] = get_uint(4)
 
             # usually there are 6 pets.
             # it can hold up to 2 sets of pet battle, each with 3 ability. hence, 6 pets.
             data["pets"] = []
 
             for i in range(int(data["pet_total_count"])):
-                data["pets"].append(get_int(4))
+                data["pets"].append(get_uint(4))
 
 
         # Steam Engine
         elif tile["extra_tile_data_type"] == 38:
-            data["temperature"] = get_int(4)
+            data["temperature"] = get_uint(4)
 
         # Lock bot
         elif tile["extra_tile_data_type"] == 39:
             # if 24 hours, bot is ded
-            data["age"] = get_int(4)
+            data["age"] = get_uint(4)
 
         # weather machine 1
         elif tile["extra_tile_data_type"] == 40:
@@ -341,7 +349,7 @@ def parse_block(i):
 
         # Spirit storage unit
         elif tile["extra_tile_data_type"] == 41:
-            data["ghost_jar_count"] = get_int(4)
+            data["ghost_jar_count"] = get_uint(4)
 
         # data bedrock
         elif tile["extra_tile_data_type"] == 42:
@@ -350,16 +358,16 @@ def parse_block(i):
 
         # shelf
         elif tile["extra_tile_data_type"] == 43:
-            data["top-left_item_id"] = get_int(4)
-            data["top-right_item_id"] = get_int(4)
-            data["bottom-left_item_id"] = get_int(4)
-            data["bottom-right_item_id"] = get_int(4)
+            data["top-left_item_id"] = get_uint(4)
+            data["top-right_item_id"] = get_uint(4)
+            data["bottom-left_item_id"] = get_uint(4)
+            data["bottom-right_item_id"] = get_uint(4)
 
         # vip entrance
         elif tile["extra_tile_data_type"] == 44:
-            data["unk1"] = get_int(1)
-            data["owner_userid"] = get_int(4)
-            ls = get_list(4, 4)
+            data["unk1"] = get_uint(1)
+            data["owner_userid"] = get_uint(4)
+            ls = get_list_uint(4, 4)
             data["allowed_userid"] = ls
             data["allowed_userid_count"] = ls.__len__()
 
@@ -371,21 +379,21 @@ def parse_block(i):
         # Fish Wall Mount
         elif tile["extra_tile_data_type"] == 47:
             data["label"] = get_str()
-            data["item_id"] = get_int(4)
-            data["lbs"] = get_int(1)
+            data["item_id"] = get_uint(4)
+            data["lbs"] = get_uint(1)
 
         # portrait
         elif tile["extra_tile_data_type"] == 48:
             data["label"] = get_str()
-            data["unk1"] = get_int(4)
-            data["unk2"] = get_int(4)
+            data["unk1"] = get_uint(4)
+            data["unk2"] = get_uint(4)
             data["unk3"] = get_byte_arr(5)
-            data["unk4"] = get_int(1)
-            data["unk5"] = get_int(2)
-            data["face"] = get_int(2)
-            data["hat"] = get_int(2)
-            data["hair"] = get_int(2)
-            data["unk6"] = get_int(4)
+            data["unk4"] = get_uint(1)
+            data["unk5"] = get_uint(2)
+            data["face"] = get_uint(2)
+            data["hat"] = get_uint(2)
+            data["hair"] = get_uint(2)
+            data["unk6"] = get_uint(4)
 
             # infinity crown
             if data["hat"] == 12958:
@@ -394,16 +402,16 @@ def parse_block(i):
 
         # weather machine 2
         elif tile["extra_tile_data_type"] == 49:
-            data["item_id"] = get_int(4) # this is used by weather machine - stuff atleast
-            data["gravity"] = get_int(4)
+            data["item_id"] = get_uint(4) # this is used by weather machine - stuff atleast
+            data["gravity"] = get_uint(4)
             # contains if the weather machine has invert sky colour on and/or spin items
             # 0x01 Spin
             # 0x02 invert sky color
-            data["flag"] = get_int(1)
+            data["flag"] = get_uint(1)
 
         # Fossil prep station
         elif tile["extra_tile_data_type"] == 50:
-            data["unk1"] = get_int(4) # idk what this field is. i think it is time? idk im broke and fossil is expensive
+            data["unk1"] = get_uint(4) # idk what this field is. i think it is time? idk im broke and fossil is expensive
 
         # dna extractor
         elif tile["extra_tile_data_type"] == 51:
@@ -417,8 +425,8 @@ def parse_block(i):
 
         # Chemsynth tank
         elif tile["extra_tile_data_type"] == 53:
-            data["current_chem_id"] = get_int(4)
-            data["supposed_chem_id"] = get_int(4)   
+            data["current_chem_id"] = get_uint(4)
+            data["supposed_chem_id"] = get_uint(4)   
 
         # Storage block
         elif tile["extra_tile_data_type"] == 54:
@@ -431,14 +439,14 @@ def parse_block(i):
             #       --------    --------
             #        item id     item amount
 
-            data["data_len"] = get_int(2)
+            data["data_len"] = get_uint(2)
             data["items"] = []
 
             for i in range(int(data["data_len"]/13)):
                 skip(3)
-                item_id = get_int(4)
+                item_id = get_uint(4)
                 skip(2)
-                item_amt = get_int(4)
+                item_amt = get_uint(4)
 
                 data["items"].append({
                     "item_id"  : item_id,
@@ -449,26 +457,26 @@ def parse_block(i):
 
         # cooking oven
         elif tile["extra_tile_data_type"] == 55:
-            data["temp_level"] = get_int(4)
-            data["ingredient_list_size"] = int(get_int(4) / 2)
+            data["temp_level"] = get_uint(4)
+            data["ingredient_list_size"] = int(get_uint(4) / 2)
             data["ingredients"] = []
 
             for i in range(int(data["ingredient_list_size"])):
                 data["ingredients"].append({
-                    "item_id" : get_int(4),
-                    "time_added" : get_int(4)
+                    "item_id" : get_uint(4),
+                    "time_added" : get_uint(4)
                 })
 
-            data["unk1"] = hex(get_int(4))
-            data["unk2"] = hex(get_int(4))
-            data["unk3"] = hex(get_int(4)) 
+            data["unk1"] = hex(get_uint(4))
+            data["unk2"] = hex(get_uint(4))
+            data["unk3"] = hex(get_uint(4)) 
 
             pass
 
         # audio rack and gear
         elif tile["extra_tile_data_type"] == 56:
             data["note"] = get_str()
-            data["volume"] = get_int(4)
+            data["volume"] = get_uint(4)
 
         # Geiger Charger
         elif tile["extra_tile_data_type"] == 57:
@@ -488,44 +496,44 @@ def parse_block(i):
         # Balloon O Matic
         elif tile["extra_tile_data_type"] == 60:
             # idk if they are right or not because no more balloon war
-            data["total_rarity"] = get_int(4)
-            data["team_type"] = get_int(1)
+            data["total_rarity"] = get_uint(4)
+            data["team_type"] = get_uint(1)
 
         # Training port
         elif tile["extra_tile_data_type"] == 61:
-            data["fish_lb"] = get_int(4)
-            data["status"] = get_int(2)
-            data["item_id"] = get_int(4)
-            data["total_exp"] = get_int(4) 
+            data["fish_lb"] = get_uint(4)
+            data["status"] = get_uint(2)
+            data["item_id"] = get_uint(4)
+            data["total_exp"] = get_uint(4) 
             data["unk1"] = get_byte_arr(8).hex().upper()
-            data["fish_level"] = get_int(4)
-            data["unk2"] = get_int(4)
+            data["fish_level"] = get_uint(4)
+            data["unk2"] = get_uint(4)
             data["unk3"] = get_byte_arr(5).hex().upper()
 
         # Item Sucker
         # like gaia, magplant, etc
         elif tile["extra_tile_data_type"] == 62:
-            data["item_id"] = get_int(4)
+            data["item_id"] = get_uint(4)
             # guessed field
-            data["item_amount"] = get_int(4)
-            data["flags"] = get_byte_arr(2).hex()
-            data["item_limit"] = get_int(4)
+            data["item_amount"] = get_uint(4)
+            data["flags"] = get_uint(2)
+            data["item_limit"] = get_uint(4)
 
         # cybot
         elif tile["extra_tile_data_type"] == 63:
-            data["command_count"] = get_int(4)
+            data["command_count"] = get_uint(4)
             data["commands"] = []
 
             for i in range(int(data["command_count"])):
                 data["commands"].append({
-                    "command_id": get_int(4),
-                    "is_command_used": get_int(4),
+                    "command_id": get_uint(4),
+                    "is_command_used": get_uint(4),
                     "unk1": get_byte_arr(7)
                 })
 
             # Some sort of syncing timer? my observations tells me that it increases every ms
-            data["timer"] = get_int(4)
-            data["is_activated"] = get_int(4);
+            data["timer"] = get_uint(4)
+            data["is_activated"] = get_uint(4);
 
         # guild things?
         # probably includes guild id, has mascot, mascot data
@@ -535,22 +543,22 @@ def parse_block(i):
         # Growscan
         elif tile["extra_tile_data_type"] == 66:
             # maybe a flag that indicates it is being used?
-            data["unk1"] = get_int(1)
+            data["unk1"] = get_uint(1)
 
         # Containment field power node
         elif tile["extra_tile_data_type"] == 67:
             # idk what kind of time this represents, but it increases every milliseconds.
-            data["time_ms"] = get_int(4)
+            data["time_ms"] = get_uint(4)
             # the block index on where the other node is placed as it link up to there.
-            data["linked_nodes"] = get_list_int(4,4) 
+            data["linked_nodes"] = get_list_uint(4,4) 
 
         # Spirit board
         # Thanks to https://github.com/fann22 for helping me reverse this
         elif tile["extra_tile_data_type"] == 68:
-            data["player_required"] = get_int(4)
+            data["player_required"] = get_uint(4)
             data["unk1"] = get_str();
             data["command"] = get_str(); # command to do 
-            data["item_list"] = get_list_int(4, 4); # item list required
+            data["item_list"] = get_list_uint(4, 4); # item list required
 
         # they are too expensive lol.
         # gimme world with these 3 items, or donat me :>
@@ -558,10 +566,10 @@ def parse_block(i):
         # Special thanks to https://github.com/CLOEI for borrowing TM.
         # Tesseract Manipulator
         elif tile["extra_tile_data_type"] == 69:
-            data["gems_left"] = get_int(4)
-            data["next_update_ms"] = get_int(4)
-            data["item_id"] = get_int(4)
-            data["enabled"] = get_int(4)
+            data["gems_left"] = get_uint(4)
+            data["next_update_ms"] = get_uint(4)
+            data["item_id"] = get_uint(4)
+            data["enabled"] = get_uint(4)
 
         # Heart of Gaia
         # elif tile["extra_tile_data_type"] == 70:
@@ -571,13 +579,13 @@ def parse_block(i):
 
         # Stormy cloud
         elif tile["extra_tile_data_type"] == 72:
-            data["sting_duration"] = get_int(4)
-            data["is_solid"] = get_int(4)
-            data["non_solid_duration"] = get_int(4)
+            data["sting_duration"] = get_uint(4)
+            data["is_solid"] = get_uint(4)
+            data["non_solid_duration"] = get_uint(4)
 
         # Temporary Platform
         elif tile["extra_tile_data_type"] == 73:
-            data["unk1"] = get_int(4)
+            data["unk1"] = get_uint(4)
 
         # Safe Vault
         elif tile["extra_tile_data_type"] == 74:
@@ -587,39 +595,39 @@ def parse_block(i):
         elif tile["extra_tile_data_type"] == 75:
             # 1 = raffling
             # 2 = done raffling
-            data["state"] = get_int(4)
-            data["unk1"] = get_int(2)
+            data["state"] = get_uint(4)
+            data["unk1"] = get_uint(2)
 
             # growtopia somehow uses ascii code here and offsets it by 1
             # only for raffling that is done
             if data["state"] == 2:
-                data["ascii_code"] = get_int(1)
+                data["ascii_code"] = get_uint(1)
 
         # Infinity Weather machine
         elif tile["extra_tile_data_type"] == 77:
-            data["interval_mins"] = get_int(4)
-            data["weather_machines"] = get_list_int(4, 4)
+            data["interval_mins"] = get_uint(4)
+            data["weather_machines"] = get_list_uint(4, 4)
 
         # Pineapple guzzler
         elif tile["extra_tile_data_type"] == 79:
             # amount of pineapple fed
-            data["pineapple_fed"] = get_int(4)
+            data["pineapple_fed"] = get_uint(4)
 
         # Kraken's galatic block
         elif tile["extra_tile_data_type"] == 80:
-            data["pattern_number"] = get_int(1)
+            data["pattern_number"] = get_uint(1)
             data["unk1"] = get_byte_arr(4).hex()
             data["color_rgb"] = get_byte_arr(3).hex().upper()
 
         # Friends entrance
         # maybe wrong because i dont have enough data.
         elif tile["extra_tile_data_type"] == 81:
-            data["owner_userid"] = get_int(4)
+            data["owner_userid"] = get_uint(4)
             
             # maybe a flag??
             data["unk1"] = get_byte_arr(2)
 
-            data["allowed_friends_userid"] = get_list_int(2, 4); 
+            data["allowed_friends_userid"] = get_list_uint(2, 4); 
 
         else: 
             ex_tile_data = tile["extra_tile_data_type"]
@@ -661,7 +669,7 @@ def parse_block(i):
 
     if tile_has_json:
         # took me some time to figure it out
-        tile["extra_data_json"] = cbor2.loads(get_byte_arr(get_int(4)))
+        tile["extra_data_json"] = cbor2.loads(get_byte_arr(get_uint(4)))
 
     return tile
 
@@ -670,9 +678,9 @@ def parse_world():
     try:
         skip(6)
         world_info["name"] = get_str()
-        world_info["width"] = get_int(4)
-        world_info["height"] = get_int(4)
-        world_info["total_block"] = get_int(4)
+        world_info["width"] = get_uint(4)
+        world_info["height"] = get_uint(4)
+        world_info["total_block"] = get_uint(4)
         world_info["tiles"] = []
     
         skip(5)
@@ -694,29 +702,29 @@ def parse_world():
 
 def parse_drops():
     # unk data, changes on every drop update. maybe a hash?
-    get_int(4)
-    get_int(4)
-    get_int(4)
+    get_uint(4)
+    get_uint(4)
+    get_uint(4)
 
     # idk why they give it 2 drop count
-    item_drop_count = get_int(4)
+    item_drop_count = get_uint(4)
     # maybe it is last dropped item uid? need to be investigated.
-    last_object_uid = get_int(4)
+    last_object_uid = get_uint(4)
 
     world_info["dropped_items"] = []
     for i in range(item_drop_count):
         data = {}
 
-        data["debug_curr_pos"] = f.tell()
+        data["debug_curr_pos"] = f.tell() # type: ignore
 
-        data["item_id"] = get_int(2)
+        data["item_id"] = get_uint(2)
         # for pos, divide by 32 and floor it to get tile coordinate.
         data["x"] = get_float()
         data["y"] = get_float()
 
-        data["amount"] = get_int(1)
-        data["flag"] = hex(get_int(1))
-        data["uid"] = get_int(4)
+        data["amount"] = get_uint(1)
+        data["flag"] = get_uint(1)
+        data["uid"] = get_uint(4)
 
         world_info["dropped_items"].append(data)
 

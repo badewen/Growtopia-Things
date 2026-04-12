@@ -757,14 +757,19 @@ var GrowtopiaWorld = (function() {
       this.numAuthorizedUserids = this._io.readU4le();
       this.authorizedUserids = [];
       for (var i = 0; i < this.numAuthorizedUserids; i++) {
-        this.authorizedUserids.push(this._io.readU4le());
+        this.authorizedUserids.push(this._io.readS4le());
       }
-      this.minimumLevel = this._io.readU1();
-      this.unk1 = this._io.readBytes(7);
+      this.minimumLevel = this._io.readU4le();
+      this.worldTimer = this._io.readU4le();
       if (this._parent.fg == 5814) {
         this.guildLocksUnk = this._io.readBytes(16);
       }
     }
+
+    /**
+     * if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+     * complex logic yet. 
+     */
 
     return LockExtra;
   })();

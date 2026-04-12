@@ -2281,9 +2281,9 @@ pub struct GrowtopiaWorld_LockExtra {
     flag: RefCell<u8>,
     owner_user_id: RefCell<u32>,
     num_authorized_userids: RefCell<u32>,
-    authorized_userids: RefCell<Vec<u32>>,
-    minimum_level: RefCell<u8>,
-    unk1: RefCell<Vec<u8>>,
+    authorized_userids: RefCell<Vec<i32>>,
+    minimum_level: RefCell<u32>,
+    world_timer: RefCell<u32>,
     guild_locks_unk: RefCell<Vec<u8>>,
     _io: RefCell<BytesReader>,
 }
@@ -2310,10 +2310,10 @@ impl KStruct for GrowtopiaWorld_LockExtra {
         *self_rc.authorized_userids.borrow_mut() = Vec::new();
         let l_authorized_userids = *self_rc.num_authorized_userids();
         for _i in 0..l_authorized_userids {
-            self_rc.authorized_userids.borrow_mut().push(_io.read_u4le()?.into());
+            self_rc.authorized_userids.borrow_mut().push(_io.read_s4le()?.into());
         }
-        *self_rc.minimum_level.borrow_mut() = _io.read_u1()?.into();
-        *self_rc.unk1.borrow_mut() = _io.read_bytes(7 as usize)?.into();
+        *self_rc.minimum_level.borrow_mut() = _io.read_u4le()?.into();
+        *self_rc.world_timer.borrow_mut() = _io.read_u4le()?.into();
         if ((*_prc.as_ref().unwrap().fg() as i32) == (5814 as i32)) {
             *self_rc.guild_locks_unk.borrow_mut() = _io.read_bytes(16 as usize)?.into();
         }
@@ -2337,19 +2337,24 @@ impl GrowtopiaWorld_LockExtra {
         self.num_authorized_userids.borrow()
     }
 }
+
+/**
+ * if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+ * complex logic yet. 
+ */
 impl GrowtopiaWorld_LockExtra {
-    pub fn authorized_userids(&self) -> Ref<'_, Vec<u32>> {
+    pub fn authorized_userids(&self) -> Ref<'_, Vec<i32>> {
         self.authorized_userids.borrow()
     }
 }
 impl GrowtopiaWorld_LockExtra {
-    pub fn minimum_level(&self) -> Ref<'_, u8> {
+    pub fn minimum_level(&self) -> Ref<'_, u32> {
         self.minimum_level.borrow()
     }
 }
 impl GrowtopiaWorld_LockExtra {
-    pub fn unk1(&self) -> Ref<'_, Vec<u8>> {
-        self.unk1.borrow()
+    pub fn world_timer(&self) -> Ref<'_, u32> {
+        self.world_timer.borrow()
     }
 }
 impl GrowtopiaWorld_LockExtra {

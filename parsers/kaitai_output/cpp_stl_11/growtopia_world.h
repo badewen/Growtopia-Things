@@ -1237,9 +1237,9 @@ public:
         uint8_t m_flag;
         uint32_t m_owner_user_id;
         uint32_t m_num_authorized_userids;
-        std::unique_ptr<std::vector<uint32_t>> m_authorized_userids;
-        uint8_t m_minimum_level;
-        std::string m_unk1;
+        std::unique_ptr<std::vector<int32_t>> m_authorized_userids;
+        uint32_t m_minimum_level;
+        uint32_t m_world_timer;
         std::string m_guild_locks_unk;
         bool n_guild_locks_unk;
 
@@ -1254,9 +1254,14 @@ public:
         uint8_t flag() const { return m_flag; }
         uint32_t owner_user_id() const { return m_owner_user_id; }
         uint32_t num_authorized_userids() const { return m_num_authorized_userids; }
-        std::vector<uint32_t>* authorized_userids() const { return m_authorized_userids.get(); }
-        uint8_t minimum_level() const { return m_minimum_level; }
-        std::string unk1() const { return m_unk1; }
+
+        /**
+         * if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+         * complex logic yet. 
+         */
+        std::vector<int32_t>* authorized_userids() const { return m_authorized_userids.get(); }
+        uint32_t minimum_level() const { return m_minimum_level; }
+        uint32_t world_timer() const { return m_world_timer; }
         std::string guild_locks_unk() const { return m_guild_locks_unk; }
         growtopia_world_t* _root() const { return m__root; }
         growtopia_world_t::world_tile_t* _parent() const { return m__parent; }

@@ -1551,9 +1551,9 @@ type GrowtopiaWorld_LockExtra struct {
 	Flag uint8
 	OwnerUserId uint32
 	NumAuthorizedUserids uint32
-	AuthorizedUserids []uint32
-	MinimumLevel uint8
-	Unk1 []byte
+	AuthorizedUserids []int32
+	MinimumLevel uint32
+	WorldTimer uint32
 	GuildLocksUnk []byte
 	_io *kaitai.Stream
 	_root *GrowtopiaWorld
@@ -1590,23 +1590,22 @@ func (this *GrowtopiaWorld_LockExtra) Read(io *kaitai.Stream, parent *GrowtopiaW
 	this.NumAuthorizedUserids = uint32(tmp99)
 	for i := 0; i < int(this.NumAuthorizedUserids); i++ {
 		_ = i
-		tmp100, err := this._io.ReadU4le()
+		tmp100, err := this._io.ReadS4le()
 		if err != nil {
 			return err
 		}
 		this.AuthorizedUserids = append(this.AuthorizedUserids, tmp100)
 	}
-	tmp101, err := this._io.ReadU1()
+	tmp101, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.MinimumLevel = tmp101
-	tmp102, err := this._io.ReadBytes(int(7))
+	this.MinimumLevel = uint32(tmp101)
+	tmp102, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	tmp102 = tmp102
-	this.Unk1 = tmp102
+	this.WorldTimer = uint32(tmp102)
 	if (this._parent.Fg == 5814) {
 		tmp103, err := this._io.ReadBytes(int(16))
 		if err != nil {
@@ -1617,6 +1616,11 @@ func (this *GrowtopiaWorld_LockExtra) Read(io *kaitai.Stream, parent *GrowtopiaW
 	}
 	return err
 }
+
+/**
+ * if you encounter negative user id, it is a world BPM. Kaitai doesnt support
+ * complex logic yet. 
+ */
 type GrowtopiaWorld_MagicEggExtra struct {
 	EggAmount uint32
 	_io *kaitai.Stream

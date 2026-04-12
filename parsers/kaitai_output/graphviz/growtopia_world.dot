@@ -460,10 +460,10 @@ digraph {
 				<TR><TD PORT="flag_pos">0</TD><TD PORT="flag_size">1</TD><TD>u1</TD><TD PORT="flag_type">flag</TD></TR>
 				<TR><TD PORT="owner_user_id_pos">1</TD><TD PORT="owner_user_id_size">4</TD><TD>u4le</TD><TD PORT="owner_user_id_type">owner_user_id</TD></TR>
 				<TR><TD PORT="num_authorized_userids_pos">5</TD><TD PORT="num_authorized_userids_size">4</TD><TD>u4le</TD><TD PORT="num_authorized_userids_type">num_authorized_userids</TD></TR>
-				<TR><TD PORT="authorized_userids_pos">9</TD><TD PORT="authorized_userids_size">4</TD><TD>u4le</TD><TD PORT="authorized_userids_type">authorized_userids</TD></TR>
+				<TR><TD PORT="authorized_userids_pos">9</TD><TD PORT="authorized_userids_size">4</TD><TD>s4le</TD><TD PORT="authorized_userids_type">authorized_userids</TD></TR>
 				<TR><TD COLSPAN="4" PORT="authorized_userids__repeat">repeat num_authorized_userids times</TD></TR>
-				<TR><TD PORT="minimum_level_pos">...</TD><TD PORT="minimum_level_size">1</TD><TD>u1</TD><TD PORT="minimum_level_type">minimum_level</TD></TR>
-				<TR><TD PORT="unk1_pos">...</TD><TD PORT="unk1_size">7</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="minimum_level_pos">...</TD><TD PORT="minimum_level_size">4</TD><TD>u4le</TD><TD PORT="minimum_level_type">minimum_level</TD></TR>
+				<TR><TD PORT="world_timer_pos">...</TD><TD PORT="world_timer_size">4</TD><TD>u4le</TD><TD PORT="world_timer_type">world_timer</TD></TR>
 				<TR><TD PORT="guild_locks_unk_pos">...</TD><TD PORT="guild_locks_unk_size">16</TD><TD></TD><TD PORT="guild_locks_unk_type">guild_locks_unk</TD></TR>
 				<TR><TD COLSPAN="4" PORT="guild_locks_unk__if">if _parent.fg == 5814</TD></TR>
 			</TABLE>>];
