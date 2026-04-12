@@ -24,3 +24,4 @@ collection of my parsers<br>
 - Big thanks to https://github.com/FakeLeq/growtopia-utility discovered alot of new fields
 - Special thanks to [CLOEI](https://github.com/CLOEI) for borrowing me expensive item
 - Thanks to [.fann](https://github.com/fann22) for helping me reverse Spirit Boards
+- Thanks to fumiko for correcting me on lock extra data
