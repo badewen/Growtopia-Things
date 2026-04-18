@@ -87,9 +87,11 @@ def parse_block(i):
         # lock
         # Thanks fumiko for giving me heads up
         elif tile["extra_tile_data_type"] == 3:
+            # 0x01 Ignore empty air
             # 0x10 Disable Music Note 
             # 0x20 Invisible Music note
             # 0x40 Break Only (Builder's lock)
+            # 0x80 Admin limited
             data["flag"] = get_uint(1)
             data["owner_user_id"] = get_uint(4)
             temp = get_list_int(4, 4)
