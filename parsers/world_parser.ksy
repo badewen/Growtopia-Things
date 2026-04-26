@@ -225,8 +225,20 @@ types:
         type: u4
       - id: world_timer
         type: u4
-      - id: guild_locks_unk
-        size: 16
+      - id: guild_id
+        type: u4
+        if: _parent.fg == 5814
+      - id: guild_mascot_fg
+        type: u2
+        if: _parent.fg == 5814
+      - id: guild_mascot_bg
+        type: u2
+        if: _parent.fg == 5814
+      - id: guild_level
+        type: u4
+        if: _parent.fg == 5814
+      - id: guild_flags
+        type: u4
         if: _parent.fg == 5814
 
   crystal_extra:
@@ -722,7 +734,17 @@ types:
   guild_extra:
     seq:
       - id: unk1
-        size: 17
+        type: u1
+      - id: guild_id
+        type: u4
+      - id: guild_mascot_fg
+        type: u2
+      - id: guild_mascot_bg
+        type: u2
+      - id: guild_level
+        type: u4
+      - id: guild_flags
+        type: u4
 
   growscan_extra:
     seq:

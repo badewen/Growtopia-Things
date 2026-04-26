@@ -103,7 +103,7 @@ def parse_block(i):
                 if id < 0: 
                     data["bpm"] = abs(id);
                 else:
-                    acc_id.append(int.from_bytes(id, byteorder="little"))
+                    acc_id.append(int.from_bytes(int.to_bytes(id, 4, byteorder="little"), "little"))
 
             data["access_list_user_id"] = acc_id            
 
@@ -113,8 +113,12 @@ def parse_block(i):
             guild_locks = [5814]
 
             if tile["fg"] in guild_locks:
-                data["guild_locks_unk"] = get_byte_arr(16).hex()
-
+                data["guild_id"] = get_uint(4);
+                data["guild_mascot_fg"] = get_uint(2);
+                data["guild_mascot_bg"] = get_uint(2);
+                data["guild_level"] = get_uint(4); # i think this is 4 bytes.
+                # 0x01 Display guild mascot
+                data["guild_flags"] = get_uint(4); 
 
         # seed
         elif tile["extra_tile_data_type"] == 4:
@@ -541,7 +545,13 @@ def parse_block(i):
         # guild things?
         # probably includes guild id, has mascot, mascot data
         elif tile["extra_tile_data_type"] == 65:
-            data["unk1"] = get_byte_arr(17).hex()
+            data["unk1"] = get_uint(1);
+            data["guild_id"] = get_uint(4);
+            data["guild_mascot_fg"] = get_uint(2);
+            data["guild_mascot_bg"] = get_uint(2);
+            data["guild_level"] = get_uint(4); # i think this is 4 bytes.
+            # 0x01 Display guild mascot
+            data["guild_flags"] = get_uint(4); 
 
         # Growscan
         elif tile["extra_tile_data_type"] == 66:
