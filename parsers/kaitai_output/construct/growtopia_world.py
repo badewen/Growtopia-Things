@@ -179,7 +179,12 @@ growtopia_world__gt_str = Struct(
 )
 
 growtopia_world__guild_extra = Struct(
-	'unk1' / FixedSized(17, GreedyBytes),
+	'unk1' / Int8ub,
+	'guild_id' / Int32ul,
+	'guild_mascot_fg' / Int16ul,
+	'guild_mascot_bg' / Int16ul,
+	'guild_level' / Int32ul,
+	'guild_flags' / Int32ul,
 )
 
 growtopia_world__heart_monitor_extra = Struct(
@@ -223,7 +228,11 @@ growtopia_world__lock_extra = Struct(
 	'authorized_userids' / Array(this.num_authorized_userids, Int32sl),
 	'minimum_level' / Int32ul,
 	'world_timer' / Int32ul,
-	'guild_locks_unk' / If(this._.fg == 5814, FixedSized(16, GreedyBytes)),
+	'guild_id' / If(this._.fg == 5814, Int32ul),
+	'guild_mascot_fg' / If(this._.fg == 5814, Int16ul),
+	'guild_mascot_bg' / If(this._.fg == 5814, Int16ul),
+	'guild_level' / If(this._.fg == 5814, Int32ul),
+	'guild_flags' / If(this._.fg == 5814, Int32ul),
 )
 
 growtopia_world__magic_egg_extra = Struct(

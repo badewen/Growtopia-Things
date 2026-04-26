@@ -1031,12 +1031,22 @@ public:
         ~guild_extra_t();
 
     private:
-        std::string m_unk1;
+        uint8_t m_unk1;
+        uint32_t m_guild_id;
+        uint16_t m_guild_mascot_fg;
+        uint16_t m_guild_mascot_bg;
+        uint32_t m_guild_level;
+        uint32_t m_guild_flags;
         growtopia_world_t* m__root;
         growtopia_world_t::world_tile_t* m__parent;
 
     public:
-        std::string unk1() const { return m_unk1; }
+        uint8_t unk1() const { return m_unk1; }
+        uint32_t guild_id() const { return m_guild_id; }
+        uint16_t guild_mascot_fg() const { return m_guild_mascot_fg; }
+        uint16_t guild_mascot_bg() const { return m_guild_mascot_bg; }
+        uint32_t guild_level() const { return m_guild_level; }
+        uint32_t guild_flags() const { return m_guild_flags; }
         growtopia_world_t* _root() const { return m__root; }
         growtopia_world_t::world_tile_t* _parent() const { return m__parent; }
     };
@@ -1241,11 +1251,39 @@ public:
         std::vector<int32_t>* m_authorized_userids;
         uint32_t m_minimum_level;
         uint32_t m_world_timer;
-        std::string m_guild_locks_unk;
-        bool n_guild_locks_unk;
+        uint32_t m_guild_id;
+        bool n_guild_id;
 
     public:
-        bool _is_null_guild_locks_unk() { guild_locks_unk(); return n_guild_locks_unk; };
+        bool _is_null_guild_id() { guild_id(); return n_guild_id; };
+
+    private:
+        uint16_t m_guild_mascot_fg;
+        bool n_guild_mascot_fg;
+
+    public:
+        bool _is_null_guild_mascot_fg() { guild_mascot_fg(); return n_guild_mascot_fg; };
+
+    private:
+        uint16_t m_guild_mascot_bg;
+        bool n_guild_mascot_bg;
+
+    public:
+        bool _is_null_guild_mascot_bg() { guild_mascot_bg(); return n_guild_mascot_bg; };
+
+    private:
+        uint32_t m_guild_level;
+        bool n_guild_level;
+
+    public:
+        bool _is_null_guild_level() { guild_level(); return n_guild_level; };
+
+    private:
+        uint32_t m_guild_flags;
+        bool n_guild_flags;
+
+    public:
+        bool _is_null_guild_flags() { guild_flags(); return n_guild_flags; };
 
     private:
         growtopia_world_t* m__root;
@@ -1263,7 +1301,11 @@ public:
         std::vector<int32_t>* authorized_userids() const { return m_authorized_userids; }
         uint32_t minimum_level() const { return m_minimum_level; }
         uint32_t world_timer() const { return m_world_timer; }
-        std::string guild_locks_unk() const { return m_guild_locks_unk; }
+        uint32_t guild_id() const { return m_guild_id; }
+        uint16_t guild_mascot_fg() const { return m_guild_mascot_fg; }
+        uint16_t guild_mascot_bg() const { return m_guild_mascot_bg; }
+        uint32_t guild_level() const { return m_guild_level; }
+        uint32_t guild_flags() const { return m_guild_flags; }
         growtopia_world_t* _root() const { return m__root; }
         growtopia_world_t::world_tile_t* _parent() const { return m__parent; }
     };

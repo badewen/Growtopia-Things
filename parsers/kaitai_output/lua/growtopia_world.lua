@@ -587,7 +587,12 @@ function GrowtopiaWorld.GuildExtra:_init(io, parent, root)
 end
 
 function GrowtopiaWorld.GuildExtra:_read()
-  self.unk1 = self._io:read_bytes(17)
+  self.unk1 = self._io:read_u1()
+  self.guild_id = self._io:read_u4le()
+  self.guild_mascot_fg = self._io:read_u2le()
+  self.guild_mascot_bg = self._io:read_u2le()
+  self.guild_level = self._io:read_u4le()
+  self.guild_flags = self._io:read_u4le()
 end
 
 
@@ -718,7 +723,19 @@ function GrowtopiaWorld.LockExtra:_read()
   self.minimum_level = self._io:read_u4le()
   self.world_timer = self._io:read_u4le()
   if self._parent.fg == 5814 then
-    self.guild_locks_unk = self._io:read_bytes(16)
+    self.guild_id = self._io:read_u4le()
+  end
+  if self._parent.fg == 5814 then
+    self.guild_mascot_fg = self._io:read_u2le()
+  end
+  if self._parent.fg == 5814 then
+    self.guild_mascot_bg = self._io:read_u2le()
+  end
+  if self._parent.fg == 5814 then
+    self.guild_level = self._io:read_u4le()
+  end
+  if self._parent.fg == 5814 then
+    self.guild_flags = self._io:read_u4le()
   end
 end
 

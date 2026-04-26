@@ -1289,7 +1289,12 @@ func (this *GrowtopiaWorld_GtStr) Read(io *kaitai.Stream, parent kaitai.Struct, 
 	return err
 }
 type GrowtopiaWorld_GuildExtra struct {
-	Unk1 []byte
+	Unk1 uint8
+	GuildId uint32
+	GuildMascotFg uint16
+	GuildMascotBg uint16
+	GuildLevel uint32
+	GuildFlags uint32
 	_io *kaitai.Stream
 	_root *GrowtopiaWorld
 	_parent *GrowtopiaWorld_WorldTile
@@ -1308,12 +1313,36 @@ func (this *GrowtopiaWorld_GuildExtra) Read(io *kaitai.Stream, parent *Growtopia
 	this._parent = parent
 	this._root = root
 
-	tmp83, err := this._io.ReadBytes(int(17))
+	tmp83, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	tmp83 = tmp83
 	this.Unk1 = tmp83
+	tmp84, err := this._io.ReadU4le()
+	if err != nil {
+		return err
+	}
+	this.GuildId = uint32(tmp84)
+	tmp85, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.GuildMascotFg = uint16(tmp85)
+	tmp86, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.GuildMascotBg = uint16(tmp86)
+	tmp87, err := this._io.ReadU4le()
+	if err != nil {
+		return err
+	}
+	this.GuildLevel = uint32(tmp87)
+	tmp88, err := this._io.ReadU4le()
+	if err != nil {
+		return err
+	}
+	this.GuildFlags = uint32(tmp88)
 	return err
 }
 type GrowtopiaWorld_HeartMonitorExtra struct {
@@ -1337,17 +1366,17 @@ func (this *GrowtopiaWorld_HeartMonitorExtra) Read(io *kaitai.Stream, parent *Gr
 	this._parent = parent
 	this._root = root
 
-	tmp84, err := this._io.ReadU4le()
+	tmp89, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.UserId = uint32(tmp84)
-	tmp85 := NewGrowtopiaWorld_GtStr()
-	err = tmp85.Read(this._io, this, this._root)
+	this.UserId = uint32(tmp89)
+	tmp90 := NewGrowtopiaWorld_GtStr()
+	err = tmp90.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.GrowId = tmp85
+	this.GrowId = tmp90
 	return err
 }
 type GrowtopiaWorld_HowlerExtra struct {
@@ -1393,23 +1422,23 @@ func (this *GrowtopiaWorld_InfinityWeatherMachineExtra) Read(io *kaitai.Stream, 
 	this._parent = parent
 	this._root = root
 
-	tmp86, err := this._io.ReadU4le()
+	tmp91, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.IntervalMins = uint32(tmp86)
-	tmp87, err := this._io.ReadU4le()
+	this.IntervalMins = uint32(tmp91)
+	tmp92, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NumWeatherMachines = uint32(tmp87)
+	this.NumWeatherMachines = uint32(tmp92)
 	for i := 0; i < int(this.NumWeatherMachines); i++ {
 		_ = i
-		tmp88, err := this._io.ReadU4le()
+		tmp93, err := this._io.ReadU4le()
 		if err != nil {
 			return err
 		}
-		this.WeatherMachines = append(this.WeatherMachines, tmp88)
+		this.WeatherMachines = append(this.WeatherMachines, tmp93)
 	}
 	return err
 }
@@ -1436,26 +1465,26 @@ func (this *GrowtopiaWorld_ItemSuckerExtra) Read(io *kaitai.Stream, parent *Grow
 	this._parent = parent
 	this._root = root
 
-	tmp89, err := this._io.ReadU4le()
+	tmp94, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp89)
-	tmp90, err := this._io.ReadU4le()
+	this.ItemId = uint32(tmp94)
+	tmp95, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemAmount = uint32(tmp90)
-	tmp91, err := this._io.ReadU2le()
+	this.ItemAmount = uint32(tmp95)
+	tmp96, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Flags = uint16(tmp91)
-	tmp92, err := this._io.ReadU4le()
+	this.Flags = uint16(tmp96)
+	tmp97, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemLimit = uint32(tmp92)
+	this.ItemLimit = uint32(tmp97)
 	return err
 }
 type GrowtopiaWorld_KrakensGalaticBlockExtra struct {
@@ -1480,23 +1509,23 @@ func (this *GrowtopiaWorld_KrakensGalaticBlockExtra) Read(io *kaitai.Stream, par
 	this._parent = parent
 	this._root = root
 
-	tmp93, err := this._io.ReadU1()
+	tmp98, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.PatternNumber = tmp93
-	tmp94, err := this._io.ReadBytes(int(4))
+	this.PatternNumber = tmp98
+	tmp99, err := this._io.ReadBytes(int(4))
 	if err != nil {
 		return err
 	}
-	tmp94 = tmp94
-	this.Unk1 = tmp94
-	tmp95, err := this._io.ReadBytes(int(3))
+	tmp99 = tmp99
+	this.Unk1 = tmp99
+	tmp100, err := this._io.ReadBytes(int(3))
 	if err != nil {
 		return err
 	}
-	tmp95 = tmp95
-	this.ColorRgb = tmp95
+	tmp100 = tmp100
+	this.ColorRgb = tmp100
 	return err
 }
 type GrowtopiaWorld_LobsterTrapExtra struct {
@@ -1540,11 +1569,11 @@ func (this *GrowtopiaWorld_LockBotExtra) Read(io *kaitai.Stream, parent *Growtop
 	this._parent = parent
 	this._root = root
 
-	tmp96, err := this._io.ReadU4le()
+	tmp101, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Age = uint32(tmp96)
+	this.Age = uint32(tmp101)
 	return err
 }
 type GrowtopiaWorld_LockExtra struct {
@@ -1554,7 +1583,11 @@ type GrowtopiaWorld_LockExtra struct {
 	AuthorizedUserids []int32
 	MinimumLevel uint32
 	WorldTimer uint32
-	GuildLocksUnk []byte
+	GuildId uint32
+	GuildMascotFg uint16
+	GuildMascotBg uint16
+	GuildLevel uint32
+	GuildFlags uint32
 	_io *kaitai.Stream
 	_root *GrowtopiaWorld
 	_parent *GrowtopiaWorld_WorldTile
@@ -1573,46 +1606,73 @@ func (this *GrowtopiaWorld_LockExtra) Read(io *kaitai.Stream, parent *GrowtopiaW
 	this._parent = parent
 	this._root = root
 
-	tmp97, err := this._io.ReadU1()
+	tmp102, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Flag = tmp97
-	tmp98, err := this._io.ReadU4le()
+	this.Flag = tmp102
+	tmp103, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.OwnerUserId = uint32(tmp98)
-	tmp99, err := this._io.ReadU4le()
+	this.OwnerUserId = uint32(tmp103)
+	tmp104, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NumAuthorizedUserids = uint32(tmp99)
+	this.NumAuthorizedUserids = uint32(tmp104)
 	for i := 0; i < int(this.NumAuthorizedUserids); i++ {
 		_ = i
-		tmp100, err := this._io.ReadS4le()
+		tmp105, err := this._io.ReadS4le()
 		if err != nil {
 			return err
 		}
-		this.AuthorizedUserids = append(this.AuthorizedUserids, tmp100)
+		this.AuthorizedUserids = append(this.AuthorizedUserids, tmp105)
 	}
-	tmp101, err := this._io.ReadU4le()
+	tmp106, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.MinimumLevel = uint32(tmp101)
-	tmp102, err := this._io.ReadU4le()
+	this.MinimumLevel = uint32(tmp106)
+	tmp107, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.WorldTimer = uint32(tmp102)
+	this.WorldTimer = uint32(tmp107)
 	if (this._parent.Fg == 5814) {
-		tmp103, err := this._io.ReadBytes(int(16))
+		tmp108, err := this._io.ReadU4le()
 		if err != nil {
 			return err
 		}
-		tmp103 = tmp103
-		this.GuildLocksUnk = tmp103
+		this.GuildId = uint32(tmp108)
+	}
+	if (this._parent.Fg == 5814) {
+		tmp109, err := this._io.ReadU2le()
+		if err != nil {
+			return err
+		}
+		this.GuildMascotFg = uint16(tmp109)
+	}
+	if (this._parent.Fg == 5814) {
+		tmp110, err := this._io.ReadU2le()
+		if err != nil {
+			return err
+		}
+		this.GuildMascotBg = uint16(tmp110)
+	}
+	if (this._parent.Fg == 5814) {
+		tmp111, err := this._io.ReadU4le()
+		if err != nil {
+			return err
+		}
+		this.GuildLevel = uint32(tmp111)
+	}
+	if (this._parent.Fg == 5814) {
+		tmp112, err := this._io.ReadU4le()
+		if err != nil {
+			return err
+		}
+		this.GuildFlags = uint32(tmp112)
 	}
 	return err
 }
@@ -1641,11 +1701,11 @@ func (this *GrowtopiaWorld_MagicEggExtra) Read(io *kaitai.Stream, parent *Growto
 	this._parent = parent
 	this._root = root
 
-	tmp104, err := this._io.ReadU4le()
+	tmp113, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.EggAmount = uint32(tmp104)
+	this.EggAmount = uint32(tmp113)
 	return err
 }
 type GrowtopiaWorld_MannequinExtra struct {
@@ -1680,72 +1740,72 @@ func (this *GrowtopiaWorld_MannequinExtra) Read(io *kaitai.Stream, parent *Growt
 	this._parent = parent
 	this._root = root
 
-	tmp105 := NewGrowtopiaWorld_GtStr()
-	err = tmp105.Read(this._io, this, this._root)
+	tmp114 := NewGrowtopiaWorld_GtStr()
+	err = tmp114.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Label = tmp105
-	tmp106, err := this._io.ReadU1()
+	this.Label = tmp114
+	tmp115, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Unk1 = tmp106
-	tmp107, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Unk2 = uint16(tmp107)
-	tmp108, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Unk3 = uint16(tmp108)
-	tmp109, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Hat = uint16(tmp109)
-	tmp110, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Shirt = uint16(tmp110)
-	tmp111, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Pants = uint16(tmp111)
-	tmp112, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Boots = uint16(tmp112)
-	tmp113, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Face = uint16(tmp113)
-	tmp114, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Hand = uint16(tmp114)
-	tmp115, err := this._io.ReadU2le()
-	if err != nil {
-		return err
-	}
-	this.Back = uint16(tmp115)
+	this.Unk1 = tmp115
 	tmp116, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Hair = uint16(tmp116)
+	this.Unk2 = uint16(tmp116)
 	tmp117, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Neck = uint16(tmp117)
+	this.Unk3 = uint16(tmp117)
+	tmp118, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Hat = uint16(tmp118)
+	tmp119, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Shirt = uint16(tmp119)
+	tmp120, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Pants = uint16(tmp120)
+	tmp121, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Boots = uint16(tmp121)
+	tmp122, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Face = uint16(tmp122)
+	tmp123, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Hand = uint16(tmp123)
+	tmp124, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Back = uint16(tmp124)
+	tmp125, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Hair = uint16(tmp125)
+	tmp126, err := this._io.ReadU2le()
+	if err != nil {
+		return err
+	}
+	this.Neck = uint16(tmp126)
 	return err
 }
 type GrowtopiaWorld_PaintingEaselExtra struct {
@@ -1769,17 +1829,17 @@ func (this *GrowtopiaWorld_PaintingEaselExtra) Read(io *kaitai.Stream, parent *G
 	this._parent = parent
 	this._root = root
 
-	tmp118, err := this._io.ReadU4le()
+	tmp127, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp118)
-	tmp119 := NewGrowtopiaWorld_GtStr()
-	err = tmp119.Read(this._io, this, this._root)
+	this.ItemId = uint32(tmp127)
+	tmp128 := NewGrowtopiaWorld_GtStr()
+	err = tmp128.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Label = tmp119
+	this.Label = tmp128
 	return err
 }
 type GrowtopiaWorld_PetBattleCageExtra struct {
@@ -1805,27 +1865,27 @@ func (this *GrowtopiaWorld_PetBattleCageExtra) Read(io *kaitai.Stream, parent *G
 	this._parent = parent
 	this._root = root
 
-	tmp120 := NewGrowtopiaWorld_GtStr()
-	err = tmp120.Read(this._io, this, this._root)
+	tmp129 := NewGrowtopiaWorld_GtStr()
+	err = tmp129.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Label = tmp120
-	tmp121, err := this._io.ReadU4le()
+	this.Label = tmp129
+	tmp130, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.BasePet = uint32(tmp121)
-	tmp122, err := this._io.ReadU4le()
+	this.BasePet = uint32(tmp130)
+	tmp131, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.CombinedPet1 = uint32(tmp122)
-	tmp123, err := this._io.ReadU4le()
+	this.CombinedPet1 = uint32(tmp131)
+	tmp132, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.CombinedPet2 = uint32(tmp123)
+	this.CombinedPet2 = uint32(tmp132)
 	return err
 }
 type GrowtopiaWorld_PetTrainerExtra struct {
@@ -1851,29 +1911,29 @@ func (this *GrowtopiaWorld_PetTrainerExtra) Read(io *kaitai.Stream, parent *Grow
 	this._parent = parent
 	this._root = root
 
-	tmp124 := NewGrowtopiaWorld_GtStr()
-	err = tmp124.Read(this._io, this, this._root)
+	tmp133 := NewGrowtopiaWorld_GtStr()
+	err = tmp133.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Name = tmp124
-	tmp125, err := this._io.ReadU4le()
+	this.Name = tmp133
+	tmp134, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NumPets = uint32(tmp125)
-	tmp126, err := this._io.ReadU4le()
+	this.NumPets = uint32(tmp134)
+	tmp135, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk1 = uint32(tmp126)
+	this.Unk1 = uint32(tmp135)
 	for i := 0; i < int(this.NumPets); i++ {
 		_ = i
-		tmp127, err := this._io.ReadU4le()
+		tmp136, err := this._io.ReadU4le()
 		if err != nil {
 			return err
 		}
-		this.Pets = append(this.Pets, tmp127)
+		this.Pets = append(this.Pets, tmp136)
 	}
 	return err
 }
@@ -1905,51 +1965,51 @@ func (this *GrowtopiaWorld_PhoneBoothExtra) Read(io *kaitai.Stream, parent *Grow
 	this._parent = parent
 	this._root = root
 
-	tmp128, err := this._io.ReadU2le()
+	tmp137, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Hat = uint16(tmp128)
-	tmp129, err := this._io.ReadU2le()
+	this.Hat = uint16(tmp137)
+	tmp138, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Shirt = uint16(tmp129)
-	tmp130, err := this._io.ReadU2le()
+	this.Shirt = uint16(tmp138)
+	tmp139, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Pants = uint16(tmp130)
-	tmp131, err := this._io.ReadU2le()
+	this.Pants = uint16(tmp139)
+	tmp140, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Shoes = uint16(tmp131)
-	tmp132, err := this._io.ReadU2le()
+	this.Shoes = uint16(tmp140)
+	tmp141, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Face = uint16(tmp132)
-	tmp133, err := this._io.ReadU2le()
+	this.Face = uint16(tmp141)
+	tmp142, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Hand = uint16(tmp133)
-	tmp134, err := this._io.ReadU2le()
+	this.Hand = uint16(tmp142)
+	tmp143, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Back = uint16(tmp134)
-	tmp135, err := this._io.ReadU2le()
+	this.Back = uint16(tmp143)
+	tmp144, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Hair = uint16(tmp135)
-	tmp136, err := this._io.ReadU2le()
+	this.Hair = uint16(tmp144)
+	tmp145, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Neck = uint16(tmp136)
+	this.Neck = uint16(tmp145)
 	return err
 }
 type GrowtopiaWorld_PineappleGuzzlerExtra struct {
@@ -1972,11 +2032,11 @@ func (this *GrowtopiaWorld_PineappleGuzzlerExtra) Read(io *kaitai.Stream, parent
 	this._parent = parent
 	this._root = root
 
-	tmp137, err := this._io.ReadU4le()
+	tmp146, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.PineappleFed = uint32(tmp137)
+	this.PineappleFed = uint32(tmp146)
 	return err
 }
 type GrowtopiaWorld_PortraitExtra struct {
@@ -2009,65 +2069,65 @@ func (this *GrowtopiaWorld_PortraitExtra) Read(io *kaitai.Stream, parent *Growto
 	this._parent = parent
 	this._root = root
 
-	tmp138 := NewGrowtopiaWorld_GtStr()
-	err = tmp138.Read(this._io, this, this._root)
+	tmp147 := NewGrowtopiaWorld_GtStr()
+	err = tmp147.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Label = tmp138
-	tmp139, err := this._io.ReadU4le()
+	this.Label = tmp147
+	tmp148, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk1 = uint32(tmp139)
-	tmp140, err := this._io.ReadU4le()
+	this.Unk1 = uint32(tmp148)
+	tmp149, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk2 = uint32(tmp140)
-	tmp141, err := this._io.ReadBytes(int(5))
+	this.Unk2 = uint32(tmp149)
+	tmp150, err := this._io.ReadBytes(int(5))
 	if err != nil {
 		return err
 	}
-	tmp141 = tmp141
-	this.Unk3 = tmp141
-	tmp142, err := this._io.ReadU1()
+	tmp150 = tmp150
+	this.Unk3 = tmp150
+	tmp151, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Unk4 = tmp142
-	tmp143, err := this._io.ReadU2le()
+	this.Unk4 = tmp151
+	tmp152, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Unk5 = uint16(tmp143)
-	tmp144, err := this._io.ReadU2le()
+	this.Unk5 = uint16(tmp152)
+	tmp153, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Face = uint16(tmp144)
-	tmp145, err := this._io.ReadU2le()
+	this.Face = uint16(tmp153)
+	tmp154, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Hat = uint16(tmp145)
-	tmp146, err := this._io.ReadU2le()
+	this.Hat = uint16(tmp154)
+	tmp155, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Hair = uint16(tmp146)
-	tmp147, err := this._io.ReadU4le()
+	this.Hair = uint16(tmp155)
+	tmp156, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk6 = uint32(tmp147)
+	this.Unk6 = uint32(tmp156)
 	if (this.Hat == 12958) {
-		tmp148 := NewGrowtopiaWorld_GtStr()
-		err = tmp148.Read(this._io, this, this._root)
+		tmp157 := NewGrowtopiaWorld_GtStr()
+		err = tmp157.Read(this._io, this, this._root)
 		if err != nil {
 			return err
 		}
-		this.InfinityCrownData = tmp148
+		this.InfinityCrownData = tmp157
 	}
 	return err
 }
@@ -2092,18 +2152,18 @@ func (this *GrowtopiaWorld_ProviderExtra) Read(io *kaitai.Stream, parent *Growto
 	this._parent = parent
 	this._root = root
 
-	tmp149, err := this._io.ReadU4le()
+	tmp158, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Age = uint32(tmp149)
+	this.Age = uint32(tmp158)
 	if (this._parent.Fg == 10656) {
-		tmp150, err := this._io.ReadBytes(int(4))
+		tmp159, err := this._io.ReadBytes(int(4))
 		if err != nil {
 			return err
 		}
-		tmp150 = tmp150
-		this.Pad1 = tmp150
+		tmp159 = tmp159
+		this.Pad1 = tmp159
 	}
 	return err
 }
@@ -2149,16 +2209,16 @@ func (this *GrowtopiaWorld_SeedExtra) Read(io *kaitai.Stream, parent *GrowtopiaW
 	this._parent = parent
 	this._root = root
 
-	tmp151, err := this._io.ReadU4le()
+	tmp160, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Age = uint32(tmp151)
-	tmp152, err := this._io.ReadU1()
+	this.Age = uint32(tmp160)
+	tmp161, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.FruitCount = tmp152
+	this.FruitCount = tmp161
 	return err
 }
 type GrowtopiaWorld_SewingMachineExtra struct {
@@ -2182,18 +2242,18 @@ func (this *GrowtopiaWorld_SewingMachineExtra) Read(io *kaitai.Stream, parent *G
 	this._parent = parent
 	this._root = root
 
-	tmp153, err := this._io.ReadU4le()
+	tmp162, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NumBoltIds = uint32(tmp153)
+	this.NumBoltIds = uint32(tmp162)
 	for i := 0; i < int(this.NumBoltIds); i++ {
 		_ = i
-		tmp154, err := this._io.ReadU4le()
+		tmp163, err := this._io.ReadU4le()
 		if err != nil {
 			return err
 		}
-		this.BoltIds = append(this.BoltIds, tmp154)
+		this.BoltIds = append(this.BoltIds, tmp163)
 	}
 	return err
 }
@@ -2220,26 +2280,26 @@ func (this *GrowtopiaWorld_ShelfExtra) Read(io *kaitai.Stream, parent *Growtopia
 	this._parent = parent
 	this._root = root
 
-	tmp155, err := this._io.ReadU4le()
+	tmp164, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.TopLeftItemId = uint32(tmp155)
-	tmp156, err := this._io.ReadU4le()
+	this.TopLeftItemId = uint32(tmp164)
+	tmp165, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.TopRightItemId = uint32(tmp156)
-	tmp157, err := this._io.ReadU4le()
+	this.TopRightItemId = uint32(tmp165)
+	tmp166, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.BottomLeftItemId = uint32(tmp157)
-	tmp158, err := this._io.ReadU4le()
+	this.BottomLeftItemId = uint32(tmp166)
+	tmp167, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.BottomRightItemId = uint32(tmp158)
+	this.BottomRightItemId = uint32(tmp167)
 	return err
 }
 type GrowtopiaWorld_SignExtra struct {
@@ -2263,18 +2323,18 @@ func (this *GrowtopiaWorld_SignExtra) Read(io *kaitai.Stream, parent *GrowtopiaW
 	this._parent = parent
 	this._root = root
 
-	tmp159 := NewGrowtopiaWorld_GtStr()
-	err = tmp159.Read(this._io, this, this._root)
+	tmp168 := NewGrowtopiaWorld_GtStr()
+	err = tmp168.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Label = tmp159
-	tmp160, err := this._io.ReadBytes(int(4))
+	this.Label = tmp168
+	tmp169, err := this._io.ReadBytes(int(4))
 	if err != nil {
 		return err
 	}
-	tmp160 = tmp160
-	this.Pad1 = tmp160
+	tmp169 = tmp169
+	this.Pad1 = tmp169
 	return err
 }
 type GrowtopiaWorld_SilkWormExtra struct {
@@ -2306,58 +2366,58 @@ func (this *GrowtopiaWorld_SilkWormExtra) Read(io *kaitai.Stream, parent *Growto
 	this._parent = parent
 	this._root = root
 
-	tmp161, err := this._io.ReadU1()
+	tmp170, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Flags = tmp161
-	tmp162 := NewGrowtopiaWorld_GtStr()
-	err = tmp162.Read(this._io, this, this._root)
+	this.Flags = tmp170
+	tmp171 := NewGrowtopiaWorld_GtStr()
+	err = tmp171.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Name = tmp162
-	tmp163, err := this._io.ReadU4le()
+	this.Name = tmp171
+	tmp172, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.AgeSec = uint32(tmp163)
-	tmp164, err := this._io.ReadU4le()
+	this.AgeSec = uint32(tmp172)
+	tmp173, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk1 = uint32(tmp164)
-	tmp165, err := this._io.ReadU4le()
+	this.Unk1 = uint32(tmp173)
+	tmp174, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk2 = uint32(tmp165)
-	tmp166, err := this._io.ReadU1()
+	this.Unk2 = uint32(tmp174)
+	tmp175, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.CanBeFed = tmp166
-	tmp167, err := this._io.ReadU4le()
+	this.CanBeFed = tmp175
+	tmp176, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.FoodSaturation = uint32(tmp167)
-	tmp168, err := this._io.ReadU4le()
+	this.FoodSaturation = uint32(tmp176)
+	tmp177, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.WaterSaturation = uint32(tmp168)
-	tmp169 := NewGrowtopiaWorld_ARGB()
-	err = tmp169.Read(this._io, this, this._root)
+	this.WaterSaturation = uint32(tmp177)
+	tmp178 := NewGrowtopiaWorld_ARGB()
+	err = tmp178.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.ColorArgb = tmp169
-	tmp170, err := this._io.ReadU4le()
+	this.ColorArgb = tmp178
+	tmp179, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.SickDuration = uint32(tmp170)
+	this.SickDuration = uint32(tmp179)
 	return err
 }
 type GrowtopiaWorld_SolarCollectorExtra struct {
@@ -2380,12 +2440,12 @@ func (this *GrowtopiaWorld_SolarCollectorExtra) Read(io *kaitai.Stream, parent *
 	this._parent = parent
 	this._root = root
 
-	tmp171, err := this._io.ReadBytes(int(5))
+	tmp180, err := this._io.ReadBytes(int(5))
 	if err != nil {
 		return err
 	}
-	tmp171 = tmp171
-	this.Unk1 = tmp171
+	tmp180 = tmp180
+	this.Unk1 = tmp180
 	return err
 }
 type GrowtopiaWorld_SpiritBoardExtra struct {
@@ -2412,35 +2472,35 @@ func (this *GrowtopiaWorld_SpiritBoardExtra) Read(io *kaitai.Stream, parent *Gro
 	this._parent = parent
 	this._root = root
 
-	tmp172, err := this._io.ReadU4le()
+	tmp181, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.PlayerRequired = uint32(tmp172)
-	tmp173 := NewGrowtopiaWorld_GtStr()
-	err = tmp173.Read(this._io, this, this._root)
+	this.PlayerRequired = uint32(tmp181)
+	tmp182 := NewGrowtopiaWorld_GtStr()
+	err = tmp182.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Unk1 = tmp173
-	tmp174 := NewGrowtopiaWorld_GtStr()
-	err = tmp174.Read(this._io, this, this._root)
+	this.Unk1 = tmp182
+	tmp183 := NewGrowtopiaWorld_GtStr()
+	err = tmp183.Read(this._io, this, this._root)
 	if err != nil {
 		return err
 	}
-	this.Command = tmp174
-	tmp175, err := this._io.ReadU4le()
+	this.Command = tmp183
+	tmp184, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NumRequiredItems = uint32(tmp175)
+	this.NumRequiredItems = uint32(tmp184)
 	for i := 0; i < int(this.NumRequiredItems); i++ {
 		_ = i
-		tmp176, err := this._io.ReadU4le()
+		tmp185, err := this._io.ReadU4le()
 		if err != nil {
 			return err
 		}
-		this.RequiredItems = append(this.RequiredItems, tmp176)
+		this.RequiredItems = append(this.RequiredItems, tmp185)
 	}
 	return err
 }
@@ -2464,11 +2524,11 @@ func (this *GrowtopiaWorld_SpiritStorageUnitExtra) Read(io *kaitai.Stream, paren
 	this._parent = parent
 	this._root = root
 
-	tmp177, err := this._io.ReadU4le()
+	tmp186, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.GhostJarCount = uint32(tmp177)
+	this.GhostJarCount = uint32(tmp186)
 	return err
 }
 type GrowtopiaWorld_SpotlightExtra struct {
@@ -2512,11 +2572,11 @@ func (this *GrowtopiaWorld_SteamEngineExtra) Read(io *kaitai.Stream, parent *Gro
 	this._parent = parent
 	this._root = root
 
-	tmp178, err := this._io.ReadU4le()
+	tmp187, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Temperature = uint32(tmp178)
+	this.Temperature = uint32(tmp187)
 	return err
 }
 type GrowtopiaWorld_SteamOrganExtra struct {
@@ -2540,16 +2600,16 @@ func (this *GrowtopiaWorld_SteamOrganExtra) Read(io *kaitai.Stream, parent *Grow
 	this._parent = parent
 	this._root = root
 
-	tmp179, err := this._io.ReadU1()
+	tmp188, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.InstrumentType = tmp179
-	tmp180, err := this._io.ReadU4le()
+	this.InstrumentType = tmp188
+	tmp189, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Note = uint32(tmp180)
+	this.Note = uint32(tmp189)
 	return err
 }
 type GrowtopiaWorld_StorageBoxXtremeExtra struct {
@@ -2573,19 +2633,19 @@ func (this *GrowtopiaWorld_StorageBoxXtremeExtra) Read(io *kaitai.Stream, parent
 	this._parent = parent
 	this._root = root
 
-	tmp181, err := this._io.ReadU2le()
+	tmp190, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.DataLen = uint16(tmp181)
+	this.DataLen = uint16(tmp190)
 	for i := 0; i < int(this.DataLen / 13); i++ {
 		_ = i
-		tmp182 := NewGrowtopiaWorld_StorageBoxXtremeExtra_StorageItem()
-		err = tmp182.Read(this._io, this, this._root)
+		tmp191 := NewGrowtopiaWorld_StorageBoxXtremeExtra_StorageItem()
+		err = tmp191.Read(this._io, this, this._root)
 		if err != nil {
 			return err
 		}
-		this.Items = append(this.Items, tmp182)
+		this.Items = append(this.Items, tmp191)
 	}
 	return err
 }
@@ -2612,28 +2672,28 @@ func (this *GrowtopiaWorld_StorageBoxXtremeExtra_StorageItem) Read(io *kaitai.St
 	this._parent = parent
 	this._root = root
 
-	tmp183, err := this._io.ReadBytes(int(3))
+	tmp192, err := this._io.ReadBytes(int(3))
 	if err != nil {
 		return err
 	}
-	tmp183 = tmp183
-	this.Pad1 = tmp183
-	tmp184, err := this._io.ReadU4le()
+	tmp192 = tmp192
+	this.Pad1 = tmp192
+	tmp193, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp184)
-	tmp185, err := this._io.ReadBytes(int(2))
+	this.ItemId = uint32(tmp193)
+	tmp194, err := this._io.ReadBytes(int(2))
 	if err != nil {
 		return err
 	}
-	tmp185 = tmp185
-	this.Pad2 = tmp185
-	tmp186, err := this._io.ReadU4le()
+	tmp194 = tmp194
+	this.Pad2 = tmp194
+	tmp195, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemAmt = uint32(tmp186)
+	this.ItemAmt = uint32(tmp195)
 	return err
 }
 type GrowtopiaWorld_StormyCloudExtra struct {
@@ -2658,21 +2718,21 @@ func (this *GrowtopiaWorld_StormyCloudExtra) Read(io *kaitai.Stream, parent *Gro
 	this._parent = parent
 	this._root = root
 
-	tmp187, err := this._io.ReadU4le()
+	tmp196, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.StingDuration = uint32(tmp187)
-	tmp188, err := this._io.ReadU4le()
+	this.StingDuration = uint32(tmp196)
+	tmp197, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.IsSolid = uint32(tmp188)
-	tmp189, err := this._io.ReadU4le()
+	this.IsSolid = uint32(tmp197)
+	tmp198, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NonSolidDuration = uint32(tmp189)
+	this.NonSolidDuration = uint32(tmp198)
 	return err
 }
 type GrowtopiaWorld_TemporaryPlatformExtra struct {
@@ -2695,11 +2755,11 @@ func (this *GrowtopiaWorld_TemporaryPlatformExtra) Read(io *kaitai.Stream, paren
 	this._parent = parent
 	this._root = root
 
-	tmp190, err := this._io.ReadU4le()
+	tmp199, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk1 = uint32(tmp190)
+	this.Unk1 = uint32(tmp199)
 	return err
 }
 type GrowtopiaWorld_TesseractManipulatorExtra struct {
@@ -2725,26 +2785,26 @@ func (this *GrowtopiaWorld_TesseractManipulatorExtra) Read(io *kaitai.Stream, pa
 	this._parent = parent
 	this._root = root
 
-	tmp191, err := this._io.ReadU4le()
+	tmp200, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.GemsLeft = uint32(tmp191)
-	tmp192, err := this._io.ReadU4le()
+	this.GemsLeft = uint32(tmp200)
+	tmp201, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NextUpdateMs = uint32(tmp192)
-	tmp193, err := this._io.ReadU4le()
+	this.NextUpdateMs = uint32(tmp201)
+	tmp202, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp193)
-	tmp194, err := this._io.ReadU4le()
+	this.ItemId = uint32(tmp202)
+	tmp203, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Enabled = uint32(tmp194)
+	this.Enabled = uint32(tmp203)
 	return err
 }
 type GrowtopiaWorld_TombRobberExtra struct {
@@ -2795,48 +2855,48 @@ func (this *GrowtopiaWorld_TrainingPortExtra) Read(io *kaitai.Stream, parent *Gr
 	this._parent = parent
 	this._root = root
 
-	tmp195, err := this._io.ReadU4le()
+	tmp204, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.FishLb = uint32(tmp195)
-	tmp196, err := this._io.ReadU2le()
+	this.FishLb = uint32(tmp204)
+	tmp205, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Status = uint16(tmp196)
-	tmp197, err := this._io.ReadU4le()
+	this.Status = uint16(tmp205)
+	tmp206, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp197)
-	tmp198, err := this._io.ReadU4le()
+	this.ItemId = uint32(tmp206)
+	tmp207, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.TotalExp = uint32(tmp198)
-	tmp199, err := this._io.ReadBytes(int(8))
+	this.TotalExp = uint32(tmp207)
+	tmp208, err := this._io.ReadBytes(int(8))
 	if err != nil {
 		return err
 	}
-	tmp199 = tmp199
-	this.Unk1 = tmp199
-	tmp200, err := this._io.ReadU4le()
+	tmp208 = tmp208
+	this.Unk1 = tmp208
+	tmp209, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.FishLevel = uint32(tmp200)
-	tmp201, err := this._io.ReadU4le()
+	this.FishLevel = uint32(tmp209)
+	tmp210, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Unk2 = uint32(tmp201)
-	tmp202, err := this._io.ReadBytes(int(5))
+	this.Unk2 = uint32(tmp210)
+	tmp211, err := this._io.ReadBytes(int(5))
 	if err != nil {
 		return err
 	}
-	tmp202 = tmp202
-	this.Unk3 = tmp202
+	tmp211 = tmp211
+	this.Unk3 = tmp211
 	return err
 }
 type GrowtopiaWorld_UnknownExtra struct {
@@ -2859,12 +2919,12 @@ func (this *GrowtopiaWorld_UnknownExtra) Read(io *kaitai.Stream, parent *Growtop
 	this._parent = parent
 	this._root = root
 
-	tmp203, err := this._io.ReadBytesFull()
+	tmp212, err := this._io.ReadBytesFull()
 	if err != nil {
 		return err
 	}
-	tmp203 = tmp203
-	this.ThisIsJustToErrorOutKaitaiPls = tmp203
+	tmp212 = tmp212
+	this.ThisIsJustToErrorOutKaitaiPls = tmp212
 	return err
 }
 
@@ -2894,16 +2954,16 @@ func (this *GrowtopiaWorld_VendingMachineExtra) Read(io *kaitai.Stream, parent *
 	this._parent = parent
 	this._root = root
 
-	tmp204, err := this._io.ReadU4le()
+	tmp213, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp204)
-	tmp205, err := this._io.ReadS4le()
+	this.ItemId = uint32(tmp213)
+	tmp214, err := this._io.ReadS4le()
 	if err != nil {
 		return err
 	}
-	this.Price = int32(tmp205)
+	this.Price = int32(tmp214)
 	return err
 }
 type GrowtopiaWorld_VipEntranceExtra struct {
@@ -2929,28 +2989,28 @@ func (this *GrowtopiaWorld_VipEntranceExtra) Read(io *kaitai.Stream, parent *Gro
 	this._parent = parent
 	this._root = root
 
-	tmp206, err := this._io.ReadU1()
+	tmp215, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Unk1 = tmp206
-	tmp207, err := this._io.ReadU4le()
+	this.Unk1 = tmp215
+	tmp216, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.OwnerUserid = uint32(tmp207)
-	tmp208, err := this._io.ReadU4le()
+	this.OwnerUserid = uint32(tmp216)
+	tmp217, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.NumAllowedUserids = uint32(tmp208)
+	this.NumAllowedUserids = uint32(tmp217)
 	for i := 0; i < int(this.NumAllowedUserids); i++ {
 		_ = i
-		tmp209, err := this._io.ReadU4le()
+		tmp218, err := this._io.ReadU4le()
 		if err != nil {
 			return err
 		}
-		this.AllowedUserids = append(this.AllowedUserids, tmp209)
+		this.AllowedUserids = append(this.AllowedUserids, tmp218)
 	}
 	return err
 }
@@ -2974,12 +3034,12 @@ func (this *GrowtopiaWorld_WeatherMachine1Extra) Read(io *kaitai.Stream, parent 
 	this._parent = parent
 	this._root = root
 
-	tmp210, err := this._io.ReadBytes(int(4))
+	tmp219, err := this._io.ReadBytes(int(4))
 	if err != nil {
 		return err
 	}
-	tmp210 = tmp210
-	this.Settings = tmp210
+	tmp219 = tmp219
+	this.Settings = tmp219
 	return err
 }
 type GrowtopiaWorld_WeatherMachine2Extra struct {
@@ -3004,21 +3064,21 @@ func (this *GrowtopiaWorld_WeatherMachine2Extra) Read(io *kaitai.Stream, parent 
 	this._parent = parent
 	this._root = root
 
-	tmp211, err := this._io.ReadU4le()
+	tmp220, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint32(tmp211)
-	tmp212, err := this._io.ReadU4le()
+	this.ItemId = uint32(tmp220)
+	tmp221, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Gravity = uint32(tmp212)
-	tmp213, err := this._io.ReadU1()
+	this.Gravity = uint32(tmp221)
+	tmp222, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Flag = tmp213
+	this.Flag = tmp222
 	return err
 }
 type GrowtopiaWorld_WorldObject struct {
@@ -3046,36 +3106,36 @@ func (this *GrowtopiaWorld_WorldObject) Read(io *kaitai.Stream, parent *Growtopi
 	this._parent = parent
 	this._root = root
 
-	tmp214, err := this._io.ReadU2le()
+	tmp223, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.ItemId = uint16(tmp214)
-	tmp215, err := this._io.ReadF4le()
+	this.ItemId = uint16(tmp223)
+	tmp224, err := this._io.ReadF4le()
 	if err != nil {
 		return err
 	}
-	this.X = float32(tmp215)
-	tmp216, err := this._io.ReadF4le()
+	this.X = float32(tmp224)
+	tmp225, err := this._io.ReadF4le()
 	if err != nil {
 		return err
 	}
-	this.Y = float32(tmp216)
-	tmp217, err := this._io.ReadU1()
+	this.Y = float32(tmp225)
+	tmp226, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Amount = tmp217
-	tmp218, err := this._io.ReadU1()
+	this.Amount = tmp226
+	tmp227, err := this._io.ReadU1()
 	if err != nil {
 		return err
 	}
-	this.Flag = tmp218
-	tmp219, err := this._io.ReadU4le()
+	this.Flag = tmp227
+	tmp228, err := this._io.ReadU4le()
 	if err != nil {
 		return err
 	}
-	this.Uid = uint32(tmp219)
+	this.Uid = uint32(tmp228)
 	return err
 }
 type GrowtopiaWorld_WorldTile struct {
@@ -3106,549 +3166,549 @@ func (this *GrowtopiaWorld_WorldTile) Read(io *kaitai.Stream, parent *GrowtopiaW
 	this._parent = parent
 	this._root = root
 
-	tmp220, err := this._io.ReadU2le()
+	tmp229, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Fg = uint16(tmp220)
-	tmp221, err := this._io.ReadU2le()
+	this.Fg = uint16(tmp229)
+	tmp230, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Bg = uint16(tmp221)
+	this.Bg = uint16(tmp230)
 	if ( ((this.Fg > 25000) || (this.Bg > 25000)) ) {
-		tmp222, err := this._io.ReadBytesFull()
+		tmp231, err := this._io.ReadBytesFull()
 		if err != nil {
 			return err
 		}
-		tmp222 = tmp222
-		this.InvalidTileFgBgKaitaiCrasher = tmp222
+		tmp231 = tmp231
+		this.InvalidTileFgBgKaitaiCrasher = tmp231
 	}
-	tmp223, err := this._io.ReadU2le()
+	tmp232, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.ParentBlockIndex = uint16(tmp223)
-	tmp224, err := this._io.ReadU2le()
+	this.ParentBlockIndex = uint16(tmp232)
+	tmp233, err := this._io.ReadU2le()
 	if err != nil {
 		return err
 	}
-	this.Flag = uint16(tmp224)
+	this.Flag = uint16(tmp233)
 	if (this.Flag & 2 == 2) {
-		tmp225, err := this._io.ReadU2le()
+		tmp234, err := this._io.ReadU2le()
 		if err != nil {
 			return err
 		}
-		this.ParentLock = uint16(tmp225)
+		this.ParentLock = uint16(tmp234)
 	}
 	if (this.Flag & 1 == 1) {
-		tmp226, err := this._io.ReadU1()
+		tmp235, err := this._io.ReadU1()
 		if err != nil {
 			return err
 		}
-		this.ExtraDataType = tmp226
+		this.ExtraDataType = tmp235
 	}
 	if (this.Flag & 1 == 1) {
 		switch (this.ExtraDataType) {
 		case 1:
-			tmp227 := NewGrowtopiaWorld_DoorExtra()
-			err = tmp227.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp227
-		case 10:
-			tmp228 := NewGrowtopiaWorld_AchievementBlockExtra()
-			err = tmp228.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp228
-		case 11:
-			tmp229 := NewGrowtopiaWorld_HeartMonitorExtra()
-			err = tmp229.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp229
-		case 14:
-			tmp230 := NewGrowtopiaWorld_MannequinExtra()
-			err = tmp230.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp230
-		case 15:
-			tmp231 := NewGrowtopiaWorld_MagicEggExtra()
-			err = tmp231.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp231
-		case 16:
-			tmp232 := NewGrowtopiaWorld_GameGraveExtra()
-			err = tmp232.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp232
-		case 17:
-			tmp233 := NewGrowtopiaWorld_GameGeneratorExtra()
-			err = tmp233.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp233
-		case 18:
-			tmp234 := NewGrowtopiaWorld_XenoniteExtra()
-			err = tmp234.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp234
-		case 19:
-			tmp235 := NewGrowtopiaWorld_PhoneBoothExtra()
-			err = tmp235.Read(this._io, this, this._root)
-			if err != nil {
-				return err
-			}
-			this.TileExtra = tmp235
-		case 2:
-			tmp236 := NewGrowtopiaWorld_SignExtra()
+			tmp236 := NewGrowtopiaWorld_DoorExtra()
 			err = tmp236.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp236
-		case 20:
-			tmp237 := NewGrowtopiaWorld_CrystalExtra()
+		case 10:
+			tmp237 := NewGrowtopiaWorld_AchievementBlockExtra()
 			err = tmp237.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp237
-		case 21:
-			tmp238 := NewGrowtopiaWorld_CrimeInProgressExtra()
+		case 11:
+			tmp238 := NewGrowtopiaWorld_HeartMonitorExtra()
 			err = tmp238.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp238
-		case 22:
-			tmp239 := NewGrowtopiaWorld_SpotlightExtra()
+		case 14:
+			tmp239 := NewGrowtopiaWorld_MannequinExtra()
 			err = tmp239.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp239
-		case 23:
-			tmp240 := NewGrowtopiaWorld_DisplayBlockExtra()
+		case 15:
+			tmp240 := NewGrowtopiaWorld_MagicEggExtra()
 			err = tmp240.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp240
-		case 24:
-			tmp241 := NewGrowtopiaWorld_VendingMachineExtra()
+		case 16:
+			tmp241 := NewGrowtopiaWorld_GameGraveExtra()
 			err = tmp241.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp241
-		case 25:
-			tmp242 := NewGrowtopiaWorld_FishTankPortExtra()
+		case 17:
+			tmp242 := NewGrowtopiaWorld_GameGeneratorExtra()
 			err = tmp242.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp242
-		case 26:
-			tmp243 := NewGrowtopiaWorld_SolarCollectorExtra()
+		case 18:
+			tmp243 := NewGrowtopiaWorld_XenoniteExtra()
 			err = tmp243.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp243
-		case 27:
-			tmp244 := NewGrowtopiaWorld_ForgeExtra()
+		case 19:
+			tmp244 := NewGrowtopiaWorld_PhoneBoothExtra()
 			err = tmp244.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp244
-		case 28:
-			tmp245 := NewGrowtopiaWorld_GivingTreeExtra()
+		case 2:
+			tmp245 := NewGrowtopiaWorld_SignExtra()
 			err = tmp245.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp245
-		case 3:
-			tmp246 := NewGrowtopiaWorld_LockExtra()
+		case 20:
+			tmp246 := NewGrowtopiaWorld_CrystalExtra()
 			err = tmp246.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp246
-		case 30:
-			tmp247 := NewGrowtopiaWorld_SteamOrganExtra()
+		case 21:
+			tmp247 := NewGrowtopiaWorld_CrimeInProgressExtra()
 			err = tmp247.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp247
-		case 31:
-			tmp248 := NewGrowtopiaWorld_SilkWormExtra()
+		case 22:
+			tmp248 := NewGrowtopiaWorld_SpotlightExtra()
 			err = tmp248.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp248
-		case 32:
-			tmp249 := NewGrowtopiaWorld_SewingMachineExtra()
+		case 23:
+			tmp249 := NewGrowtopiaWorld_DisplayBlockExtra()
 			err = tmp249.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp249
-		case 33:
-			tmp250 := NewGrowtopiaWorld_CountryFlagExtra()
+		case 24:
+			tmp250 := NewGrowtopiaWorld_VendingMachineExtra()
 			err = tmp250.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp250
-		case 34:
-			tmp251 := NewGrowtopiaWorld_LobsterTrapExtra()
+		case 25:
+			tmp251 := NewGrowtopiaWorld_FishTankPortExtra()
 			err = tmp251.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp251
-		case 35:
-			tmp252 := NewGrowtopiaWorld_PaintingEaselExtra()
+		case 26:
+			tmp252 := NewGrowtopiaWorld_SolarCollectorExtra()
 			err = tmp252.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp252
-		case 36:
-			tmp253 := NewGrowtopiaWorld_PetBattleCageExtra()
+		case 27:
+			tmp253 := NewGrowtopiaWorld_ForgeExtra()
 			err = tmp253.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp253
-		case 37:
-			tmp254 := NewGrowtopiaWorld_PetTrainerExtra()
+		case 28:
+			tmp254 := NewGrowtopiaWorld_GivingTreeExtra()
 			err = tmp254.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp254
-		case 38:
-			tmp255 := NewGrowtopiaWorld_SteamEngineExtra()
+		case 3:
+			tmp255 := NewGrowtopiaWorld_LockExtra()
 			err = tmp255.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp255
-		case 39:
-			tmp256 := NewGrowtopiaWorld_LockBotExtra()
+		case 30:
+			tmp256 := NewGrowtopiaWorld_SteamOrganExtra()
 			err = tmp256.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp256
-		case 4:
-			tmp257 := NewGrowtopiaWorld_SeedExtra()
+		case 31:
+			tmp257 := NewGrowtopiaWorld_SilkWormExtra()
 			err = tmp257.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp257
-		case 40:
-			tmp258 := NewGrowtopiaWorld_WeatherMachine1Extra()
+		case 32:
+			tmp258 := NewGrowtopiaWorld_SewingMachineExtra()
 			err = tmp258.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp258
-		case 41:
-			tmp259 := NewGrowtopiaWorld_SpiritStorageUnitExtra()
+		case 33:
+			tmp259 := NewGrowtopiaWorld_CountryFlagExtra()
 			err = tmp259.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp259
-		case 42:
-			tmp260 := NewGrowtopiaWorld_DataBedrockExtra()
+		case 34:
+			tmp260 := NewGrowtopiaWorld_LobsterTrapExtra()
 			err = tmp260.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp260
-		case 43:
-			tmp261 := NewGrowtopiaWorld_ShelfExtra()
+		case 35:
+			tmp261 := NewGrowtopiaWorld_PaintingEaselExtra()
 			err = tmp261.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp261
-		case 44:
-			tmp262 := NewGrowtopiaWorld_VipEntranceExtra()
+		case 36:
+			tmp262 := NewGrowtopiaWorld_PetBattleCageExtra()
 			err = tmp262.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp262
-		case 45:
-			tmp263 := NewGrowtopiaWorld_ChallengeTimerExtra()
+		case 37:
+			tmp263 := NewGrowtopiaWorld_PetTrainerExtra()
 			err = tmp263.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp263
-		case 47:
-			tmp264 := NewGrowtopiaWorld_FishWallMountExtra()
+		case 38:
+			tmp264 := NewGrowtopiaWorld_SteamEngineExtra()
 			err = tmp264.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp264
-		case 48:
-			tmp265 := NewGrowtopiaWorld_PortraitExtra()
+		case 39:
+			tmp265 := NewGrowtopiaWorld_LockBotExtra()
 			err = tmp265.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp265
-		case 49:
-			tmp266 := NewGrowtopiaWorld_WeatherMachine2Extra()
+		case 4:
+			tmp266 := NewGrowtopiaWorld_SeedExtra()
 			err = tmp266.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp266
-		case 50:
-			tmp267 := NewGrowtopiaWorld_FossilPrepStationExtra()
+		case 40:
+			tmp267 := NewGrowtopiaWorld_WeatherMachine1Extra()
 			err = tmp267.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp267
-		case 51:
-			tmp268 := NewGrowtopiaWorld_DnaExtractorExtra()
+		case 41:
+			tmp268 := NewGrowtopiaWorld_SpiritStorageUnitExtra()
 			err = tmp268.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp268
-		case 52:
-			tmp269 := NewGrowtopiaWorld_HowlerExtra()
+		case 42:
+			tmp269 := NewGrowtopiaWorld_DataBedrockExtra()
 			err = tmp269.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp269
-		case 53:
-			tmp270 := NewGrowtopiaWorld_ChemsynthTankExtra()
+		case 43:
+			tmp270 := NewGrowtopiaWorld_ShelfExtra()
 			err = tmp270.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp270
-		case 54:
-			tmp271 := NewGrowtopiaWorld_StorageBoxXtremeExtra()
+		case 44:
+			tmp271 := NewGrowtopiaWorld_VipEntranceExtra()
 			err = tmp271.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp271
-		case 55:
-			tmp272 := NewGrowtopiaWorld_CookingOvenExtra()
+		case 45:
+			tmp272 := NewGrowtopiaWorld_ChallengeTimerExtra()
 			err = tmp272.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp272
-		case 56:
-			tmp273 := NewGrowtopiaWorld_AudioRackExtra()
+		case 47:
+			tmp273 := NewGrowtopiaWorld_FishWallMountExtra()
 			err = tmp273.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp273
-		case 57:
-			tmp274 := NewGrowtopiaWorld_GeigerChargerExtra()
+		case 48:
+			tmp274 := NewGrowtopiaWorld_PortraitExtra()
 			err = tmp274.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp274
-		case 58:
-			tmp275 := NewGrowtopiaWorld_AdventureBeginsExtra()
+		case 49:
+			tmp275 := NewGrowtopiaWorld_WeatherMachine2Extra()
 			err = tmp275.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp275
-		case 59:
-			tmp276 := NewGrowtopiaWorld_TombRobberExtra()
+		case 50:
+			tmp276 := NewGrowtopiaWorld_FossilPrepStationExtra()
 			err = tmp276.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp276
-		case 60:
-			tmp277 := NewGrowtopiaWorld_BalloonOMaticExtra()
+		case 51:
+			tmp277 := NewGrowtopiaWorld_DnaExtractorExtra()
 			err = tmp277.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp277
-		case 61:
-			tmp278 := NewGrowtopiaWorld_TrainingPortExtra()
+		case 52:
+			tmp278 := NewGrowtopiaWorld_HowlerExtra()
 			err = tmp278.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp278
-		case 62:
-			tmp279 := NewGrowtopiaWorld_ItemSuckerExtra()
+		case 53:
+			tmp279 := NewGrowtopiaWorld_ChemsynthTankExtra()
 			err = tmp279.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp279
-		case 63:
-			tmp280 := NewGrowtopiaWorld_CybotExtra()
+		case 54:
+			tmp280 := NewGrowtopiaWorld_StorageBoxXtremeExtra()
 			err = tmp280.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp280
-		case 65:
-			tmp281 := NewGrowtopiaWorld_GuildExtra()
+		case 55:
+			tmp281 := NewGrowtopiaWorld_CookingOvenExtra()
 			err = tmp281.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp281
-		case 66:
-			tmp282 := NewGrowtopiaWorld_GrowscanExtra()
+		case 56:
+			tmp282 := NewGrowtopiaWorld_AudioRackExtra()
 			err = tmp282.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp282
-		case 67:
-			tmp283 := NewGrowtopiaWorld_ContainmentFieldPowerNodeExtra()
+		case 57:
+			tmp283 := NewGrowtopiaWorld_GeigerChargerExtra()
 			err = tmp283.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp283
-		case 68:
-			tmp284 := NewGrowtopiaWorld_SpiritBoardExtra()
+		case 58:
+			tmp284 := NewGrowtopiaWorld_AdventureBeginsExtra()
 			err = tmp284.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp284
-		case 69:
-			tmp285 := NewGrowtopiaWorld_TesseractManipulatorExtra()
+		case 59:
+			tmp285 := NewGrowtopiaWorld_TombRobberExtra()
 			err = tmp285.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp285
-		case 72:
-			tmp286 := NewGrowtopiaWorld_StormyCloudExtra()
+		case 60:
+			tmp286 := NewGrowtopiaWorld_BalloonOMaticExtra()
 			err = tmp286.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp286
-		case 73:
-			tmp287 := NewGrowtopiaWorld_TemporaryPlatformExtra()
+		case 61:
+			tmp287 := NewGrowtopiaWorld_TrainingPortExtra()
 			err = tmp287.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp287
-		case 74:
-			tmp288 := NewGrowtopiaWorld_SafeVaultExtra()
+		case 62:
+			tmp288 := NewGrowtopiaWorld_ItemSuckerExtra()
 			err = tmp288.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp288
-		case 75:
-			tmp289 := NewGrowtopiaWorld_AngelicCountingCloudExtra()
+		case 63:
+			tmp289 := NewGrowtopiaWorld_CybotExtra()
 			err = tmp289.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp289
-		case 77:
-			tmp290 := NewGrowtopiaWorld_InfinityWeatherMachineExtra()
+		case 65:
+			tmp290 := NewGrowtopiaWorld_GuildExtra()
 			err = tmp290.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp290
-		case 79:
-			tmp291 := NewGrowtopiaWorld_PineappleGuzzlerExtra()
+		case 66:
+			tmp291 := NewGrowtopiaWorld_GrowscanExtra()
 			err = tmp291.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp291
-		case 8:
-			tmp292 := NewGrowtopiaWorld_DiceExtra()
+		case 67:
+			tmp292 := NewGrowtopiaWorld_ContainmentFieldPowerNodeExtra()
 			err = tmp292.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp292
-		case 80:
-			tmp293 := NewGrowtopiaWorld_KrakensGalaticBlockExtra()
+		case 68:
+			tmp293 := NewGrowtopiaWorld_SpiritBoardExtra()
 			err = tmp293.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp293
-		case 81:
-			tmp294 := NewGrowtopiaWorld_FriendsEntranceExtra()
+		case 69:
+			tmp294 := NewGrowtopiaWorld_TesseractManipulatorExtra()
 			err = tmp294.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp294
-		case 9:
-			tmp295 := NewGrowtopiaWorld_ProviderExtra()
+		case 72:
+			tmp295 := NewGrowtopiaWorld_StormyCloudExtra()
 			err = tmp295.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp295
-		default:
-			tmp296 := NewGrowtopiaWorld_UnknownExtra()
+		case 73:
+			tmp296 := NewGrowtopiaWorld_TemporaryPlatformExtra()
 			err = tmp296.Read(this._io, this, this._root)
 			if err != nil {
 				return err
 			}
 			this.TileExtra = tmp296
+		case 74:
+			tmp297 := NewGrowtopiaWorld_SafeVaultExtra()
+			err = tmp297.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp297
+		case 75:
+			tmp298 := NewGrowtopiaWorld_AngelicCountingCloudExtra()
+			err = tmp298.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp298
+		case 77:
+			tmp299 := NewGrowtopiaWorld_InfinityWeatherMachineExtra()
+			err = tmp299.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp299
+		case 79:
+			tmp300 := NewGrowtopiaWorld_PineappleGuzzlerExtra()
+			err = tmp300.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp300
+		case 8:
+			tmp301 := NewGrowtopiaWorld_DiceExtra()
+			err = tmp301.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp301
+		case 80:
+			tmp302 := NewGrowtopiaWorld_KrakensGalaticBlockExtra()
+			err = tmp302.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp302
+		case 81:
+			tmp303 := NewGrowtopiaWorld_FriendsEntranceExtra()
+			err = tmp303.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp303
+		case 9:
+			tmp304 := NewGrowtopiaWorld_ProviderExtra()
+			err = tmp304.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp304
+		default:
+			tmp305 := NewGrowtopiaWorld_UnknownExtra()
+			err = tmp305.Read(this._io, this, this._root)
+			if err != nil {
+				return err
+			}
+			this.TileExtra = tmp305
 		}
 	}
 	if ( (( ((this.Flag & 1 == 1) && (this.ExtraDataType == 36)) ) || (this.Fg == 15546) || (this.Fg == 14666) || (this.Fg == 14962) || (this.Fg == 14662)) ) {
-		tmp297 := NewGrowtopiaWorld_CborData()
-		err = tmp297.Read(this._io, this, this._root)
+		tmp306 := NewGrowtopiaWorld_CborData()
+		err = tmp306.Read(this._io, this, this._root)
 		if err != nil {
 			return err
 		}
-		this.CborData = tmp297
+		this.CborData = tmp306
 	}
 	return err
 }
@@ -3678,11 +3738,11 @@ func (this *GrowtopiaWorld_XenoniteExtra) Read(io *kaitai.Stream, parent *Growto
 	this._parent = parent
 	this._root = root
 
-	tmp298, err := this._io.ReadBytes(int(5))
+	tmp307, err := this._io.ReadBytes(int(5))
 	if err != nil {
 		return err
 	}
-	tmp298 = tmp298
-	this.Unk1 = tmp298
+	tmp307 = tmp307
+	this.Unk1 = tmp307
 	return err
 }

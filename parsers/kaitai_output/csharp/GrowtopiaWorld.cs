@@ -1013,12 +1013,27 @@ namespace Kaitai
             }
             private void _read()
             {
-                _unk1 = m_io.ReadBytes(17);
+                _unk1 = m_io.ReadU1();
+                _guildId = m_io.ReadU4le();
+                _guildMascotFg = m_io.ReadU2le();
+                _guildMascotBg = m_io.ReadU2le();
+                _guildLevel = m_io.ReadU4le();
+                _guildFlags = m_io.ReadU4le();
             }
-            private byte[] _unk1;
+            private byte _unk1;
+            private uint _guildId;
+            private ushort _guildMascotFg;
+            private ushort _guildMascotBg;
+            private uint _guildLevel;
+            private uint _guildFlags;
             private GrowtopiaWorld m_root;
             private GrowtopiaWorld.WorldTile m_parent;
-            public byte[] Unk1 { get { return _unk1; } }
+            public byte Unk1 { get { return _unk1; } }
+            public uint GuildId { get { return _guildId; } }
+            public ushort GuildMascotFg { get { return _guildMascotFg; } }
+            public ushort GuildMascotBg { get { return _guildMascotBg; } }
+            public uint GuildLevel { get { return _guildLevel; } }
+            public uint GuildFlags { get { return _guildFlags; } }
             public GrowtopiaWorld M_Root { get { return m_root; } }
             public GrowtopiaWorld.WorldTile M_Parent { get { return m_parent; } }
         }
@@ -1238,7 +1253,19 @@ namespace Kaitai
                 _minimumLevel = m_io.ReadU4le();
                 _worldTimer = m_io.ReadU4le();
                 if (M_Parent.Fg == 5814) {
-                    _guildLocksUnk = m_io.ReadBytes(16);
+                    _guildId = m_io.ReadU4le();
+                }
+                if (M_Parent.Fg == 5814) {
+                    _guildMascotFg = m_io.ReadU2le();
+                }
+                if (M_Parent.Fg == 5814) {
+                    _guildMascotBg = m_io.ReadU2le();
+                }
+                if (M_Parent.Fg == 5814) {
+                    _guildLevel = m_io.ReadU4le();
+                }
+                if (M_Parent.Fg == 5814) {
+                    _guildFlags = m_io.ReadU4le();
                 }
             }
             private byte _flag;
@@ -1247,7 +1274,11 @@ namespace Kaitai
             private List<int> _authorizedUserids;
             private uint _minimumLevel;
             private uint _worldTimer;
-            private byte[] _guildLocksUnk;
+            private uint? _guildId;
+            private ushort? _guildMascotFg;
+            private ushort? _guildMascotBg;
+            private uint? _guildLevel;
+            private uint? _guildFlags;
             private GrowtopiaWorld m_root;
             private GrowtopiaWorld.WorldTile m_parent;
             public byte Flag { get { return _flag; } }
@@ -1261,7 +1292,11 @@ namespace Kaitai
             public List<int> AuthorizedUserids { get { return _authorizedUserids; } }
             public uint MinimumLevel { get { return _minimumLevel; } }
             public uint WorldTimer { get { return _worldTimer; } }
-            public byte[] GuildLocksUnk { get { return _guildLocksUnk; } }
+            public uint? GuildId { get { return _guildId; } }
+            public ushort? GuildMascotFg { get { return _guildMascotFg; } }
+            public ushort? GuildMascotBg { get { return _guildMascotBg; } }
+            public uint? GuildLevel { get { return _guildLevel; } }
+            public uint? GuildFlags { get { return _guildFlags; } }
             public GrowtopiaWorld M_Root { get { return m_root; } }
             public GrowtopiaWorld.WorldTile M_Parent { get { return m_parent; } }
         }

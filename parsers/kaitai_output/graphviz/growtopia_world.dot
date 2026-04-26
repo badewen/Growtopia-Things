@@ -378,7 +378,12 @@ digraph {
 
 			guild_extra__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
-				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">17</TD><TD></TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="unk1_pos">0</TD><TD PORT="unk1_size">1</TD><TD>u1</TD><TD PORT="unk1_type">unk1</TD></TR>
+				<TR><TD PORT="guild_id_pos">1</TD><TD PORT="guild_id_size">4</TD><TD>u4le</TD><TD PORT="guild_id_type">guild_id</TD></TR>
+				<TR><TD PORT="guild_mascot_fg_pos">5</TD><TD PORT="guild_mascot_fg_size">2</TD><TD>u2le</TD><TD PORT="guild_mascot_fg_type">guild_mascot_fg</TD></TR>
+				<TR><TD PORT="guild_mascot_bg_pos">7</TD><TD PORT="guild_mascot_bg_size">2</TD><TD>u2le</TD><TD PORT="guild_mascot_bg_type">guild_mascot_bg</TD></TR>
+				<TR><TD PORT="guild_level_pos">9</TD><TD PORT="guild_level_size">4</TD><TD>u4le</TD><TD PORT="guild_level_type">guild_level</TD></TR>
+				<TR><TD PORT="guild_flags_pos">13</TD><TD PORT="guild_flags_size">4</TD><TD>u4le</TD><TD PORT="guild_flags_type">guild_flags</TD></TR>
 			</TABLE>>];
 		}
 		subgraph cluster__heart_monitor_extra {
@@ -464,8 +469,16 @@ digraph {
 				<TR><TD COLSPAN="4" PORT="authorized_userids__repeat">repeat num_authorized_userids times</TD></TR>
 				<TR><TD PORT="minimum_level_pos">...</TD><TD PORT="minimum_level_size">4</TD><TD>u4le</TD><TD PORT="minimum_level_type">minimum_level</TD></TR>
 				<TR><TD PORT="world_timer_pos">...</TD><TD PORT="world_timer_size">4</TD><TD>u4le</TD><TD PORT="world_timer_type">world_timer</TD></TR>
-				<TR><TD PORT="guild_locks_unk_pos">...</TD><TD PORT="guild_locks_unk_size">16</TD><TD></TD><TD PORT="guild_locks_unk_type">guild_locks_unk</TD></TR>
-				<TR><TD COLSPAN="4" PORT="guild_locks_unk__if">if _parent.fg == 5814</TD></TR>
+				<TR><TD PORT="guild_id_pos">...</TD><TD PORT="guild_id_size">4</TD><TD>u4le</TD><TD PORT="guild_id_type">guild_id</TD></TR>
+				<TR><TD COLSPAN="4" PORT="guild_id__if">if _parent.fg == 5814</TD></TR>
+				<TR><TD PORT="guild_mascot_fg_pos">...</TD><TD PORT="guild_mascot_fg_size">2</TD><TD>u2le</TD><TD PORT="guild_mascot_fg_type">guild_mascot_fg</TD></TR>
+				<TR><TD COLSPAN="4" PORT="guild_mascot_fg__if">if _parent.fg == 5814</TD></TR>
+				<TR><TD PORT="guild_mascot_bg_pos">...</TD><TD PORT="guild_mascot_bg_size">2</TD><TD>u2le</TD><TD PORT="guild_mascot_bg_type">guild_mascot_bg</TD></TR>
+				<TR><TD COLSPAN="4" PORT="guild_mascot_bg__if">if _parent.fg == 5814</TD></TR>
+				<TR><TD PORT="guild_level_pos">...</TD><TD PORT="guild_level_size">4</TD><TD>u4le</TD><TD PORT="guild_level_type">guild_level</TD></TR>
+				<TR><TD COLSPAN="4" PORT="guild_level__if">if _parent.fg == 5814</TD></TR>
+				<TR><TD PORT="guild_flags_pos">...</TD><TD PORT="guild_flags_size">4</TD><TD>u4le</TD><TD PORT="guild_flags_type">guild_flags</TD></TR>
+				<TR><TD COLSPAN="4" PORT="guild_flags__if">if _parent.fg == 5814</TD></TR>
 			</TABLE>>];
 		}
 		subgraph cluster__magic_egg_extra {
@@ -994,7 +1007,11 @@ world_tile__seq_tile_extra_switch [label=<<TABLE BORDER="0" CELLBORDER="1" CELLS
 	heart_monitor_extra__seq:grow_id_type -> gt_str__seq [style=bold];
 	infinity_weather_machine_extra__seq:num_weather_machines_type -> infinity_weather_machine_extra__seq:weather_machines__repeat [color="#404040"];
 	lock_extra__seq:num_authorized_userids_type -> lock_extra__seq:authorized_userids__repeat [color="#404040"];
-	world_tile__seq:fg_type -> lock_extra__seq:guild_locks_unk__if [color="#404040"];
+	world_tile__seq:fg_type -> lock_extra__seq:guild_id__if [color="#404040"];
+	world_tile__seq:fg_type -> lock_extra__seq:guild_mascot_fg__if [color="#404040"];
+	world_tile__seq:fg_type -> lock_extra__seq:guild_mascot_bg__if [color="#404040"];
+	world_tile__seq:fg_type -> lock_extra__seq:guild_level__if [color="#404040"];
+	world_tile__seq:fg_type -> lock_extra__seq:guild_flags__if [color="#404040"];
 	mannequin_extra__seq:label_type -> gt_str__seq [style=bold];
 	painting_easel_extra__seq:label_type -> gt_str__seq [style=bold];
 	pet_battle_cage_extra__seq:label_type -> gt_str__seq [style=bold];

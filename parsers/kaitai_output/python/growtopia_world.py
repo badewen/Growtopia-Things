@@ -667,7 +667,12 @@ class GrowtopiaWorld(KaitaiStruct):
             self._read()
 
         def _read(self):
-            self.unk1 = self._io.read_bytes(17)
+            self.unk1 = self._io.read_u1()
+            self.guild_id = self._io.read_u4le()
+            self.guild_mascot_fg = self._io.read_u2le()
+            self.guild_mascot_bg = self._io.read_u2le()
+            self.guild_level = self._io.read_u4le()
+            self.guild_flags = self._io.read_u4le()
 
 
         def _fetch_instances(self):
@@ -813,13 +818,41 @@ class GrowtopiaWorld(KaitaiStruct):
             self.world_timer = self._io.read_u4le()
             if self._parent.fg == 5814:
                 pass
-                self.guild_locks_unk = self._io.read_bytes(16)
+                self.guild_id = self._io.read_u4le()
+
+            if self._parent.fg == 5814:
+                pass
+                self.guild_mascot_fg = self._io.read_u2le()
+
+            if self._parent.fg == 5814:
+                pass
+                self.guild_mascot_bg = self._io.read_u2le()
+
+            if self._parent.fg == 5814:
+                pass
+                self.guild_level = self._io.read_u4le()
+
+            if self._parent.fg == 5814:
+                pass
+                self.guild_flags = self._io.read_u4le()
 
 
 
         def _fetch_instances(self):
             pass
             for i in range(len(self.authorized_userids)):
+                pass
+
+            if self._parent.fg == 5814:
+                pass
+
+            if self._parent.fg == 5814:
+                pass
+
+            if self._parent.fg == 5814:
+                pass
+
+            if self._parent.fg == 5814:
                 pass
 
             if self._parent.fg == 5814:

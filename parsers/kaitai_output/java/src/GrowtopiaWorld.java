@@ -1336,15 +1336,30 @@ public class GrowtopiaWorld extends KaitaiStruct {
             _read();
         }
         private void _read() {
-            this.unk1 = this._io.readBytes(17);
+            this.unk1 = this._io.readU1();
+            this.guildId = this._io.readU4le();
+            this.guildMascotFg = this._io.readU2le();
+            this.guildMascotBg = this._io.readU2le();
+            this.guildLevel = this._io.readU4le();
+            this.guildFlags = this._io.readU4le();
         }
 
         public void _fetchInstances() {
         }
-        private byte[] unk1;
+        private int unk1;
+        private long guildId;
+        private int guildMascotFg;
+        private int guildMascotBg;
+        private long guildLevel;
+        private long guildFlags;
         private GrowtopiaWorld _root;
         private GrowtopiaWorld.WorldTile _parent;
-        public byte[] unk1() { return unk1; }
+        public int unk1() { return unk1; }
+        public long guildId() { return guildId; }
+        public int guildMascotFg() { return guildMascotFg; }
+        public int guildMascotBg() { return guildMascotBg; }
+        public long guildLevel() { return guildLevel; }
+        public long guildFlags() { return guildFlags; }
         public GrowtopiaWorld _root() { return _root; }
         public GrowtopiaWorld.WorldTile _parent() { return _parent; }
     }
@@ -1626,12 +1641,32 @@ public class GrowtopiaWorld extends KaitaiStruct {
             this.minimumLevel = this._io.readU4le();
             this.worldTimer = this._io.readU4le();
             if (_parent().fg() == 5814) {
-                this.guildLocksUnk = this._io.readBytes(16);
+                this.guildId = this._io.readU4le();
+            }
+            if (_parent().fg() == 5814) {
+                this.guildMascotFg = this._io.readU2le();
+            }
+            if (_parent().fg() == 5814) {
+                this.guildMascotBg = this._io.readU2le();
+            }
+            if (_parent().fg() == 5814) {
+                this.guildLevel = this._io.readU4le();
+            }
+            if (_parent().fg() == 5814) {
+                this.guildFlags = this._io.readU4le();
             }
         }
 
         public void _fetchInstances() {
             for (int i = 0; i < this.authorizedUserids.size(); i++) {
+            }
+            if (_parent().fg() == 5814) {
+            }
+            if (_parent().fg() == 5814) {
+            }
+            if (_parent().fg() == 5814) {
+            }
+            if (_parent().fg() == 5814) {
             }
             if (_parent().fg() == 5814) {
             }
@@ -1642,7 +1677,11 @@ public class GrowtopiaWorld extends KaitaiStruct {
         private List<Integer> authorizedUserids;
         private long minimumLevel;
         private long worldTimer;
-        private byte[] guildLocksUnk;
+        private Long guildId;
+        private Integer guildMascotFg;
+        private Integer guildMascotBg;
+        private Long guildLevel;
+        private Long guildFlags;
         private GrowtopiaWorld _root;
         private GrowtopiaWorld.WorldTile _parent;
         public int flag() { return flag; }
@@ -1656,7 +1695,11 @@ public class GrowtopiaWorld extends KaitaiStruct {
         public List<Integer> authorizedUserids() { return authorizedUserids; }
         public long minimumLevel() { return minimumLevel; }
         public long worldTimer() { return worldTimer; }
-        public byte[] guildLocksUnk() { return guildLocksUnk; }
+        public Long guildId() { return guildId; }
+        public Integer guildMascotFg() { return guildMascotFg; }
+        public Integer guildMascotBg() { return guildMascotBg; }
+        public Long guildLevel() { return guildLevel; }
+        public Long guildFlags() { return guildFlags; }
         public GrowtopiaWorld _root() { return _root; }
         public GrowtopiaWorld.WorldTile _parent() { return _parent; }
     }

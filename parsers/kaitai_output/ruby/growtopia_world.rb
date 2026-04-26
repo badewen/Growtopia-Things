@@ -548,10 +548,20 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
     end
 
     def _read
-      @unk1 = @_io.read_bytes(17)
+      @unk1 = @_io.read_u1
+      @guild_id = @_io.read_u4le
+      @guild_mascot_fg = @_io.read_u2le
+      @guild_mascot_bg = @_io.read_u2le
+      @guild_level = @_io.read_u4le
+      @guild_flags = @_io.read_u4le
       self
     end
     attr_reader :unk1
+    attr_reader :guild_id
+    attr_reader :guild_mascot_fg
+    attr_reader :guild_mascot_bg
+    attr_reader :guild_level
+    attr_reader :guild_flags
   end
   class HeartMonitorExtra < Kaitai::Struct::Struct
     def initialize(_io, _parent = nil, _root = nil)
@@ -669,7 +679,19 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
       @minimum_level = @_io.read_u4le
       @world_timer = @_io.read_u4le
       if _parent.fg == 5814
-        @guild_locks_unk = @_io.read_bytes(16)
+        @guild_id = @_io.read_u4le
+      end
+      if _parent.fg == 5814
+        @guild_mascot_fg = @_io.read_u2le
+      end
+      if _parent.fg == 5814
+        @guild_mascot_bg = @_io.read_u2le
+      end
+      if _parent.fg == 5814
+        @guild_level = @_io.read_u4le
+      end
+      if _parent.fg == 5814
+        @guild_flags = @_io.read_u4le
       end
       self
     end
@@ -683,7 +705,11 @@ class GrowtopiaWorld < Kaitai::Struct::Struct
     attr_reader :authorized_userids
     attr_reader :minimum_level
     attr_reader :world_timer
-    attr_reader :guild_locks_unk
+    attr_reader :guild_id
+    attr_reader :guild_mascot_fg
+    attr_reader :guild_mascot_bg
+    attr_reader :guild_level
+    attr_reader :guild_flags
   end
   class MagicEggExtra < Kaitai::Struct::Struct
     def initialize(_io, _parent = nil, _root = nil)

@@ -724,10 +724,25 @@ namespace GrowtopiaWorld {
         }
 
         private function _read() {
-            $this->_m_unk1 = $this->_io->readBytes(17);
+            $this->_m_unk1 = $this->_io->readU1();
+            $this->_m_guildId = $this->_io->readU4le();
+            $this->_m_guildMascotFg = $this->_io->readU2le();
+            $this->_m_guildMascotBg = $this->_io->readU2le();
+            $this->_m_guildLevel = $this->_io->readU4le();
+            $this->_m_guildFlags = $this->_io->readU4le();
         }
         protected $_m_unk1;
+        protected $_m_guildId;
+        protected $_m_guildMascotFg;
+        protected $_m_guildMascotBg;
+        protected $_m_guildLevel;
+        protected $_m_guildFlags;
         public function unk1() { return $this->_m_unk1; }
+        public function guildId() { return $this->_m_guildId; }
+        public function guildMascotFg() { return $this->_m_guildMascotFg; }
+        public function guildMascotBg() { return $this->_m_guildMascotBg; }
+        public function guildLevel() { return $this->_m_guildLevel; }
+        public function guildFlags() { return $this->_m_guildFlags; }
     }
 }
 
@@ -877,7 +892,19 @@ namespace GrowtopiaWorld {
             $this->_m_minimumLevel = $this->_io->readU4le();
             $this->_m_worldTimer = $this->_io->readU4le();
             if ($this->_parent()->fg() == 5814) {
-                $this->_m_guildLocksUnk = $this->_io->readBytes(16);
+                $this->_m_guildId = $this->_io->readU4le();
+            }
+            if ($this->_parent()->fg() == 5814) {
+                $this->_m_guildMascotFg = $this->_io->readU2le();
+            }
+            if ($this->_parent()->fg() == 5814) {
+                $this->_m_guildMascotBg = $this->_io->readU2le();
+            }
+            if ($this->_parent()->fg() == 5814) {
+                $this->_m_guildLevel = $this->_io->readU4le();
+            }
+            if ($this->_parent()->fg() == 5814) {
+                $this->_m_guildFlags = $this->_io->readU4le();
             }
         }
         protected $_m_flag;
@@ -886,7 +913,11 @@ namespace GrowtopiaWorld {
         protected $_m_authorizedUserids;
         protected $_m_minimumLevel;
         protected $_m_worldTimer;
-        protected $_m_guildLocksUnk;
+        protected $_m_guildId;
+        protected $_m_guildMascotFg;
+        protected $_m_guildMascotBg;
+        protected $_m_guildLevel;
+        protected $_m_guildFlags;
         public function flag() { return $this->_m_flag; }
         public function ownerUserId() { return $this->_m_ownerUserId; }
         public function numAuthorizedUserids() { return $this->_m_numAuthorizedUserids; }
@@ -898,7 +929,11 @@ namespace GrowtopiaWorld {
         public function authorizedUserids() { return $this->_m_authorizedUserids; }
         public function minimumLevel() { return $this->_m_minimumLevel; }
         public function worldTimer() { return $this->_m_worldTimer; }
-        public function guildLocksUnk() { return $this->_m_guildLocksUnk; }
+        public function guildId() { return $this->_m_guildId; }
+        public function guildMascotFg() { return $this->_m_guildMascotFg; }
+        public function guildMascotBg() { return $this->_m_guildMascotBg; }
+        public function guildLevel() { return $this->_m_guildLevel; }
+        public function guildFlags() { return $this->_m_guildFlags; }
     }
 }
 

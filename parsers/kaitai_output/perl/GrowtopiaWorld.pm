@@ -1686,12 +1686,42 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{unk1} = $self->{_io}->read_bytes(17);
+    $self->{unk1} = $self->{_io}->read_u1();
+    $self->{guild_id} = $self->{_io}->read_u4le();
+    $self->{guild_mascot_fg} = $self->{_io}->read_u2le();
+    $self->{guild_mascot_bg} = $self->{_io}->read_u2le();
+    $self->{guild_level} = $self->{_io}->read_u4le();
+    $self->{guild_flags} = $self->{_io}->read_u4le();
 }
 
 sub unk1 {
     my ($self) = @_;
     return $self->{unk1};
+}
+
+sub guild_id {
+    my ($self) = @_;
+    return $self->{guild_id};
+}
+
+sub guild_mascot_fg {
+    my ($self) = @_;
+    return $self->{guild_mascot_fg};
+}
+
+sub guild_mascot_bg {
+    my ($self) = @_;
+    return $self->{guild_mascot_bg};
+}
+
+sub guild_level {
+    my ($self) = @_;
+    return $self->{guild_level};
+}
+
+sub guild_flags {
+    my ($self) = @_;
+    return $self->{guild_flags};
 }
 
 ########################################################################
@@ -2041,7 +2071,19 @@ sub _read {
     $self->{minimum_level} = $self->{_io}->read_u4le();
     $self->{world_timer} = $self->{_io}->read_u4le();
     if ($self->_parent()->fg() == 5814) {
-        $self->{guild_locks_unk} = $self->{_io}->read_bytes(16);
+        $self->{guild_id} = $self->{_io}->read_u4le();
+    }
+    if ($self->_parent()->fg() == 5814) {
+        $self->{guild_mascot_fg} = $self->{_io}->read_u2le();
+    }
+    if ($self->_parent()->fg() == 5814) {
+        $self->{guild_mascot_bg} = $self->{_io}->read_u2le();
+    }
+    if ($self->_parent()->fg() == 5814) {
+        $self->{guild_level} = $self->{_io}->read_u4le();
+    }
+    if ($self->_parent()->fg() == 5814) {
+        $self->{guild_flags} = $self->{_io}->read_u4le();
     }
 }
 
@@ -2075,9 +2117,29 @@ sub world_timer {
     return $self->{world_timer};
 }
 
-sub guild_locks_unk {
+sub guild_id {
     my ($self) = @_;
-    return $self->{guild_locks_unk};
+    return $self->{guild_id};
+}
+
+sub guild_mascot_fg {
+    my ($self) = @_;
+    return $self->{guild_mascot_fg};
+}
+
+sub guild_mascot_bg {
+    my ($self) = @_;
+    return $self->{guild_mascot_bg};
+}
+
+sub guild_level {
+    my ($self) = @_;
+    return $self->{guild_level};
+}
+
+sub guild_flags {
+    my ($self) = @_;
+    return $self->{guild_flags};
 }
 
 ########################################################################

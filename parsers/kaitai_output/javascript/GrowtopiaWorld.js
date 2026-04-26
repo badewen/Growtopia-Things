@@ -623,7 +623,12 @@ var GrowtopiaWorld = (function() {
       this._read();
     }
     GuildExtra.prototype._read = function() {
-      this.unk1 = this._io.readBytes(17);
+      this.unk1 = this._io.readU1();
+      this.guildId = this._io.readU4le();
+      this.guildMascotFg = this._io.readU2le();
+      this.guildMascotBg = this._io.readU2le();
+      this.guildLevel = this._io.readU4le();
+      this.guildFlags = this._io.readU4le();
     }
 
     return GuildExtra;
@@ -762,7 +767,19 @@ var GrowtopiaWorld = (function() {
       this.minimumLevel = this._io.readU4le();
       this.worldTimer = this._io.readU4le();
       if (this._parent.fg == 5814) {
-        this.guildLocksUnk = this._io.readBytes(16);
+        this.guildId = this._io.readU4le();
+      }
+      if (this._parent.fg == 5814) {
+        this.guildMascotFg = this._io.readU2le();
+      }
+      if (this._parent.fg == 5814) {
+        this.guildMascotBg = this._io.readU2le();
+      }
+      if (this._parent.fg == 5814) {
+        this.guildLevel = this._io.readU4le();
+      }
+      if (this._parent.fg == 5814) {
+        this.guildFlags = this._io.readU4le();
       }
     }
 

@@ -1895,7 +1895,12 @@ pub struct GrowtopiaWorld_GuildExtra {
     pub _root: SharedType<GrowtopiaWorld>,
     pub _parent: SharedType<GrowtopiaWorld_WorldTile>,
     pub _self: SharedType<Self>,
-    unk1: RefCell<Vec<u8>>,
+    unk1: RefCell<u8>,
+    guild_id: RefCell<u32>,
+    guild_mascot_fg: RefCell<u16>,
+    guild_mascot_bg: RefCell<u16>,
+    guild_level: RefCell<u32>,
+    guild_flags: RefCell<u32>,
     _io: RefCell<BytesReader>,
 }
 impl KStruct for GrowtopiaWorld_GuildExtra {
@@ -1915,15 +1920,45 @@ impl KStruct for GrowtopiaWorld_GuildExtra {
         let _rrc = self_rc._root.get_value().borrow().upgrade();
         let _prc = self_rc._parent.get_value().borrow().upgrade();
         let _r = _rrc.as_ref().unwrap();
-        *self_rc.unk1.borrow_mut() = _io.read_bytes(17 as usize)?.into();
+        *self_rc.unk1.borrow_mut() = _io.read_u1()?.into();
+        *self_rc.guild_id.borrow_mut() = _io.read_u4le()?.into();
+        *self_rc.guild_mascot_fg.borrow_mut() = _io.read_u2le()?.into();
+        *self_rc.guild_mascot_bg.borrow_mut() = _io.read_u2le()?.into();
+        *self_rc.guild_level.borrow_mut() = _io.read_u4le()?.into();
+        *self_rc.guild_flags.borrow_mut() = _io.read_u4le()?.into();
         Ok(())
     }
 }
 impl GrowtopiaWorld_GuildExtra {
 }
 impl GrowtopiaWorld_GuildExtra {
-    pub fn unk1(&self) -> Ref<'_, Vec<u8>> {
+    pub fn unk1(&self) -> Ref<'_, u8> {
         self.unk1.borrow()
+    }
+}
+impl GrowtopiaWorld_GuildExtra {
+    pub fn guild_id(&self) -> Ref<'_, u32> {
+        self.guild_id.borrow()
+    }
+}
+impl GrowtopiaWorld_GuildExtra {
+    pub fn guild_mascot_fg(&self) -> Ref<'_, u16> {
+        self.guild_mascot_fg.borrow()
+    }
+}
+impl GrowtopiaWorld_GuildExtra {
+    pub fn guild_mascot_bg(&self) -> Ref<'_, u16> {
+        self.guild_mascot_bg.borrow()
+    }
+}
+impl GrowtopiaWorld_GuildExtra {
+    pub fn guild_level(&self) -> Ref<'_, u32> {
+        self.guild_level.borrow()
+    }
+}
+impl GrowtopiaWorld_GuildExtra {
+    pub fn guild_flags(&self) -> Ref<'_, u32> {
+        self.guild_flags.borrow()
     }
 }
 impl GrowtopiaWorld_GuildExtra {
@@ -2284,7 +2319,11 @@ pub struct GrowtopiaWorld_LockExtra {
     authorized_userids: RefCell<Vec<i32>>,
     minimum_level: RefCell<u32>,
     world_timer: RefCell<u32>,
-    guild_locks_unk: RefCell<Vec<u8>>,
+    guild_id: RefCell<u32>,
+    guild_mascot_fg: RefCell<u16>,
+    guild_mascot_bg: RefCell<u16>,
+    guild_level: RefCell<u32>,
+    guild_flags: RefCell<u32>,
     _io: RefCell<BytesReader>,
 }
 impl KStruct for GrowtopiaWorld_LockExtra {
@@ -2315,7 +2354,19 @@ impl KStruct for GrowtopiaWorld_LockExtra {
         *self_rc.minimum_level.borrow_mut() = _io.read_u4le()?.into();
         *self_rc.world_timer.borrow_mut() = _io.read_u4le()?.into();
         if ((*_prc.as_ref().unwrap().fg() as i32) == (5814 as i32)) {
-            *self_rc.guild_locks_unk.borrow_mut() = _io.read_bytes(16 as usize)?.into();
+            *self_rc.guild_id.borrow_mut() = _io.read_u4le()?.into();
+        }
+        if ((*_prc.as_ref().unwrap().fg() as i32) == (5814 as i32)) {
+            *self_rc.guild_mascot_fg.borrow_mut() = _io.read_u2le()?.into();
+        }
+        if ((*_prc.as_ref().unwrap().fg() as i32) == (5814 as i32)) {
+            *self_rc.guild_mascot_bg.borrow_mut() = _io.read_u2le()?.into();
+        }
+        if ((*_prc.as_ref().unwrap().fg() as i32) == (5814 as i32)) {
+            *self_rc.guild_level.borrow_mut() = _io.read_u4le()?.into();
+        }
+        if ((*_prc.as_ref().unwrap().fg() as i32) == (5814 as i32)) {
+            *self_rc.guild_flags.borrow_mut() = _io.read_u4le()?.into();
         }
         Ok(())
     }
@@ -2358,8 +2409,28 @@ impl GrowtopiaWorld_LockExtra {
     }
 }
 impl GrowtopiaWorld_LockExtra {
-    pub fn guild_locks_unk(&self) -> Ref<'_, Vec<u8>> {
-        self.guild_locks_unk.borrow()
+    pub fn guild_id(&self) -> Ref<'_, u32> {
+        self.guild_id.borrow()
+    }
+}
+impl GrowtopiaWorld_LockExtra {
+    pub fn guild_mascot_fg(&self) -> Ref<'_, u16> {
+        self.guild_mascot_fg.borrow()
+    }
+}
+impl GrowtopiaWorld_LockExtra {
+    pub fn guild_mascot_bg(&self) -> Ref<'_, u16> {
+        self.guild_mascot_bg.borrow()
+    }
+}
+impl GrowtopiaWorld_LockExtra {
+    pub fn guild_level(&self) -> Ref<'_, u32> {
+        self.guild_level.borrow()
+    }
+}
+impl GrowtopiaWorld_LockExtra {
+    pub fn guild_flags(&self) -> Ref<'_, u32> {
+        self.guild_flags.borrow()
     }
 }
 impl GrowtopiaWorld_LockExtra {

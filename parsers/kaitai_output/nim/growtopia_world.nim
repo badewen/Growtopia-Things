@@ -158,7 +158,12 @@ type
     `str`*: string
     `parent`*: KaitaiStruct
   GrowtopiaWorld_GuildExtra* = ref object of KaitaiStruct
-    `unk1`*: seq[byte]
+    `unk1`*: uint8
+    `guildId`*: uint32
+    `guildMascotFg`*: uint16
+    `guildMascotBg`*: uint16
+    `guildLevel`*: uint32
+    `guildFlags`*: uint32
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_HeartMonitorExtra* = ref object of KaitaiStruct
     `userId`*: uint32
@@ -194,7 +199,11 @@ type
     `authorizedUserids`*: seq[int32]
     `minimumLevel`*: uint32
     `worldTimer`*: uint32
-    `guildLocksUnk`*: seq[byte]
+    `guildId`*: uint32
+    `guildMascotFg`*: uint16
+    `guildMascotBg`*: uint16
+    `guildLevel`*: uint32
+    `guildFlags`*: uint32
     `parent`*: GrowtopiaWorld_WorldTile
   GrowtopiaWorld_MagicEggExtra* = ref object of KaitaiStruct
     `eggAmount`*: uint32
@@ -1079,8 +1088,18 @@ proc read*(_: typedesc[GrowtopiaWorld_GuildExtra], io: KaitaiStream, root: Kaita
   this.root = root
   this.parent = parent
 
-  let unk1Expr = this.io.readBytes(int(17))
+  let unk1Expr = this.io.readU1()
   this.unk1 = unk1Expr
+  let guildIdExpr = this.io.readU4le()
+  this.guildId = guildIdExpr
+  let guildMascotFgExpr = this.io.readU2le()
+  this.guildMascotFg = guildMascotFgExpr
+  let guildMascotBgExpr = this.io.readU2le()
+  this.guildMascotBg = guildMascotBgExpr
+  let guildLevelExpr = this.io.readU4le()
+  this.guildLevel = guildLevelExpr
+  let guildFlagsExpr = this.io.readU4le()
+  this.guildFlags = guildFlagsExpr
 
 proc fromFile*(_: typedesc[GrowtopiaWorld_GuildExtra], filename: string): GrowtopiaWorld_GuildExtra =
   GrowtopiaWorld_GuildExtra.read(newKaitaiFileStream(filename), nil, nil)
@@ -1224,8 +1243,20 @@ complex logic yet.
   let worldTimerExpr = this.io.readU4le()
   this.worldTimer = worldTimerExpr
   if this.parent.fg == 5814:
-    let guildLocksUnkExpr = this.io.readBytes(int(16))
-    this.guildLocksUnk = guildLocksUnkExpr
+    let guildIdExpr = this.io.readU4le()
+    this.guildId = guildIdExpr
+  if this.parent.fg == 5814:
+    let guildMascotFgExpr = this.io.readU2le()
+    this.guildMascotFg = guildMascotFgExpr
+  if this.parent.fg == 5814:
+    let guildMascotBgExpr = this.io.readU2le()
+    this.guildMascotBg = guildMascotBgExpr
+  if this.parent.fg == 5814:
+    let guildLevelExpr = this.io.readU4le()
+    this.guildLevel = guildLevelExpr
+  if this.parent.fg == 5814:
+    let guildFlagsExpr = this.io.readU4le()
+    this.guildFlags = guildFlagsExpr
 
 proc fromFile*(_: typedesc[GrowtopiaWorld_LockExtra], filename: string): GrowtopiaWorld_LockExtra =
   GrowtopiaWorld_LockExtra.read(newKaitaiFileStream(filename), nil, nil)

@@ -716,7 +716,12 @@ growtopia_world_t::guild_extra_t::guild_extra_t(kaitai::kstream* p__io, growtopi
 }
 
 void growtopia_world_t::guild_extra_t::_read() {
-    m_unk1 = m__io->read_bytes(17);
+    m_unk1 = m__io->read_u1();
+    m_guild_id = m__io->read_u4le();
+    m_guild_mascot_fg = m__io->read_u2le();
+    m_guild_mascot_bg = m__io->read_u2le();
+    m_guild_level = m__io->read_u4le();
+    m_guild_flags = m__io->read_u4le();
 }
 
 growtopia_world_t::guild_extra_t::~guild_extra_t() {
@@ -875,10 +880,30 @@ void growtopia_world_t::lock_extra_t::_read() {
     }
     m_minimum_level = m__io->read_u4le();
     m_world_timer = m__io->read_u4le();
-    n_guild_locks_unk = true;
+    n_guild_id = true;
     if (_parent()->fg() == 5814) {
-        n_guild_locks_unk = false;
-        m_guild_locks_unk = m__io->read_bytes(16);
+        n_guild_id = false;
+        m_guild_id = m__io->read_u4le();
+    }
+    n_guild_mascot_fg = true;
+    if (_parent()->fg() == 5814) {
+        n_guild_mascot_fg = false;
+        m_guild_mascot_fg = m__io->read_u2le();
+    }
+    n_guild_mascot_bg = true;
+    if (_parent()->fg() == 5814) {
+        n_guild_mascot_bg = false;
+        m_guild_mascot_bg = m__io->read_u2le();
+    }
+    n_guild_level = true;
+    if (_parent()->fg() == 5814) {
+        n_guild_level = false;
+        m_guild_level = m__io->read_u4le();
+    }
+    n_guild_flags = true;
+    if (_parent()->fg() == 5814) {
+        n_guild_flags = false;
+        m_guild_flags = m__io->read_u4le();
     }
 }
 
@@ -887,7 +912,15 @@ growtopia_world_t::lock_extra_t::~lock_extra_t() {
 }
 
 void growtopia_world_t::lock_extra_t::_clean_up() {
-    if (!n_guild_locks_unk) {
+    if (!n_guild_id) {
+    }
+    if (!n_guild_mascot_fg) {
+    }
+    if (!n_guild_mascot_bg) {
+    }
+    if (!n_guild_level) {
+    }
+    if (!n_guild_flags) {
     }
 }
 
